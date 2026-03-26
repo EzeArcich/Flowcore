@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Quotation\StoreQuotationRequest;
+use App\Http\Requests\Quotation\UpdateQuotationRequest;
 use App\Models\Company;
-use App\Models\Quotation;
 use App\Models\FollowUp;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
+use App\Models\Quotation;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class QuotationController extends Controller
 {
@@ -18,21 +19,9 @@ class QuotationController extends Controller
         return view('quotations.create', compact('company'));
     }
 
-    public function store(Request $request, Company $company): RedirectResponse
+    public function store(StoreQuotationRequest $request, Company $company): RedirectResponse
     {
-        $data = $request->validate([
-            'contact_id' => ['nullable', 'exists:contacts,id'],
-            'title' => ['required', 'string', 'max:255'],
-            'pricing_type' => ['required', 'string'],
-            'amount' => ['required', 'numeric', 'min:0'],
-            'currency' => ['required', 'string', 'max:10'],
-            'estimated_hours' => ['nullable', 'integer', 'min:1'],
-            'sent_at' => ['nullable', 'date'],
-            'valid_until' => ['nullable', 'date'],
-            'status' => ['required', 'string'],
-            'scope_summary' => ['nullable', 'string'],
-            'notes' => ['nullable', 'string'],
-        ]);
+        $data = $request->validated();
 
         $quotation = $company->quotations()->create($data);
 
@@ -65,23 +54,9 @@ class QuotationController extends Controller
         return view('quotations.edit', compact('quotation'));
     }
 
-    public function update(Request $request, Quotation $quotation): RedirectResponse
+    public function update(UpdateQuotationRequest $request, Quotation $quotation): RedirectResponse
     {
-        $data = $request->validate([
-            'contact_id' => ['nullable', 'exists:contacts,id'],
-            'title' => ['required', 'string', 'max:255'],
-            'pricing_type' => ['required', 'string'],
-            'amount' => ['required', 'numeric', 'min:0'],
-            'currency' => ['required', 'string', 'max:10'],
-            'estimated_hours' => ['nullable', 'integer', 'min:1'],
-            'sent_at' => ['nullable', 'date'],
-            'valid_until' => ['nullable', 'date'],
-            'status' => ['required', 'string'],
-            'scope_summary' => ['nullable', 'string'],
-            'notes' => ['nullable', 'string'],
-        ]);
-
-        $quotation->update($data);
+        $quotation->update($request->validated());
 
         return redirect()
             ->route('companies.show', $quotation->company_id)

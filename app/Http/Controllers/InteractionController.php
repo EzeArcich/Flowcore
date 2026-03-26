@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Interaction\StoreInteractionRequest;
+use App\Http\Requests\Interaction\UpdateInteractionRequest;
 use App\Models\Company;
-use App\Models\Interaction;
 use App\Models\FollowUp;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
+use App\Models\Interaction;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class InteractionController extends Controller
 {
@@ -28,21 +29,9 @@ class InteractionController extends Controller
         return view('interactions.create', compact('company'));
     }
 
-    public function store(Request $request, Company $company): RedirectResponse
+    public function store(StoreInteractionRequest $request, Company $company): RedirectResponse
     {
-        $data = $request->validate([
-            'contact_id' => ['nullable', 'exists:contacts,id'],
-            'direction' => ['required', 'string'],
-            'channel' => ['required', 'string'],
-            'subject' => ['nullable', 'string', 'max:255'],
-            'message' => ['nullable', 'string'],
-            'response' => ['nullable', 'string'],
-            'interacted_at' => ['required', 'date'],
-            'requires_follow_up' => ['nullable', 'boolean'],
-            'follow_up_due_at' => ['nullable', 'date'],
-            'outcome' => ['nullable', 'string', 'max:255'],
-            'notes' => ['nullable', 'string'],
-        ]);
+        $data = $request->validated();
 
         $interaction = $company->interactions()->create($data);
 
@@ -51,7 +40,7 @@ class InteractionController extends Controller
             'first_contact_at' => $company->first_contact_at ?: now()->toDateString(),
         ]);
 
-        if (!empty($data['requires_follow_up']) && !empty($data['follow_up_due_at'])) {
+        if (! empty($data['requires_follow_up']) && ! empty($data['follow_up_due_at'])) {
             FollowUp::create([
                 'company_id' => $company->id,
                 'contact_id' => $data['contact_id'] ?? null,
@@ -79,23 +68,9 @@ class InteractionController extends Controller
         return view('interactions.edit', compact('interaction'));
     }
 
-    public function update(Request $request, Interaction $interaction): RedirectResponse
+    public function update(UpdateInteractionRequest $request, Interaction $interaction): RedirectResponse
     {
-        $data = $request->validate([
-            'contact_id' => ['nullable', 'exists:contacts,id'],
-            'direction' => ['required', 'string'],
-            'channel' => ['required', 'string'],
-            'subject' => ['nullable', 'string', 'max:255'],
-            'message' => ['nullable', 'string'],
-            'response' => ['nullable', 'string'],
-            'interacted_at' => ['required', 'date'],
-            'requires_follow_up' => ['nullable', 'boolean'],
-            'follow_up_due_at' => ['nullable', 'date'],
-            'outcome' => ['nullable', 'string', 'max:255'],
-            'notes' => ['nullable', 'string'],
-        ]);
-
-        $interaction->update($data);
+        $interaction->update($request->validated());
 
         return redirect()
             ->route('companies.show', $interaction->company_id)

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Contact\StoreContactRequest;
+use App\Http\Requests\Contact\UpdateContactRequest;
 use App\Models\Company;
 use App\Models\Contact;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class ContactController extends Controller
 {
@@ -15,22 +16,9 @@ class ContactController extends Controller
         return view('contacts.create', compact('company'));
     }
 
-    public function store(Request $request, Company $company): RedirectResponse
+    public function store(StoreContactRequest $request, Company $company): RedirectResponse
     {
-        $data = $request->validate([
-            'full_name' => ['required', 'string', 'max:255'],
-            'role' => ['nullable', 'string', 'max:255'],
-            'email' => ['nullable', 'email', 'max:255'],
-            'linkedin_url' => ['nullable', 'url'],
-            'phone' => ['nullable', 'string', 'max:50'],
-            'whatsapp' => ['nullable', 'string', 'max:50'],
-            'is_primary' => ['nullable', 'boolean'],
-            'is_decision_maker' => ['nullable', 'boolean'],
-            'status' => ['required', 'string'],
-            'notes' => ['nullable', 'string'],
-        ]);
-
-        $company->contacts()->create($data);
+        $company->contacts()->create($request->validated());
 
         return redirect()
             ->route('companies.show', $company)
@@ -44,22 +32,9 @@ class ContactController extends Controller
         return view('contacts.edit', compact('contact'));
     }
 
-    public function update(Request $request, Contact $contact): RedirectResponse
+    public function update(UpdateContactRequest $request, Contact $contact): RedirectResponse
     {
-        $data = $request->validate([
-            'full_name' => ['required', 'string', 'max:255'],
-            'role' => ['nullable', 'string', 'max:255'],
-            'email' => ['nullable', 'email', 'max:255'],
-            'linkedin_url' => ['nullable', 'url'],
-            'phone' => ['nullable', 'string', 'max:50'],
-            'whatsapp' => ['nullable', 'string', 'max:50'],
-            'is_primary' => ['nullable', 'boolean'],
-            'is_decision_maker' => ['nullable', 'boolean'],
-            'status' => ['required', 'string'],
-            'notes' => ['nullable', 'string'],
-        ]);
-
-        $contact->update($data);
+        $contact->update($request->validated());
 
         return redirect()
             ->route('companies.show', $contact->company_id)

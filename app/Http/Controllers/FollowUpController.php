@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FollowUp\StoreFollowUpRequest;
+use App\Http\Requests\FollowUp\UpdateFollowUpRequest;
 use App\Models\FollowUp;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 
 class FollowUpController extends Controller
 {
@@ -36,20 +38,9 @@ class FollowUpController extends Controller
         return view('follow-ups.create');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(StoreFollowUpRequest $request): RedirectResponse
     {
-        $data = $request->validate([
-            'company_id' => ['required', 'exists:companies,id'],
-            'contact_id' => ['nullable', 'exists:contacts,id'],
-            'interaction_id' => ['nullable', 'exists:interactions,id'],
-            'quotation_id' => ['nullable', 'exists:quotations,id'],
-            'due_date' => ['required', 'date'],
-            'status' => ['required', 'string'],
-            'reason' => ['required', 'string'],
-            'notes' => ['nullable', 'string'],
-        ]);
-
-        FollowUp::create($data);
+        FollowUp::create($request->validated());
 
         return redirect()
             ->route('follow-ups.index')
@@ -63,16 +54,9 @@ class FollowUpController extends Controller
         return view('follow-ups.edit', compact('followUp'));
     }
 
-    public function update(Request $request, FollowUp $followUp): RedirectResponse
+    public function update(UpdateFollowUpRequest $request, FollowUp $followUp): RedirectResponse
     {
-        $data = $request->validate([
-            'due_date' => ['required', 'date'],
-            'status' => ['required', 'string'],
-            'reason' => ['required', 'string'],
-            'notes' => ['nullable', 'string'],
-        ]);
-
-        $followUp->update($data);
+        $followUp->update($request->validated());
 
         return redirect()
             ->route('follow-ups.index')
