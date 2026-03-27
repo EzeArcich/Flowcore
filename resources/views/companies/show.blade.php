@@ -1,17 +1,17 @@
 <x-layouts::app :title="$company->name">
     <div class="crm-page space-y-6">
-        <div class="crm-form-shell">
+        <div class="crm-page-header">
             <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
                 <div class="space-y-4">
                     <div class="space-y-2">
-                        <p class="crm-kpi-label">Empresa</p>
+                        <p class="crm-page-eyebrow">Empresa</p>
                         <div class="flex flex-wrap items-center gap-3">
-                            <h1 class="text-3xl font-black tracking-tight text-ink-900 dark:text-ink-50">{{ $company->name }}</h1>
+                            <h1 class="crm-page-title !mt-0 !text-[2.6rem]">{{ $company->name }}</h1>
                             <span class="crm-badge crm-badge--company-status" data-status="{{ $company->status }}">
                                 {{ $company->status }}
                             </span>
                         </div>
-                        <p class="text-sm text-ink-500 dark:text-ink-400">
+                        <p class="crm-page-subtitle !mt-0">
                             {{ $company->industry ?: 'Industria no definida' }}
                             @if($company->country || $company->city)
                                 · {{ collect([$company->city, $company->country])->filter()->implode(', ') }}
@@ -102,11 +102,11 @@
             </div>
 
             @if($company->notes)
-                <div class="crm-form-section mt-6 space-y-3">
-                    <div>
-                        <p class="crm-kpi-label">Contexto</p>
-                        <h2 class="text-lg font-bold text-ink-900 dark:text-ink-50">Notas comerciales</h2>
-                    </div>
+                    <div class="crm-form-section mt-6 space-y-3">
+                        <div>
+                            <p class="crm-kpi-label">Contexto</p>
+                            <h2 class="crm-block-title">Notas comerciales</h2>
+                        </div>
 
                     <p class="whitespace-pre-line text-sm leading-6 text-ink-700 dark:text-ink-200">{{ $company->notes }}</p>
                 </div>
@@ -119,7 +119,7 @@
                     <div class="crm-panel-title">
                         <div>
                             <p class="crm-kpi-label">Personas</p>
-                            <h2 class="text-lg font-bold text-ink-900 dark:text-ink-50">Contactos</h2>
+                            <h2 class="crm-block-title">Contactos</h2>
                         </div>
                         <a href="{{ route('companies.contacts.create', $company) }}" class="crm-btn-secondary crm-btn-sm">
                             Nuevo contacto

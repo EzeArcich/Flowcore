@@ -1,9 +1,10 @@
 <x-layouts::app title="Follow-ups">
     <div class="crm-page space-y-6">
-        <div class="flex items-center justify-between">
+        <div class="crm-page-header flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-                <h1 class="text-lg font-semibold text-ink-900 dark:text-ink-50">Follow-ups</h1>
-                <p class="text-sm text-ink-500 dark:text-ink-400">
+                <p class="crm-page-eyebrow">Cadencia comercial</p>
+                <h1 class="crm-page-title">Follow-ups</h1>
+                <p class="crm-page-subtitle">
                     Control centralizado de tareas de seguimiento.
                 </p>
             </div>
@@ -39,7 +40,7 @@
                         <th>Empresa</th>
                         <th>Contacto</th>
                         <th>Vence</th>
-                        <th>Estado</th>
+                        <th class="text-right">Estado</th>
                         <th>Motivo</th>
                         <th>Acciones</th>
                     </tr>
@@ -56,7 +57,7 @@
                             <td>
                                 {{ $followUp->due_date?->format('d/m/Y') ?? '—' }}
                             </td>
-                            <td>
+                            <td  class="text-right">
                                 <span class="crm-badge"
                                       data-status="{{ $followUp->status }}">
                                     {{ $followUp->status }}

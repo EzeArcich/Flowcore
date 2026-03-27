@@ -1,5 +1,13 @@
 <x-layouts::app title="Empresas">
     <div class="crm-page space-y-6">
+    <div class="crm-page-header">
+        <p class="crm-page-eyebrow">Prospección</p>
+        <h1 class="crm-page-title">Empresas</h1>
+        <p class="crm-page-subtitle">
+            Explorá leads, filtrá por estado comercial y detectá rápido qué cuentas necesitan el próximo movimiento.
+        </p>
+    </div>
+
     <div class="crm-card">
         <form method="GET" class="grid grid-cols-1 gap-4 md:grid-cols-4">
             <input type="text" name="q" value="{{ request('q') }}" placeholder="Buscar..."

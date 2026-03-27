@@ -1,10 +1,10 @@
 <x-layouts::app title="Nueva empresa">
     <div class="crm-page space-y-6">
-        <div class="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+        <div class="crm-page-header flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-                <p class="crm-kpi-label">Empresa</p>
-                <h1 class="text-2xl font-bold text-ink-900 dark:text-ink-50">Nueva empresa</h1>
-                <p class="text-sm text-ink-500 dark:text-ink-400">
+                <p class="crm-page-eyebrow">Empresa</p>
+                <h1 class="crm-page-title">Nueva empresa</h1>
+                <p class="crm-page-subtitle">
                     Cargá un lead con contexto comercial real para que el pipeline nazca ordenado y accionable.
                 </p>
             </div>
@@ -23,7 +23,7 @@
                         <div class="flex items-center justify-between gap-3">
                             <div>
                                 <p class="crm-kpi-label">Identidad</p>
-                                <h2 class="text-lg font-bold text-ink-900 dark:text-ink-50">Base del lead</h2>
+                                <h2 class="crm-block-title">Base del lead</h2>
                             </div>
                             <span class="crm-panel-chip">Alta comercial</span>
                         </div>
@@ -72,7 +72,7 @@
                         <div class="flex items-center justify-between gap-3">
                             <div>
                                 <p class="crm-kpi-label">Seguimiento</p>
-                                <h2 class="text-lg font-bold text-ink-900 dark:text-ink-50">Estado y timing</h2>
+                                <h2 class="crm-block-title">Estado y timing</h2>
                             </div>
                             <span class="crm-panel-chip">Pipeline</span>
                         </div>

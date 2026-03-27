@@ -104,11 +104,11 @@
             }
         }"
     >
-        <div class="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+        <div class="crm-page-header flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-                <p class="crm-kpi-label">Follow-up</p>
-                <h1 class="text-2xl font-bold text-ink-900 dark:text-ink-50">Editar follow-up</h1>
-                <p class="text-sm text-ink-500 dark:text-ink-400">
+                <p class="crm-page-eyebrow">Follow-up</p>
+                <h1 class="crm-page-title">Editar follow-up</h1>
+                <p class="crm-page-subtitle">
                     Reasigná o ajustá el seguimiento manteniendo coherencia entre empresa, contacto y contexto comercial.
                 </p>
             </div>
@@ -125,7 +125,7 @@
                     <div class="crm-form-section space-y-4">
                         <div>
                             <p class="crm-kpi-label">Contexto</p>
-                            <h2 class="text-lg font-bold text-ink-900 dark:text-ink-50">Empresa y contacto</h2>
+                            <h2 class="crm-block-title">Empresa y contacto</h2>
                         </div>
 
                         <div>

@@ -1,10 +1,10 @@
 <x-layouts::app :title="'Editar contacto · ' . $contact->full_name">
     <div class="crm-page space-y-6">
-        <div class="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+        <div class="crm-page-header flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-                <p class="crm-kpi-label">Contacto</p>
-                <h1 class="text-2xl font-bold text-ink-900 dark:text-ink-50">Editar contacto</h1>
-                <p class="text-sm text-ink-500 dark:text-ink-400">
+                <p class="crm-page-eyebrow">Contacto</p>
+                <h1 class="crm-page-title">Editar contacto</h1>
+                <p class="crm-page-subtitle">
                     Empresa: <span class="font-semibold">{{ $contact->company->name }}</span>
                 </p>
             </div>
@@ -21,7 +21,7 @@
                     <div class="crm-form-section space-y-4">
                         <div>
                             <p class="crm-kpi-label">Identidad</p>
-                            <h2 class="text-lg font-bold text-ink-900 dark:text-ink-50">Persona de contacto</h2>
+                            <h2 class="crm-block-title">Persona de contacto</h2>
                         </div>
 
                         <div>
@@ -50,7 +50,7 @@
                     <div class="crm-form-section space-y-4">
                         <div>
                             <p class="crm-kpi-label">Relación</p>
-                            <h2 class="text-lg font-bold text-ink-900 dark:text-ink-50">Nivel de contacto</h2>
+                            <h2 class="crm-block-title">Nivel de contacto</h2>
                         </div>
 
                         <div>

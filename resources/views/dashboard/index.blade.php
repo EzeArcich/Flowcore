@@ -1,5 +1,13 @@
 <x-layouts::app title="Dashboard">
     <div class="crm-page space-y-6">
+        <div class="crm-page-header">
+            <p class="crm-page-eyebrow">Cockpit comercial</p>
+            <h1 class="crm-page-title">Dashboard</h1>
+            <p class="crm-page-subtitle">
+                Vista diaria para operar el pipeline, resolver seguimientos pendientes y detectar oportunidades que necesitan movimiento.
+            </p>
+        </div>
+
         <div class="grid grid-cols-1 gap-4 md:grid-cols-4">
         <div class="crm-stat-card">
             <p class="crm-kpi-label">Empresas</p>

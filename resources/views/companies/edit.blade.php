@@ -1,10 +1,10 @@
 <x-layouts::app :title="'Editar '.$company->name">
     <div class="crm-page space-y-6">
-        <div class="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+        <div class="crm-page-header flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-                <p class="crm-kpi-label">Empresa</p>
-                <h1 class="text-2xl font-bold text-ink-900 dark:text-ink-50">Editar {{ $company->name }}</h1>
-                <p class="text-sm text-ink-500 dark:text-ink-400">
+                <p class="crm-page-eyebrow">Empresa</p>
+                <h1 class="crm-page-title">Editar {{ $company->name }}</h1>
+                <p class="crm-page-subtitle">
                     Actualizá los datos clave del lead, su estado comercial y el próximo seguimiento.
                 </p>
             </div>

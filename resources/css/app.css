@@ -9,7 +9,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Sora', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display: 'Space Grotesk', 'Sora', ui-sans-serif, system-ui, sans-serif;
 
     /* CRM identity palette: tactical dark + vivid signal tones */
     --color-brand-50: #edf2ff;
@@ -67,6 +68,18 @@
 }
 
 @layer base {
+    body {
+        font-family: var(--font-sans);
+        font-feature-settings: 'ss01' 1, 'cv02' 1, 'cv11' 1;
+    }
+
+    h1,
+    h2,
+    h3,
+    [data-crm-display='true'] {
+        font-family: var(--font-display);
+        letter-spacing: -0.03em;
+    }
 
     *,
     ::after,
@@ -114,15 +127,61 @@ select:focus[data-flux-control] {
     }
 
     .crm-kpi-label {
-        @apply text-xs font-bold uppercase tracking-[0.08em] text-ink-500 dark:text-ink-300;
+        @apply text-[11px] font-black uppercase tracking-[0.16em] text-ink-500 dark:text-ink-300;
+        font-family: var(--font-display);
     }
 
     .crm-kpi-value {
         @apply mt-2 text-3xl font-bold leading-none text-ink-900 dark:text-white;
+        font-family: var(--font-display);
+        letter-spacing: -0.05em;
     }
 
     .crm-section-title {
-        @apply mb-4 text-sm font-bold uppercase tracking-[0.08em] text-ink-700 dark:text-ink-100;
+        @apply mb-4 text-sm font-black uppercase tracking-[0.14em] text-ink-700 dark:text-ink-100;
+        font-family: var(--font-display);
+    }
+
+    .crm-page-header {
+        @apply relative overflow-hidden rounded-[2rem] border border-white/85 bg-white/82 p-6 shadow-2xl shadow-brand-950/10 ring-1 ring-brand-100/70 backdrop-blur-xl dark:border-ink-800 dark:bg-ink-900/75 dark:ring-brand-900/40;
+        background-image:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(241, 245, 255, 0.9)),
+            radial-gradient(circle at top right, rgba(61, 90, 254, 0.1), transparent 34%);
+    }
+
+    .crm-page-header::before {
+        content: '';
+        @apply absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-brand-500 via-sky-400 to-cyan-300;
+    }
+
+    .crm-page-header::after {
+        content: '';
+        @apply pointer-events-none absolute -right-8 bottom-0 h-28 w-28 rounded-full;
+        background:
+            radial-gradient(circle, rgba(61, 90, 254, 0.14), rgba(61, 90, 254, 0) 68%);
+        filter: blur(8px);
+    }
+
+    .crm-page-eyebrow {
+        @apply text-[11px] font-black uppercase tracking-[0.22em] text-brand-700 dark:text-brand-200;
+        font-family: var(--font-display);
+    }
+
+    .crm-page-title {
+        @apply mt-2 text-3xl font-bold leading-none text-ink-950 dark:text-white md:text-[2.4rem];
+        font-family: var(--font-display);
+        letter-spacing: -0.06em;
+        text-wrap: balance;
+    }
+
+    .crm-page-subtitle {
+        @apply mt-3 max-w-3xl text-sm leading-6 text-ink-600 dark:text-ink-300;
+    }
+
+    .crm-block-title {
+        @apply text-lg font-bold text-ink-900 dark:text-ink-50;
+        font-family: var(--font-display);
+        letter-spacing: -0.04em;
     }
 
     .crm-surface-muted {
@@ -511,6 +570,7 @@ select:focus[data-flux-control] {
         @apply rounded-full border border-brand-200 bg-brand-50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-brand-700 dark:border-brand-800 dark:bg-brand-900/40 dark:text-brand-200;
         border-radius: 999px 18px 12px 22px;
         box-shadow: inset 0 -1px 0 color-mix(in oklab, currentColor 20%, transparent);
+        font-family: var(--font-display);
     }
 
     .crm-table {
@@ -523,6 +583,7 @@ select:focus[data-flux-control] {
 
     .crm-table th {
         @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-[0.05em] text-ink-500 dark:text-ink-300;
+        font-family: var(--font-display);
     }
 
     .crm-table td {
