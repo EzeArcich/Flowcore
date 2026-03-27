@@ -5,7 +5,6 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/PHP-8.3-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.3">
   <img src="https://img.shields.io/badge/Laravel-13-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel 13">
   <img src="https://img.shields.io/badge/Livewire-4-FB70A9?style=for-the-badge&logo=livewire&logoColor=white" alt="Livewire 4">
   <img src="https://img.shields.io/badge/Flux_UI-2-6B46FF?style=for-the-badge" alt="Flux UI 2">
