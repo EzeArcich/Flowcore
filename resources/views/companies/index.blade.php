@@ -1,10 +1,11 @@
 <x-layouts::app title="Empresas">
-    <div class="bg-white rounded-xl shadow p-4 mb-6">
-        <form method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div class="crm-page space-y-6">
+    <div class="crm-card">
+        <form method="GET" class="grid grid-cols-1 gap-4 md:grid-cols-4">
             <input type="text" name="q" value="{{ request('q') }}" placeholder="Buscar..."
-                   class="border rounded px-3 py-2">
+                   class="crm-input">
 
-            <select name="status" class="border rounded px-3 py-2">
+            <select name="status" class="crm-select">
                 <option value="">Estado</option>
                 @foreach(['prospect','contacted','replied','meeting','proposal_sent','negotiation','won','lost','archived'] as $status)
                     <option value="{{ $status }}" @selected(request('status') === $status)>
@@ -14,39 +15,43 @@
             </select>
 
             <input type="text" name="industry" value="{{ request('industry') }}" placeholder="Industria"
-                   class="border rounded px-3 py-2">
+                   class="crm-input">
 
-            <button class="bg-black text-white rounded px-4 py-2">Filtrar</button>
+            <button class="crm-btn-primary">Filtrar</button>
         </form>
     </div>
 
-    <div class="bg-white rounded-xl shadow overflow-hidden">
-        <table class="w-full text-sm">
-            <thead class="bg-gray-50">
+    <div class="crm-card overflow-hidden p-0">
+        <table class="crm-table">
+            <thead>
                 <tr>
-                    <th class="text-left px-4 py-3">Nombre</th>
-                    <th class="text-left px-4 py-3">Industria</th>
-                    <th class="text-left px-4 py-3">Estado</th>
-                    <th class="text-left px-4 py-3">Próx. follow-up</th>
-                    <th class="text-left px-4 py-3">Acciones</th>
+                    <th>Nombre</th>
+                    <th>Industria</th>
+                    <th class="text-right">Estado</th>
+                    <th>Próx. follow-up</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($companies as $company)
-                    <tr class="border-t">
-                        <td class="px-4 py-3 font-medium">{{ $company->name }}</td>
-                        <td class="px-4 py-3">{{ $company->industry }}</td>
-                        <td class="px-4 py-3">{{ $company->status }}</td>
-                        <td class="px-4 py-3">
+                    <tr>
+                        <td class="font-medium">{{ $company->name }}</td>
+                        <td>{{ $company->industry }}</td>
+                        <td class="text-right">
+                            <span class="crm-badge crm-badge--company-status" data-status="{{ $company->status }}">
+                                {{ $company->status }}
+                            </span>
+                        </td>
+                        <td>
                             {{ $company->next_follow_up_at?->format('d/m/Y') ?? '-' }}
                         </td>
-                        <td class="px-4 py-3">
-                            <a href="{{ route('companies.show', $company) }}" class="text-blue-600 hover:underline">Ver</a>
+                        <td>
+                            <a href="{{ route('companies.show', $company) }}" class="crm-link">Ver</a>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="px-4 py-6 text-center text-gray-500">No hay empresas cargadas.</td>
+                        <td colspan="5" class="px-4 py-6 text-center text-ink-500 dark:text-ink-400">No hay empresas cargadas.</td>
                     </tr>
                 @endforelse
             </tbody>
@@ -55,5 +60,6 @@
 
     <div class="mt-4">
         {{ $companies->links() }}
+    </div>
     </div>
 </x-layouts::app>

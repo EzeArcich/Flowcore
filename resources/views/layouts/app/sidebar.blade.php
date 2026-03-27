@@ -4,16 +4,75 @@
         @include('partials.head')
     </head>
     <body class="min-h-screen bg-white dark:bg-zinc-800">
-        <flux:sidebar sticky collapsible="mobile" class="border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
+        <flux:sidebar sticky collapsible="mobile" class="crm-sidebar-shell border-e border-zinc-200/85 dark:border-zinc-700/85">
             <flux:sidebar.header>
                 <x-app-logo :sidebar="true" href="{{ route('dashboard') }}" wire:navigate />
                 <flux:sidebar.collapse class="lg:hidden" />
             </flux:sidebar.header>
 
             <flux:sidebar.nav>
+                @php
+                    $todayDate = now()->toDateString();
+                    $overdueFollowUpsCount = \App\Models\FollowUp::query()
+                        ->where('status', 'pending')
+                        ->whereDate('due_date', '<', $todayDate)
+                        ->count();
+                    $todayFollowUpsCount = \App\Models\FollowUp::query()
+                        ->where('status', 'pending')
+                        ->whereDate('due_date', $todayDate)
+                        ->count();
+                    $allPendingFollowUpsCount = \App\Models\FollowUp::query()
+                        ->where('status', 'pending')
+                        ->count();
+                    $isFollowUpsSection = request()->routeIs('follow-ups.*');
+                @endphp
+
                 <flux:sidebar.group :heading="__('Platform')" class="grid">
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
+                    </flux:sidebar.item>
+
+                    <flux:sidebar.item icon="building-office-2" :href="route('companies.index')" :current="request()->routeIs('companies.*')" wire:navigate>
+                        {{ __('Empresas') }}
+                    </flux:sidebar.item>
+                </flux:sidebar.group>
+
+                <flux:sidebar.group :heading="__('Follow-ups')" expandable :expanded="$isFollowUpsSection" class="grid">
+                    <flux:sidebar.item icon="clock" :href="route('follow-ups.index')" :current="request()->routeIs('follow-ups.*') && ! request()->has('due')" wire:navigate>
+                        <span class="flex w-full items-center justify-between gap-2">
+                            <span>{{ __('Todos') }}</span>
+                            <span class="rounded-full bg-zinc-200 px-2 py-0.5 text-[11px] font-semibold text-zinc-700 dark:bg-zinc-700 dark:text-zinc-100">
+                                {{ $allPendingFollowUpsCount }}
+                            </span>
+                        </span>
+                    </flux:sidebar.item>
+
+                    <flux:sidebar.item icon="calendar-days" :href="route('follow-ups.index', ['due' => 'today'])" :current="request()->routeIs('follow-ups.*') && request('due') === 'today'" wire:navigate>
+                        <span class="flex w-full items-center justify-between gap-2">
+                            <span>{{ __('De hoy') }}</span>
+                            <span class="rounded-full bg-sky-100 px-2 py-0.5 text-[11px] font-semibold text-sky-700 dark:bg-sky-900/70 dark:text-sky-200">
+                                {{ $todayFollowUpsCount }}
+                            </span>
+                        </span>
+                    </flux:sidebar.item>
+
+                    <flux:sidebar.item icon="exclamation-triangle" :href="route('follow-ups.index', ['due' => 'overdue'])" :current="request()->routeIs('follow-ups.*') && request('due') === 'overdue'" wire:navigate>
+                        <span class="flex w-full items-center justify-between gap-2">
+                            <span>{{ __('Vencidos') }}</span>
+                            <span class="rounded-full bg-rose-100 px-2 py-0.5 text-[11px] font-semibold text-rose-700 dark:bg-rose-900/70 dark:text-rose-200">
+                                {{ $overdueFollowUpsCount }}
+                            </span>
+                        </span>
+                    </flux:sidebar.item>
+                </flux:sidebar.group>
+
+                <flux:sidebar.group :heading="__('Quick Actions')" class="grid">
+                    <flux:sidebar.item icon="clipboard-document-list" :href="route('follow-ups.create')" :current="request()->routeIs('follow-ups.create')" wire:navigate>
+                        {{ __('Nuevo follow-up') }}
+                    </flux:sidebar.item>
+
+                    <flux:sidebar.item icon="plus" :href="route('companies.create')" :current="request()->routeIs('companies.create')" wire:navigate>
+                        {{ __('Nueva empresa') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>
             </flux:sidebar.nav>
@@ -21,13 +80,7 @@
             <flux:spacer />
 
             <flux:sidebar.nav>
-                <flux:sidebar.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
-                    {{ __('Repository') }}
-                </flux:sidebar.item>
-
-                <flux:sidebar.item icon="book-open-text" href="https://laravel.com/docs/starter-kits#livewire" target="_blank">
-                    {{ __('Documentation') }}
-                </flux:sidebar.item>
+                 <!-- Parte baja del Sidebar -->
             </flux:sidebar.nav>
 
             <x-desktop-user-menu class="hidden lg:block" :name="auth()->user()->name" />

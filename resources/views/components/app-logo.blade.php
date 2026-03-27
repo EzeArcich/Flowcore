@@ -3,15 +3,21 @@
 ])
 
 @if($sidebar)
-    <flux:sidebar.brand name="Laravel Starter Kit" {{ $attributes }}>
-        <x-slot name="logo" class="flex aspect-square size-8 items-center justify-center rounded-md bg-accent-content text-accent-foreground">
-            <x-app-logo-icon class="size-5 fill-current text-white dark:text-black" />
-        </x-slot>
-    </flux:sidebar.brand>
+    <a {{ $attributes->class('inline-flex items-center rounded-2xl px-1 py-2') }}>
+        <img
+            src="{{ asset('images/logo-fu-bl-ui.png') }}"
+            alt="{{ config('app.name', 'FollowUp') }}"
+            class="block h-11 w-auto max-w-none object-contain"
+        >
+        <span class="sr-only">{{ config('app.name', 'FollowUp') }}</span>
+    </a>
 @else
-    <flux:brand name="Laravel Starter Kit" {{ $attributes }}>
-        <x-slot name="logo" class="flex aspect-square size-8 items-center justify-center rounded-md bg-accent-content text-accent-foreground">
-            <x-app-logo-icon class="size-5 fill-current text-white dark:text-black" />
-        </x-slot>
-    </flux:brand>
+    <a {{ $attributes->class('inline-flex items-center rounded-2xl px-1 py-1') }}>
+        <img
+            src="{{ asset('images/logo-fu-bl-ui.png') }}"
+            alt="{{ config('app.name', 'FollowUp') }}"
+            class="block h-11 w-auto max-w-none object-contain"
+        >
+        <span class="sr-only">{{ config('app.name', 'FollowUp') }}</span>
+    </a>
 @endif

@@ -59,10 +59,21 @@ test('quotation store uses the quotation form request validation rules', functio
 test('follow up update uses the update form request rules without requiring creation-only fields', function () {
     $this->actingAs(User::factory()->create());
 
-    $followUp = FollowUp::factory()->create();
+    $company = Company::factory()->create();
+    $contact = Contact::factory()->for($company)->create();
+    $followUp = FollowUp::factory()->create([
+        'company_id' => $company->id,
+        'contact_id' => $contact->id,
+        'interaction_id' => null,
+        'quotation_id' => null,
+    ]);
 
     $response = $this->from(route('follow-ups.index'))
         ->put(route('follow-ups.update', $followUp), [
+            'company_id' => $followUp->company_id,
+            'contact_id' => $followUp->contact_id,
+            'interaction_id' => $followUp->interaction_id,
+            'quotation_id' => $followUp->quotation_id,
             'due_date' => now()->addDay()->toDateString(),
             'status' => 'done',
             'reason' => 'manual',
@@ -71,4 +82,23 @@ test('follow up update uses the update form request rules without requiring crea
 
     $response->assertRedirect(route('follow-ups.index'));
     $response->assertSessionHasNoErrors();
+});
+
+test('follow up store rejects contacts that do not belong to the selected company', function () {
+    $this->actingAs(User::factory()->create());
+
+    $selectedCompany = Company::factory()->create();
+    $foreignContact = Contact::factory()->create();
+
+    $response = $this->from(route('follow-ups.create'))
+        ->post(route('follow-ups.store'), [
+            'company_id' => $selectedCompany->id,
+            'contact_id' => $foreignContact->id,
+            'due_date' => now()->addDays(4)->toDateString(),
+            'status' => 'pending',
+            'reason' => 'manual',
+        ]);
+
+    $response->assertRedirect(route('follow-ups.create'));
+    $response->assertSessionHasErrors('contact_id');
 });

@@ -25,3 +25,14 @@ test('authenticated users can visit the company show page', function () {
 
     $this->get(route('companies.show', $company))->assertOk();
 });
+
+test('authenticated users can visit the company edit page', function () {
+    $this->withoutVite();
+    $this->actingAs(User::factory()->create());
+
+    $company = Company::factory()->create();
+
+    $this->get(route('companies.edit', $company))
+        ->assertOk()
+        ->assertSee('Guardar cambios');
+});
