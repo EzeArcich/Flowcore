@@ -5,8 +5,8 @@
     {{ filled($title ?? null) ? $title.' - '.config('app.name', 'Laravel') : config('app.name', 'Laravel') }}
 </title>
 
-<link rel="icon" href="{{ asset('images/logo-fu-bl.png') }}" type="image/png">
-<link rel="apple-touch-icon" href="{{ asset('images/logo-fu-bl.png') }}">
+<link rel="icon" href="{{ asset('images/logo-fu.png') }}" type="image/png">
+<link rel="apple-touch-icon" href="{{ asset('images/favicon-fu.png') }}">
 
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />

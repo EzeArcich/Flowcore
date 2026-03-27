@@ -8,7 +8,7 @@
                 </p>
             </div>
 
-            <a href="{{ route('follow-ups.create') }}" class="crm-btn-primary">Nuevo follow-up</a>
+            <a href="{{ route('follow-ups.create') }}" class="crm-btn-spotlight">Nuevo follow-up</a>
         </div>
 
         <div class="crm-card p-6 space-y-4">
@@ -111,4 +111,3 @@
         </div>
     </div>
 </x-layouts::app>
-

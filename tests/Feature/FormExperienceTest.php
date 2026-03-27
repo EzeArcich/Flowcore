@@ -66,3 +66,13 @@ test('authenticated users can visit the follow up create and edit pages', functi
         ->assertSee('Acme Search')
         ->assertSee('Guardar cambios');
 });
+
+test('authenticated users can visit the follow up index page', function () {
+    $this->withoutVite();
+    $this->actingAs(User::factory()->create());
+
+    $this->get(route('follow-ups.index'))
+        ->assertOk()
+        ->assertSee('Control centralizado de tareas de seguimiento.')
+        ->assertSee('Nuevo follow-up');
+});
