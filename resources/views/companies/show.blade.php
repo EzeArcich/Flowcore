@@ -43,10 +43,10 @@
                 </div>
 
                 <div class="flex flex-wrap items-center gap-3 lg:justify-end">
-                    <a href="{{ route('companies.edit', $company) }}" class="crm-btn-primary">
+                    <a href="{{ route('companies.edit', $company) }}" class="crm-btn-spotlight">
                         Editar empresa
                     </a>
-                    <a href="{{ route('companies.index') }}" class="crm-btn-secondary">
+                    <a href="{{ route('companies.index') }}" class="crm-btn-spotlight">
                         Volver al listado
                     </a>
                 </div>

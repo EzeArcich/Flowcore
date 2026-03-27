@@ -23,7 +23,10 @@ test('authenticated users can visit the company show page', function () {
 
     $company = Company::factory()->create();
 
-    $this->get(route('companies.show', $company))->assertOk();
+    $this->get(route('companies.show', $company))
+        ->assertOk()
+        ->assertSee('Editar empresa')
+        ->assertSee('Volver al listado');
 });
 
 test('authenticated users can visit the company edit page', function () {
