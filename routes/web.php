@@ -1,14 +1,21 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FollowUpController;
 use App\Http\Controllers\InteractionController;
 use App\Http\Controllers\QuotationController;
-use App\Http\Controllers\FollowUpController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => redirect()->route('dashboard'));
+Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect()->route('dashboard');
+    }
+
+    return view('welcome');
+})->name('home');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
