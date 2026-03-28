@@ -91,7 +91,6 @@ So I built one.
 
 ## ⚡ Getting started
 
-```bash
 composer install
 cp .env.example .env
 php artisan key:generate
@@ -99,3 +98,16 @@ php artisan migrate:fresh --seed
 npm install
 npm run build
 php artisan serve
+
+🧭 Roadmap
+Message templates
+Lead scoring
+Advanced filters
+Attachments
+Follow-up automation
+Calendar & email integrations
+🚧 Status
+
+Active development.
+
+This is evolving into a simple but powerful CRM focused on execution, not complexity.
