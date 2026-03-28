@@ -1016,7 +1016,7 @@ select:focus[data-flux-control] {
     }
 
     .auth-showcase__content {
-        @apply mt-12 grid h-full items-end gap-10 xl:grid-cols-[0.95fr_1.05fr];
+        @apply mt-1 grid items-start gap-10 xl:grid-cols-[0.95fr_1.05fr];
     }
 
     .auth-showcase__badge {

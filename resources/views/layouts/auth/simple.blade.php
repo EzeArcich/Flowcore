@@ -30,9 +30,7 @@
             <section class="auth-showcase">
                 <div class="auth-showcase__frame">
                     <div class="auth-showcase__nav">
-                        <a href="{{ route('home') }}" class="inline-flex items-center">
-                            <x-app-logo class="auth-showcase__logo" />
-                        </a>
+                        <x-app-logo href="{{ route('home') }}" class="auth-showcase__logo" />
 
                         <div class="hidden items-center gap-3 sm:flex">
                             <a href="{{ route('home') }}" class="auth-showcase__nav-link">Home</a>
@@ -43,10 +41,13 @@
                     </div>
 
                     <div class="auth-showcase__content">
-                        <div class="space-y-6">
-                            <span class="auth-showcase__badge">Open source CRM for focused sales</span>
+                        <div class="space-y-5">
+                            <div class="space-y-2">
+                                <p class="landing-brand-mark">FollowUp</p>
+                                <span class="auth-showcase__badge">Open source CRM for focused sales</span>
+                            </div>
 
-                            <div class="space-y-4">
+                            <div class="space-y-2">
                                 <h1 class="auth-showcase__title">
                                     {{ request()->routeIs('register') ? 'Create an account and start running follow-ups with structure.' : 'Pick the thread back up and keep every opportunity moving.' }}
                                 </h1>
