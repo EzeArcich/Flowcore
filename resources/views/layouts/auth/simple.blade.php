@@ -24,11 +24,49 @@
                 <strong class="auth-floater__title">Reply due today</strong>
                 <p class="auth-floater__meta">owner: sales</p>
             </div>
+            <div class="auth-floater auth-floater--crm" data-parallax data-parallax-speed="-9">
+                <span class="auth-floater__label">CRM</span>
+                <strong class="auth-floater__title">Vertex Partners</strong>
+                <p class="auth-floater__meta">context: meeting booked</p>
+            </div>
+            <div class="auth-floater auth-floater--deal" data-parallax data-parallax-speed="7">
+                <span class="auth-floater__label">Deal</span>
+                <strong class="auth-floater__title">Negotiation open</strong>
+                <p class="auth-floater__meta">status: waiting response</p>
+            </div>
+            <div class="auth-floater auth-floater--note" data-parallax data-parallax-speed="-11">
+                <span class="auth-floater__label">Note</span>
+                <strong class="auth-floater__title">Proposal revision</strong>
+                <p class="auth-floater__meta">requested by stakeholder</p>
+            </div>
         </div>
 
         <div class="auth-shell">
             <section class="auth-showcase">
                 <div class="auth-showcase__frame">
+                    <div class="auth-showcase__ambient" aria-hidden="true">
+                        <div class="auth-floater auth-floater--ambient auth-floater--ambient-a">
+                            <span class="auth-floater__label">Company</span>
+                            <strong class="auth-floater__title">Orbit Studio</strong>
+                            <p class="auth-floater__meta">industry: design systems</p>
+                        </div>
+                        <div class="auth-floater auth-floater--ambient auth-floater--ambient-b">
+                            <span class="auth-floater__label">Quotation</span>
+                            <strong class="auth-floater__title">$2,800 retainer</strong>
+                            <p class="auth-floater__meta">stage: sent yesterday</p>
+                        </div>
+                        <div class="auth-floater auth-floater--ambient auth-floater--ambient-c">
+                            <span class="auth-floater__label">Follow-up</span>
+                            <strong class="auth-floater__title">Call due at 16:30</strong>
+                            <p class="auth-floater__meta">priority: high</p>
+                        </div>
+                        <div class="auth-floater auth-floater--ambient auth-floater--ambient-d">
+                            <span class="auth-floater__label">Interaction</span>
+                            <strong class="auth-floater__title">Discovery recap</strong>
+                            <p class="auth-floater__meta">last update: 2h ago</p>
+                        </div>
+                    </div>
+
                     <div class="auth-showcase__nav">
                         <x-app-logo href="{{ route('home') }}" class="auth-showcase__logo" />
 

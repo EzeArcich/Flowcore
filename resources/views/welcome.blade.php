@@ -10,6 +10,133 @@
             <div class="landing-orb landing-orb--sky" data-parallax data-parallax-speed="-18"></div>
             <div class="landing-orb landing-orb--warm" data-parallax data-parallax-speed="14"></div>
             <div class="landing-grid"></div>
+            <div class="landing-floaters" aria-hidden="true">
+                <div class="landing-floater landing-floater--1" data-parallax data-parallax-speed="8">
+                    <span class="landing-floater__label">Company</span>
+                    <strong class="landing-floater__title">Northstar Retail</strong>
+                    <p class="landing-floater__meta">stage: proposal_sent</p>
+                </div>
+                <div class="landing-floater landing-floater--2" data-parallax data-parallax-speed="-7">
+                    <span class="landing-floater__label">Quotation</span>
+                    <strong class="landing-floater__title">$6,400 proposal</strong>
+                    <p class="landing-floater__meta">valid until: Apr 14</p>
+                </div>
+                <div class="landing-floater landing-floater--3" data-parallax data-parallax-speed="11">
+                    <span class="landing-floater__label">Follow-up</span>
+                    <strong class="landing-floater__title">Reply due today</strong>
+                    <p class="landing-floater__meta">priority: high</p>
+                </div>
+                <div class="landing-floater landing-floater--4" data-parallax data-parallax-speed="-9">
+                    <span class="landing-floater__label">Interaction</span>
+                    <strong class="landing-floater__title">Discovery recap</strong>
+                    <p class="landing-floater__meta">2h ago</p>
+                </div>
+                <div class="landing-floater landing-floater--5" data-parallax data-parallax-speed="6">
+                    <span class="landing-floater__label">Company</span>
+                    <strong class="landing-floater__title">Orbit Studio</strong>
+                    <p class="landing-floater__meta">industry: design</p>
+                </div>
+                <div class="landing-floater landing-floater--6" data-parallax data-parallax-speed="-10">
+                    <span class="landing-floater__label">Deal</span>
+                    <strong class="landing-floater__title">Negotiation open</strong>
+                    <p class="landing-floater__meta">waiting response</p>
+                </div>
+                <div class="landing-floater landing-floater--7" data-parallax data-parallax-speed="9">
+                    <span class="landing-floater__label">Follow-up</span>
+                    <strong class="landing-floater__title">Call due 16:30</strong>
+                    <p class="landing-floater__meta">owner: sales</p>
+                </div>
+                <div class="landing-floater landing-floater--8" data-parallax data-parallax-speed="-8">
+                    <span class="landing-floater__label">CRM</span>
+                    <strong class="landing-floater__title">Vertex Partners</strong>
+                    <p class="landing-floater__meta">context: meeting booked</p>
+                </div>
+                <div class="landing-floater landing-floater--9" data-parallax data-parallax-speed="7">
+                    <span class="landing-floater__label">Quotation</span>
+                    <strong class="landing-floater__title">$2,800 retainer</strong>
+                    <p class="landing-floater__meta">sent yesterday</p>
+                </div>
+                <div class="landing-floater landing-floater--10" data-parallax data-parallax-speed="-6">
+                    <span class="landing-floater__label">Contact</span>
+                    <strong class="landing-floater__title">Ana Torres</strong>
+                    <p class="landing-floater__meta">role: founder</p>
+                </div>
+                <div class="landing-floater landing-floater--11" data-parallax data-parallax-speed="10">
+                    <span class="landing-floater__label">Pipeline</span>
+                    <strong class="landing-floater__title">Discovery 34</strong>
+                    <p class="landing-floater__meta">proposal 18</p>
+                </div>
+                <div class="landing-floater landing-floater--12" data-parallax data-parallax-speed="-11">
+                    <span class="landing-floater__label">Task</span>
+                    <strong class="landing-floater__title">Proposal revision</strong>
+                    <p class="landing-floater__meta">stakeholder request</p>
+                </div>
+                <div class="landing-floater landing-floater--13" data-parallax data-parallax-speed="5">
+                    <span class="landing-floater__label">Company</span>
+                    <strong class="landing-floater__title">Acme Logistics</strong>
+                    <p class="landing-floater__meta">status: hot lead</p>
+                </div>
+                <div class="landing-floater landing-floater--14" data-parallax data-parallax-speed="-7">
+                    <span class="landing-floater__label">Interaction</span>
+                    <strong class="landing-floater__title">Proposal reviewed</strong>
+                    <p class="landing-floater__meta">last touch: today</p>
+                </div>
+                <div class="landing-floater landing-floater--15" data-parallax data-parallax-speed="12">
+                    <span class="landing-floater__label">Reminder</span>
+                    <strong class="landing-floater__title">Next step visible</strong>
+                    <p class="landing-floater__meta">no deal left cold</p>
+                </div>
+                <div class="landing-floater landing-floater--16" data-parallax data-parallax-speed="-8">
+                    <span class="landing-floater__label">Contact</span>
+                    <strong class="landing-floater__title">Lucia Gomez</strong>
+                    <p class="landing-floater__meta">role: ops lead</p>
+                </div>
+                <div class="landing-floater landing-floater--17" data-parallax data-parallax-speed="7">
+                    <span class="landing-floater__label">Company</span>
+                    <strong class="landing-floater__title">Atlas Commerce</strong>
+                    <p class="landing-floater__meta">country: AR</p>
+                </div>
+                <div class="landing-floater landing-floater--18" data-parallax data-parallax-speed="-10">
+                    <span class="landing-floater__label">Quotation</span>
+                    <strong class="landing-floater__title">$12,000 implementation</strong>
+                    <p class="landing-floater__meta">stage: viewed</p>
+                </div>
+                <div class="landing-floater landing-floater--19" data-parallax data-parallax-speed="9">
+                    <span class="landing-floater__label">Follow-up</span>
+                    <strong class="landing-floater__title">Send recap</strong>
+                    <p class="landing-floater__meta">due: tomorrow</p>
+                </div>
+                <div class="landing-floater landing-floater--20" data-parallax data-parallax-speed="-7">
+                    <span class="landing-floater__label">Interaction</span>
+                    <strong class="landing-floater__title">Pricing discussion</strong>
+                    <p class="landing-floater__meta">last touch: yesterday</p>
+                </div>
+                <div class="landing-floater landing-floater--21" data-parallax data-parallax-speed="6">
+                    <span class="landing-floater__label">Deal</span>
+                    <strong class="landing-floater__title">Expansion opportunity</strong>
+                    <p class="landing-floater__meta">status: warm</p>
+                </div>
+                <div class="landing-floater landing-floater--22" data-parallax data-parallax-speed="-12">
+                    <span class="landing-floater__label">CRM</span>
+                    <strong class="landing-floater__title">Signal detected</strong>
+                    <p class="landing-floater__meta">reply received</p>
+                </div>
+                <div class="landing-floater landing-floater--23" data-parallax data-parallax-speed="8">
+                    <span class="landing-floater__label">Task</span>
+                    <strong class="landing-floater__title">Update proposal</strong>
+                    <p class="landing-floater__meta">owner: silvio</p>
+                </div>
+                <div class="landing-floater landing-floater--24" data-parallax data-parallax-speed="-9">
+                    <span class="landing-floater__label">Pipeline</span>
+                    <strong class="landing-floater__title">Negotiation 09</strong>
+                    <p class="landing-floater__meta">won rate: 31%</p>
+                </div>
+                <div class="landing-floater landing-floater--25" data-parallax data-parallax-speed="11">
+                    <span class="landing-floater__label">Reminder</span>
+                    <strong class="landing-floater__title">No silent deals</strong>
+                    <p class="landing-floater__meta">follow-through matters</p>
+                </div>
+            </div>
 
             <header class="relative z-10 w-full px-5 pt-5 sm:px-6 lg:px-10">
                 <nav class="landing-nav">

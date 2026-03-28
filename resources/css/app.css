@@ -68,6 +68,10 @@
 }
 
 @layer base {
+    [x-cloak] {
+        display: none !important;
+    }
+
     body {
         font-family: var(--font-sans);
         font-feature-settings: 'ss01' 1, 'cv02' 1, 'cv11' 1;
@@ -901,6 +905,48 @@ select:focus[data-flux-control] {
     }
 }
 
+@keyframes auth-floater-drift {
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+
+    25% {
+        transform: translate3d(22px, -18px, 0) rotate(1.2deg);
+    }
+
+    50% {
+        transform: translate3d(-16px, 12px, 0) rotate(-1deg);
+    }
+
+    75% {
+        transform: translate3d(14px, 24px, 0) rotate(0.8deg);
+    }
+}
+
+@keyframes landing-floater-drift {
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+
+    20% {
+        transform: translate3d(26px, -16px, 0) rotate(1.1deg);
+    }
+
+    40% {
+        transform: translate3d(-18px, 12px, 0) rotate(-0.9deg);
+    }
+
+    60% {
+        transform: translate3d(14px, 24px, 0) rotate(0.8deg);
+    }
+
+    80% {
+        transform: translate3d(-10px, -18px, 0) rotate(-0.7deg);
+    }
+}
+
 @layer components {
     .auth-experience {
         @apply relative min-h-screen overflow-hidden bg-[linear-gradient(180deg,#fbfcff_0%,#f5f8ff_45%,#f9fbff_100%)] text-ink-950;
@@ -952,29 +998,57 @@ select:focus[data-flux-control] {
     }
 
     .auth-floater {
-        @apply absolute hidden border border-white/80 bg-white/58 p-4 text-left shadow-[0_24px_60px_rgba(15,23,42,0.08)] backdrop-blur-xl xl:block;
+        @apply absolute hidden border border-white/80 bg-white/58 p-4 text-left shadow-[0_24px_60px_rgba(15,23,42,0.08)] backdrop-blur-xl lg:block;
         border-radius: 1.45rem 2.15rem 1.35rem 1.7rem;
-        animation: landing-float 18s ease-in-out infinite;
+        animation: auth-floater-drift 14s ease-in-out infinite;
+        will-change: transform;
+        opacity: 0.82;
     }
 
     .auth-floater--company {
-        top: 8rem;
-        right: 20rem;
+        top: 7rem;
+        right: 22rem;
         width: 16rem;
     }
 
     .auth-floater--quote {
-        top: 22rem;
-        right: 6rem;
+        top: 19rem;
+        right: 4rem;
         width: 15rem;
-        animation-duration: 21s;
+        animation-duration: 17s;
+        animation-delay: -4s;
     }
 
     .auth-floater--followup {
-        bottom: 7rem;
-        left: 10rem;
+        bottom: 5rem;
+        left: 6rem;
         width: 14rem;
-        animation-duration: 17s;
+        animation-duration: 12s;
+        animation-delay: -7s;
+    }
+
+    .auth-floater--crm {
+        top: 28rem;
+        left: 34rem;
+        width: 14rem;
+        animation-duration: 15s;
+        animation-delay: -2s;
+    }
+
+    .auth-floater--deal {
+        top: 9rem;
+        left: 42%;
+        width: 13rem;
+        animation-duration: 18s;
+        animation-delay: -5s;
+    }
+
+    .auth-floater--note {
+        bottom: 10rem;
+        right: 18rem;
+        width: 15rem;
+        animation-duration: 13s;
+        animation-delay: -8s;
     }
 
     .auth-floater__label {
@@ -999,8 +1073,17 @@ select:focus[data-flux-control] {
     }
 
     .auth-showcase__frame {
-        @apply flex h-full min-h-[calc(100vh-4rem)] flex-col border border-white/70 bg-white/58 p-7 shadow-[0_40px_120px_rgba(15,23,42,0.10)] backdrop-blur-xl;
+        @apply relative flex h-full min-h-[calc(100vh-4rem)] flex-col border border-white/70 bg-white/58 p-7 shadow-[0_40px_120px_rgba(15,23,42,0.10)] backdrop-blur-xl;
         border-radius: 2.2rem 3.2rem 2.4rem 2.8rem;
+    }
+
+    .auth-showcase__frame > * {
+        position: relative;
+        z-index: 1;
+    }
+
+    .auth-showcase__ambient {
+        @apply pointer-events-none absolute inset-0 z-0 overflow-hidden;
     }
 
     .auth-showcase__nav {
@@ -1049,6 +1132,42 @@ select:focus[data-flux-control] {
 
     .auth-showcase__board {
         @apply relative ml-auto w-full max-w-2xl;
+    }
+
+    .auth-floater--ambient {
+        @apply block bg-white/50;
+    }
+
+    .auth-floater--ambient-a {
+        top: 8.5rem;
+        left: 28rem;
+        width: 14rem;
+        animation-duration: 11s;
+        animation-delay: -1s;
+    }
+
+    .auth-floater--ambient-b {
+        top: 17rem;
+        left: 44rem;
+        width: 13.5rem;
+        animation-duration: 16s;
+        animation-delay: -6s;
+    }
+
+    .auth-floater--ambient-c {
+        top: 22rem;
+        left: 18rem;
+        width: 13rem;
+        animation-duration: 14s;
+        animation-delay: -3s;
+    }
+
+    .auth-floater--ambient-d {
+        bottom: 12rem;
+        left: 30rem;
+        width: 14rem;
+        animation-duration: 19s;
+        animation-delay: -9s;
     }
 
     .auth-showcase__board-card {
@@ -1147,6 +1266,35 @@ select:focus[data-flux-control] {
         display: none !important;
     }
 
+    .auth-header-stack__copy {
+        min-height: 8.5rem;
+    }
+
+    .auth-modal-header {
+        @apply space-y-5;
+    }
+
+    .auth-modal-copy {
+        @apply space-y-3;
+        min-height: 8.5rem;
+    }
+
+    .auth-modal-kicker {
+        @apply text-[11px] font-black uppercase tracking-[0.18em] text-brand-700;
+        font-family: var(--font-display);
+    }
+
+    .auth-modal-title {
+        @apply text-3xl font-bold leading-tight text-ink-950;
+        font-family: var(--font-display);
+        letter-spacing: -0.05em;
+        text-wrap: balance;
+    }
+
+    .auth-modal-description {
+        @apply max-w-xl text-base leading-7 text-ink-600;
+    }
+
     .auth-toggle {
         @apply relative grid grid-cols-2 gap-1 overflow-hidden rounded-full border border-brand-100/80 p-1;
     }
@@ -1199,20 +1347,46 @@ select:focus[data-flux-control] {
 
     .auth-form-stage {
         @apply relative overflow-hidden;
+        min-height: 39rem;
     }
 
     .auth-form-stage__rail {
-        @apply flex w-[200%] transition-transform duration-700;
-        transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-        transform: translateX(0);
+        @apply relative w-full;
     }
 
     .auth-form-stage__rail--register {
-        transform: translateX(-50%);
+        transform: none;
     }
 
     .auth-form-stage__pane {
-        @apply w-1/2 shrink-0 pr-2;
+        @apply absolute inset-0 w-full pb-3;
+    }
+
+    .auth-form-stage__pane--active {
+        pointer-events: auto;
+    }
+
+    .auth-form-stage__pane--inactive {
+        pointer-events: none;
+    }
+
+    .auth-modal-transition {
+        transition:
+            opacity 480ms cubic-bezier(0.22, 1, 0.36, 1),
+            transform 480ms cubic-bezier(0.22, 1, 0.36, 1),
+            filter 480ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .auth-modal-transition-start {
+        opacity: 0;
+        transform: translateY(8px) scale(0.992);
+        filter: blur(4px);
+    }
+
+    .auth-modal-transition-end {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
     }
 
     .auth-form-fieldset {
@@ -1306,6 +1480,57 @@ select:focus[data-flux-control] {
             radial-gradient(circle at 18% 72%, rgba(245, 158, 11, 0.06), transparent 20%),
             linear-gradient(180deg, #fbfcff 0%, #f5f8ff 45%, #f9fbff 100%);
     }
+
+    .landing-floaters {
+        @apply pointer-events-none absolute inset-0 z-0 overflow-hidden;
+    }
+
+    .landing-floater {
+        @apply absolute hidden border border-white/85 bg-white/62 p-4 text-left shadow-[0_24px_60px_rgba(15,23,42,0.08)] backdrop-blur-xl lg:block;
+        border-radius: 1.35rem 2rem 1.25rem 1.7rem;
+        animation: landing-floater-drift 15s ease-in-out infinite;
+        will-change: transform;
+        opacity: 0.78;
+    }
+
+    .landing-floater__label {
+        @apply text-[11px] font-black uppercase tracking-[0.16em] text-brand-700;
+        font-family: var(--font-display);
+    }
+
+    .landing-floater__title {
+        @apply mt-2 block text-base font-semibold text-ink-950;
+    }
+
+    .landing-floater__meta {
+        @apply mt-1 text-sm text-ink-500;
+    }
+
+    .landing-floater--1 { top: 6rem; left: 3rem; width: 13rem; animation-delay: -2s; }
+    .landing-floater--2 { top: 14rem; left: 28rem; width: 14rem; animation-duration: 17s; animation-delay: -6s; }
+    .landing-floater--3 { top: 24rem; left: 6rem; width: 13rem; animation-duration: 13s; animation-delay: -4s; }
+    .landing-floater--4 { top: 36rem; left: 26rem; width: 13rem; animation-duration: 18s; animation-delay: -9s; }
+    .landing-floater--5 { top: 52rem; left: 4rem; width: 12.5rem; animation-duration: 14s; animation-delay: -3s; }
+    .landing-floater--6 { top: 8rem; right: 12rem; width: 13rem; animation-duration: 16s; animation-delay: -5s; }
+    .landing-floater--7 { top: 26rem; right: 4rem; width: 12.5rem; animation-duration: 12s; animation-delay: -8s; }
+    .landing-floater--8 { top: 44rem; right: 18rem; width: 13rem; animation-duration: 19s; animation-delay: -1s; }
+    .landing-floater--9 { top: 62rem; right: 5rem; width: 13rem; animation-duration: 15s; animation-delay: -11s; }
+    .landing-floater--10 { top: 78rem; left: 14rem; width: 12rem; animation-duration: 18s; animation-delay: -7s; }
+    .landing-floater--11 { top: 90rem; right: 22rem; width: 12.5rem; animation-duration: 14s; animation-delay: -10s; }
+    .landing-floater--12 { top: 106rem; left: 5rem; width: 13rem; animation-duration: 17s; animation-delay: -12s; }
+    .landing-floater--13 { top: 120rem; right: 6rem; width: 12.5rem; animation-duration: 13s; animation-delay: -6s; }
+    .landing-floater--14 { top: 134rem; left: 26rem; width: 13rem; animation-duration: 18s; animation-delay: -4s; }
+    .landing-floater--15 { top: 148rem; right: 20rem; width: 12.5rem; animation-duration: 15s; animation-delay: -9s; }
+    .landing-floater--16 { top: 18rem; right: 34rem; width: 12rem; animation-duration: 16s; animation-delay: -3s; }
+    .landing-floater--17 { top: 58rem; left: 34rem; width: 13rem; animation-duration: 12s; animation-delay: -5s; }
+    .landing-floater--18 { top: 74rem; right: 30rem; width: 14rem; animation-duration: 19s; animation-delay: -8s; }
+    .landing-floater--19 { top: 98rem; left: 34rem; width: 12rem; animation-duration: 13s; animation-delay: -2s; }
+    .landing-floater--20 { top: 112rem; right: 34rem; width: 13rem; animation-duration: 17s; animation-delay: -10s; }
+    .landing-floater--21 { top: 126rem; left: 10rem; width: 13rem; animation-duration: 14s; animation-delay: -6s; }
+    .landing-floater--22 { top: 142rem; right: 9rem; width: 12.5rem; animation-duration: 18s; animation-delay: -7s; }
+    .landing-floater--23 { top: 156rem; left: 32rem; width: 12rem; animation-duration: 12s; animation-delay: -4s; }
+    .landing-floater--24 { top: 170rem; right: 26rem; width: 12.5rem; animation-duration: 16s; animation-delay: -11s; }
+    .landing-floater--25 { top: 184rem; left: 8rem; width: 12rem; animation-duration: 15s; animation-delay: -5s; }
 
     .landing-shell {
         @apply mx-auto w-full max-w-[min(100%,110rem)] px-5 sm:px-6 lg:px-10;

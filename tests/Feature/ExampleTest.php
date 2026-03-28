@@ -11,7 +11,7 @@ test('guests see the landing page at root', function () {
         ->assertSee(route('login'))
         ->assertSee(route('register'))
         ->assertSee('Try the demo')
-        ->assertSee('https://github.com/EzeArcich/followUp');
+        ->assertSee('https://github.com/EzeArcich');
 });
 
 test('authenticated users are redirected from root to the dashboard', function () {
