@@ -109,5 +109,3 @@ Calendar & email integrations
 🚧 Status
 
 Active development.
-
-This is evolving into a simple but powerful CRM focused on execution, not complexity.
