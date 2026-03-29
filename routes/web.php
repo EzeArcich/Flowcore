@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FollowUpController;
 use App\Http\Controllers\InteractionController;
 use App\Http\Controllers\QuotationController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,13 @@ Route::get('/', function () {
 
     return view('welcome');
 })->name('home');
+
+Route::post('/locale/{locale}', function (Request $request, string $locale) {
+    $request->session()->put('locale', $locale);
+
+    return redirect()->to(url()->previous() ?: route('home'));
+})->whereIn('locale', config('app.supported_locales', ['es', 'en', 'pt']))
+    ->name('locale.switch');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

@@ -1,6 +1,18 @@
 <div
     x-data="{
         mode: @js($initialMode),
+        copy: {
+            register: {
+                kicker: @js(__('auth.modal.register.kicker')),
+                title: @js(__('auth.modal.register.title')),
+                description: @js(__('auth.modal.register.description')),
+            },
+            login: {
+                kicker: @js(__('auth.modal.login.kicker')),
+                title: @js(__('auth.modal.login.title')),
+                description: @js(__('auth.modal.login.description')),
+            },
+        },
         syncUrl() {
             history.replaceState({}, '', this.mode === 'register' ? @js(route('register')) : @js(route('login')));
         },
@@ -17,22 +29,25 @@
     class="flex flex-col gap-6"
 >
     <div class="auth-form-shell">
-        <div class="auth-modal-header">
-            <div class="auth-modal-copy">
-                <p class="auth-modal-kicker" x-text="mode === 'register' ? 'Create your workspace' : 'Welcome back'"></p>
-                <h2 class="auth-modal-title" x-text="mode === 'register' ? 'Start tracking your pipeline with structure.' : 'Log in to keep every opportunity moving.'"></h2>
-                <p class="auth-modal-description" x-text="mode === 'register'
-                    ? 'Create an account to manage companies, contacts, quotations and follow-ups inside one clean workflow.'
-                    : 'Pick up your pipeline where you left it, with context, pending actions and due follow-ups ready to go.'"></p>
-            </div>
+        <!-- <div class="auth-modal-brand">
+            <x-app-logo href="{{ route('home') }}" variant="light" class="auth-modal-brand__logo" />
+            <p class="auth-modal-brand__tagline">{{ __('auth.layout.showcase.tagline') }}</p>
+        </div> -->
 
-            <div class="auth-toggle crm-surface-muted">
+        <div class="auth-modal-header">
+            <!-- <div class="auth-modal-copy">
+                <p class="auth-modal-kicker" x-text="copy[mode].kicker"></p>
+                <h2 class="auth-modal-title" x-text="copy[mode].title"></h2>
+                <p class="auth-modal-description" x-text="copy[mode].description"></p>
+            </div> -->
+
+            <div class="auth-toggle">
                 <div class="auth-toggle__track" :class="mode === 'register' ? 'auth-toggle__track--register' : ''"></div>
                 <button type="button" class="auth-toggle__option" :class="mode === 'login' ? 'auth-toggle__option--active' : ''" @click="showLogin()">
-                    Log in
+                    {{ __('auth.modal.toggle.login') }}
                 </button>
                 <button type="button" class="auth-toggle__option" :class="mode === 'register' ? 'auth-toggle__option--active' : ''" @click="showRegister()">
-                    Register
+                    {{ __('auth.modal.toggle.register') }}
                 </button>
             </div>
         </div>
@@ -46,7 +61,7 @@
                     @csrf
 
                     <div class="auth-form-fieldset">
-                        <p class="auth-form-fieldset__eyebrow">Credentials</p>
+                        <p class="auth-form-fieldset__eyebrow">{{ __('auth.modal.login.fieldsets.credentials') }}</p>
                         <div class="grid gap-5">
                             <flux:input
                                 id="portal_login_email"
@@ -83,17 +98,17 @@
 
                     <div class="auth-form-row">
                         <flux:checkbox name="remember" :label="__('Remember me')" :checked="old('remember')" />
-                        <span class="auth-form-row__meta">Resume faster on this device.</span>
+                        <span class="auth-form-row__meta">{{ __('auth.modal.login.resume_faster') }}</span>
                     </div>
 
                     <div class="grid gap-3">
-                        <button type="submit" class="crm-btn-primary auth-submit-button" data-test="login-button">
-                            {{ __('Log in') }}
+                        <button type="submit" class="auth-modal-button auth-modal-button--primary auth-submit-button" data-test="login-button">
+                            {{ __('auth.modal.toggle.login') }}
                         </button>
 
-                        <button type="button" class="crm-btn-secondary auth-alt-action auth-alt-action--button" @click="showRegister()">
-                            <span>{{ __('Need an account?') }}</span>
-                            <strong>{{ __('Switch to register') }}</strong>
+                        <button type="button" class="auth-modal-button auth-modal-button--ghost auth-alt-action auth-alt-action--button" @click="showRegister()">
+                            <span>{{ __('auth.modal.login.alt_action.prompt') }}</span>
+                            <strong>{{ __('auth.modal.login.alt_action.cta') }}</strong>
                         </button>
                     </div>
                 </form>
@@ -107,7 +122,7 @@
                     @csrf
 
                     <div class="auth-form-fieldset">
-                        <p class="auth-form-fieldset__eyebrow">Profile</p>
+                        <p class="auth-form-fieldset__eyebrow">{{ __('auth.modal.register.fieldsets.profile') }}</p>
                         <div class="grid gap-5">
                             <flux:input
                                 id="portal_register_name"
@@ -135,7 +150,7 @@
                     </div>
 
                     <div class="auth-form-fieldset">
-                        <p class="auth-form-fieldset__eyebrow">Security</p>
+                        <p class="auth-form-fieldset__eyebrow">{{ __('auth.modal.register.fieldsets.security') }}</p>
                         <div class="grid gap-5">
                             <flux:input
                                 id="portal_register_password"
@@ -162,13 +177,13 @@
                     </div>
 
                     <div class="grid gap-3">
-                        <button type="submit" class="crm-btn-primary auth-submit-button" data-test="register-user-button">
-                            {{ __('Create account') }}
+                        <button type="submit" class="auth-modal-button auth-modal-button--primary auth-submit-button" data-test="register-user-button">
+                            {{ __('auth.modal.register.submit') }}
                         </button>
 
-                        <button type="button" class="crm-btn-secondary auth-alt-action auth-alt-action--button" @click="showLogin()">
-                            <span>{{ __('Already have an account?') }}</span>
-                            <strong>{{ __('Switch to login') }}</strong>
+                        <button type="button" class="auth-modal-button auth-modal-button--ghost auth-alt-action auth-alt-action--button" @click="showLogin()">
+                            <span>{{ __('auth.modal.register.alt_action.prompt') }}</span>
+                            <strong>{{ __('auth.modal.register.alt_action.cta') }}</strong>
                         </button>
                     </div>
                 </form>

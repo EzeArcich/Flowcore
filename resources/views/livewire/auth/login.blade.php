@@ -1,11 +1,11 @@
-<x-layouts::auth :title="__('Log in')">
+<x-layouts::auth :title="__('auth.modal.toggle.login')">
     <div class="flex flex-col gap-6">
         <div class="auth-form-shell">
-            <x-auth-header :title="__('Log in to your account')" :description="__('Pick up your pipeline where you left it, with every next step and conversation in view.')" />
+            <x-auth-header :title="__('auth.pages.login.header.title')" :description="__('auth.pages.login.header.description')" />
 
             <div class="auth-form-note">
-                <span class="auth-form-note__label">Inside FollowUp</span>
-                <p class="auth-form-note__copy">Today’s priorities, overdue follow-ups and deal context are ready as soon as you sign in.</p>
+                <span class="auth-form-note__label">{{ __('auth.pages.login.note.label') }}</span>
+                <p class="auth-form-note__copy">{{ __('auth.pages.login.note.copy') }}</p>
             </div>
 
             <!-- Session Status -->
@@ -50,7 +50,7 @@
 
                 <div class="auth-form-row">
                     <flux:checkbox name="remember" :label="__('Remember me')" :checked="old('remember')" />
-                    <span class="auth-form-row__meta">Resume faster on this device.</span>
+                    <span class="auth-form-row__meta">{{ __('auth.modal.login.resume_faster') }}</span>
                 </div>
 
                 <div class="grid gap-3">
@@ -70,12 +70,12 @@
 
         <div class="auth-side-facts">
             <div class="auth-side-facts__item">
-                <span class="auth-side-facts__label">Daily focus</span>
-                <p class="auth-side-facts__copy">Open FollowUp and know what needs attention now.</p>
+                <span class="auth-side-facts__label">{{ __('auth.pages.login.facts.daily_focus.label') }}</span>
+                <p class="auth-side-facts__copy">{{ __('auth.pages.login.facts.daily_focus.copy') }}</p>
             </div>
             <div class="auth-side-facts__item">
-                <span class="auth-side-facts__label">Context preserved</span>
-                <p class="auth-side-facts__copy">Conversations, quotations and next actions remain connected.</p>
+                <span class="auth-side-facts__label">{{ __('auth.pages.login.facts.context.label') }}</span>
+                <p class="auth-side-facts__copy">{{ __('auth.pages.login.facts.context.copy') }}</p>
             </div>
         </div>
     </div>

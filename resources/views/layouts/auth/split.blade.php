@@ -7,12 +7,12 @@
         <div class="relative grid h-dvh flex-col items-center justify-center px-8 sm:px-0 lg:max-w-none lg:grid-cols-2 lg:px-0">
             <div class="bg-muted relative hidden h-full flex-col p-10 text-white lg:flex dark:border-e dark:border-neutral-800">
                 <div class="absolute inset-0 bg-neutral-900"></div>
-                <a href="{{ route('dashboard') }}" class="relative z-20 flex items-center text-lg font-medium" wire:navigate>
-                    <span class="flex h-10 w-10 items-center justify-center rounded-md">
-                        <x-app-logo-icon class="me-2 h-7 fill-current text-white" />
-                    </span>
-                    {{ config('app.name', 'Laravel') }}
-                </a>
+                <x-app-logo
+                    href="{{ route('dashboard') }}"
+                    variant="dark"
+                    class="relative z-20 rounded-[1.15rem] border border-white/10 bg-white/5 px-4 py-2 shadow-[0_16px_40px_rgba(0,0,0,0.25)]"
+                    wire:navigate
+                />
 
                 @php
                     [$message, $author] = str(Illuminate\Foundation\Inspiring::quotes()->random())->explode('-');

@@ -1,11 +1,11 @@
-<x-layouts::auth :title="__('Register')">
+<x-layouts::auth :title="__('auth.modal.register.submit')">
     <div class="flex flex-col gap-6">
         <div class="auth-form-shell">
-            <x-auth-header :title="__('Create an account')" :description="__('Set up your workspace and start tracking companies, contacts and follow-ups with a cleaner workflow.')" />
+            <x-auth-header :title="__('auth.pages.register.header.title')" :description="__('auth.pages.register.header.description')" />
 
             <div class="auth-form-note auth-form-note--soft">
-                <span class="auth-form-note__label">What you get</span>
-                <p class="auth-form-note__copy">A lightweight commercial workspace with visible next steps, interaction history and fewer dropped opportunities.</p>
+                <span class="auth-form-note__label">{{ __('auth.pages.register.note.label') }}</span>
+                <p class="auth-form-note__copy">{{ __('auth.pages.register.note.copy') }}</p>
             </div>
 
             <!-- Session Status -->
@@ -15,7 +15,7 @@
                 @csrf
 
                 <div class="auth-form-fieldset">
-                    <p class="auth-form-fieldset__eyebrow">Profile</p>
+                    <p class="auth-form-fieldset__eyebrow">{{ __('auth.modal.register.fieldsets.profile') }}</p>
                     <div class="grid gap-5">
                         <flux:input
                             name="name"
@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="auth-form-fieldset">
-                    <p class="auth-form-fieldset__eyebrow">Security</p>
+                    <p class="auth-form-fieldset__eyebrow">{{ __('auth.modal.register.fieldsets.security') }}</p>
                     <div class="grid gap-5">
                         <flux:input
                             name="password"
@@ -78,14 +78,14 @@
             </form>
         </div>
 
-        <div class="auth-side-facts">
+            <div class="auth-side-facts">
             <div class="auth-side-facts__item">
-                <span class="auth-side-facts__label">Self-hosted</span>
-                <p class="auth-side-facts__copy">Own your pipeline, data and workflow from day one.</p>
+                <span class="auth-side-facts__label">{{ __('auth.pages.register.facts.ownership.label') }}</span>
+                <p class="auth-side-facts__copy">{{ __('auth.pages.register.facts.ownership.copy') }}</p>
             </div>
             <div class="auth-side-facts__item">
-                <span class="auth-side-facts__label">Built for execution</span>
-                <p class="auth-side-facts__copy">Designed for teams who need clarity, not CRM bureaucracy.</p>
+                <span class="auth-side-facts__label">{{ __('auth.pages.register.facts.execution.label') }}</span>
+                <p class="auth-side-facts__copy">{{ __('auth.pages.register.facts.execution.copy') }}</p>
             </div>
         </div>
     </div>

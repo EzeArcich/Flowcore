@@ -1,6 +1,18 @@
 @import 'tailwindcss';
 @import '../../vendor/livewire/flux/dist/flux.css';
 
+:root {
+    --fc-primary: #3155f6;
+    --fc-primary-dark: #1d4ed8;
+    --fc-accent: #22c3ee;
+    --fc-ink: #0f172a;
+    --fc-ink-soft: #334155;
+    --fc-bg-dark: #0b1220;
+    --fc-bg-soft: #f8fafc;
+    --fc-border: rgba(49, 85, 246, 0.16);
+    --fc-glow: rgba(34, 195, 238, 0.22);
+}
+
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
@@ -13,29 +25,29 @@
     --font-display: 'Space Grotesk', 'Sora', ui-sans-serif, system-ui, sans-serif;
 
     /* CRM identity palette: tactical dark + vivid signal tones */
-    --color-brand-50: #edf2ff;
+    --color-brand-50: #edf3ff;
     --color-brand-100: #dbe5ff;
-    --color-brand-200: #b9ccff;
-    --color-brand-300: #8ba8ff;
-    --color-brand-400: #5f7fff;
-    --color-brand-500: #3d5afe;
-    --color-brand-600: #2f47d8;
-    --color-brand-700: #2738ac;
-    --color-brand-800: #1f2d82;
-    --color-brand-900: #192467;
-    --color-brand-950: #0e1437;
+    --color-brand-200: #bed0ff;
+    --color-brand-300: #8fadff;
+    --color-brand-400: #5f80fb;
+    --color-brand-500: var(--fc-primary);
+    --color-brand-600: var(--fc-primary-dark);
+    --color-brand-700: #173ea8;
+    --color-brand-800: #173481;
+    --color-brand-900: #142a63;
+    --color-brand-950: #0d1b3b;
 
-    --color-ink-50: #eef1f7;
-    --color-ink-100: #d8deec;
-    --color-ink-200: #b7c2da;
-    --color-ink-300: #8fa0c2;
-    --color-ink-400: #6a7ca9;
-    --color-ink-500: #4f608b;
-    --color-ink-600: #3f4d72;
-    --color-ink-700: #323d5a;
-    --color-ink-800: #252d43;
-    --color-ink-900: #161d30;
-    --color-ink-950: #0b1020;
+    --color-ink-50: #eff5ff;
+    --color-ink-100: #dde6f3;
+    --color-ink-200: #c3d0e3;
+    --color-ink-300: #90a3c0;
+    --color-ink-400: #64748b;
+    --color-ink-500: var(--fc-ink-soft);
+    --color-ink-600: #243449;
+    --color-ink-700: #1b293c;
+    --color-ink-800: #162233;
+    --color-ink-900: #111b2c;
+    --color-ink-950: var(--fc-bg-dark);
 
     --color-signal-success: #16a34a;
     --color-signal-warning: #d97706;
@@ -54,8 +66,8 @@
     --color-zinc-900: #171717;
     --color-zinc-950: #0a0a0a;
 
-    --color-accent: var(--color-brand-600);
-    --color-accent-content: var(--color-brand-600);
+    --color-accent: var(--fc-accent);
+    --color-accent-content: var(--fc-accent);
     --color-accent-foreground: var(--color-white);
 }
 
@@ -905,6 +917,23 @@ select:focus[data-flux-control] {
     }
 }
 
+@keyframes landing-cta-breathe {
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+        box-shadow:
+            0 12px 28px rgba(49, 85, 246, 0.10),
+            0 0 0 0 rgba(34, 195, 238, 0.00);
+    }
+
+    50% {
+        transform: translateY(-1px) scale(1.02);
+        box-shadow:
+            0 18px 36px rgba(49, 85, 246, 0.16),
+            0 0 0 8px rgba(34, 195, 238, 0.10);
+    }
+}
+
 @keyframes auth-floater-drift {
     0%,
     100% {
@@ -924,26 +953,247 @@ select:focus[data-flux-control] {
     }
 }
 
-@keyframes landing-floater-drift {
-    0%,
-    100% {
-        transform: translate3d(0, 0, 0) rotate(0deg);
+@keyframes landing-floater-sweep-a {
+    0% {
+        opacity: 0;
+        transform: translate3d(-16vw, 9vh, 0) scale(0.72) rotate(-5deg);
+        filter: blur(12px);
     }
 
-    20% {
-        transform: translate3d(26px, -16px, 0) rotate(1.1deg);
+    12% {
+        opacity: 0.16;
+        filter: blur(8px);
+    }
+
+    28% {
+        opacity: 0.34;
+        transform: translate3d(-5vw, -2vh, 0) scale(0.88) rotate(-1deg);
+        filter: blur(3px);
+    }
+
+    38% {
+        opacity: 0.31;
+        transform: translate3d(0, -5vh, 0) scale(0.95) rotate(1deg);
+        filter: blur(2px);
+    }
+
+    48% {
+        opacity: 0;
+        transform: translate3d(11vw, -10vh, 0) scale(1.02) rotate(3deg);
+        filter: blur(12px);
+    }
+
+    49% {
+        opacity: 0;
+        transform: translate3d(15vw, 15vh, 0) scale(0.7) rotate(-7deg);
+        filter: blur(13px);
+    }
+
+    58% {
+        opacity: 0.17;
+        filter: blur(8px);
+    }
+
+    76% {
+        opacity: 0.33;
+        transform: translate3d(-3vw, 4vh, 0) scale(0.92) rotate(-2deg);
+        filter: blur(3px);
+    }
+
+    84% {
+        opacity: 0.29;
+        transform: translate3d(-7vw, 1vh, 0) scale(0.98) rotate(0deg);
+        filter: blur(2px);
+    }
+
+    94%,
+    100% {
+        opacity: 0;
+        transform: translate3d(-15vw, -13vh, 0) scale(1.1) rotate(4deg);
+        filter: blur(12px);
+    }
+}
+
+@keyframes landing-floater-sweep-b {
+    0% {
+        opacity: 0;
+        transform: translate3d(15vw, -13vh, 0) scale(0.7) rotate(6deg);
+        filter: blur(12px);
+    }
+
+    14% {
+        opacity: 0.16;
+        filter: blur(8px);
+    }
+
+    31% {
+        opacity: 0.33;
+        transform: translate3d(4vw, -3vh, 0) scale(0.9) rotate(2deg);
+        filter: blur(3px);
     }
 
     40% {
-        transform: translate3d(-18px, 12px, 0) rotate(-0.9deg);
+        opacity: 0.3;
+        transform: translate3d(-1vw, 0, 0) scale(0.97) rotate(0deg);
+        filter: blur(2px);
     }
 
-    60% {
-        transform: translate3d(14px, 24px, 0) rotate(0.8deg);
+    50% {
+        opacity: 0;
+        transform: translate3d(-10vw, 8vh, 0) scale(1.05) rotate(-3deg);
+        filter: blur(12px);
     }
 
-    80% {
-        transform: translate3d(-10px, -18px, 0) rotate(-0.7deg);
+    51% {
+        opacity: 0;
+        transform: translate3d(-17vw, -11vh, 0) scale(0.72) rotate(7deg);
+        filter: blur(13px);
+    }
+
+    63% {
+        opacity: 0.16;
+        filter: blur(8px);
+    }
+
+    79% {
+        opacity: 0.32;
+        transform: translate3d(2vw, 6vh, 0) scale(0.94) rotate(1deg);
+        filter: blur(3px);
+    }
+
+    86% {
+        opacity: 0.29;
+        transform: translate3d(6vw, 2vh, 0) scale(1) rotate(-1deg);
+        filter: blur(2px);
+    }
+
+    95%,
+    100% {
+        opacity: 0;
+        transform: translate3d(13vw, -8vh, 0) scale(1.12) rotate(-4deg);
+        filter: blur(12px);
+    }
+}
+
+@keyframes landing-floater-sweep-c {
+    0% {
+        opacity: 0;
+        transform: translate3d(-9vw, 14vh, 0) scale(0.72) rotate(-7deg);
+        filter: blur(13px);
+    }
+
+    16% {
+        opacity: 0.15;
+        filter: blur(8px);
+    }
+
+    34% {
+        opacity: 0.33;
+        transform: translate3d(6vw, 3vh, 0) scale(0.92) rotate(-1deg);
+        filter: blur(3px);
+    }
+
+    41% {
+        opacity: 0.3;
+        transform: translate3d(10vw, 0, 0) scale(0.98) rotate(1deg);
+        filter: blur(2px);
+    }
+
+    51% {
+        opacity: 0;
+        transform: translate3d(17vw, -6vh, 0) scale(1.06) rotate(5deg);
+        filter: blur(12px);
+    }
+
+    52% {
+        opacity: 0;
+        transform: translate3d(17vw, -17vh, 0) scale(0.72) rotate(-6deg);
+        filter: blur(13px);
+    }
+
+    66% {
+        opacity: 0.16;
+        filter: blur(8px);
+    }
+
+    82% {
+        opacity: 0.32;
+        transform: translate3d(-4vw, -4vh, 0) scale(0.94) rotate(0deg);
+        filter: blur(3px);
+    }
+
+    88% {
+        opacity: 0.29;
+        transform: translate3d(-9vw, -1vh, 0) scale(1) rotate(-1deg);
+        filter: blur(2px);
+    }
+
+    96%,
+    100% {
+        opacity: 0;
+        transform: translate3d(-17vw, 11vh, 0) scale(1.12) rotate(5deg);
+        filter: blur(12px);
+    }
+}
+
+@keyframes landing-floater-sweep-d {
+    0% {
+        opacity: 0;
+        transform: translate3d(11vw, 13vh, 0) scale(0.7) rotate(7deg);
+        filter: blur(12px);
+    }
+
+    13% {
+        opacity: 0.16;
+        filter: blur(8px);
+    }
+
+    29% {
+        opacity: 0.33;
+        transform: translate3d(-2vw, 2vh, 0) scale(0.9) rotate(1deg);
+        filter: blur(3px);
+    }
+
+    39% {
+        opacity: 0.3;
+        transform: translate3d(-7vw, -1vh, 0) scale(0.98) rotate(-1deg);
+        filter: blur(2px);
+    }
+
+    49% {
+        opacity: 0;
+        transform: translate3d(-13vw, -9vh, 0) scale(1.04) rotate(-4deg);
+        filter: blur(12px);
+    }
+
+    50% {
+        opacity: 0;
+        transform: translate3d(-18vw, 7vh, 0) scale(0.72) rotate(6deg);
+        filter: blur(13px);
+    }
+
+    61% {
+        opacity: 0.17;
+        filter: blur(8px);
+    }
+
+    78% {
+        opacity: 0.33;
+        transform: translate3d(5vw, -5vh, 0) scale(0.95) rotate(-1deg);
+        filter: blur(3px);
+    }
+
+    87% {
+        opacity: 0.3;
+        transform: translate3d(9vw, -2vh, 0) scale(1) rotate(1deg);
+        filter: blur(2px);
+    }
+
+    95%,
+    100% {
+        opacity: 0;
+        transform: translate3d(16vw, 9vh, 0) scale(1.1) rotate(-4deg);
+        filter: blur(12px);
     }
 }
 
@@ -998,11 +1248,21 @@ select:focus[data-flux-control] {
     }
 
     .auth-floater {
-        @apply absolute hidden border border-white/80 bg-white/58 p-4 text-left shadow-[0_24px_60px_rgba(15,23,42,0.08)] backdrop-blur-xl lg:block;
+        @apply absolute hidden border p-4 text-left lg:block;
+        border-color: rgba(255, 255, 255, 0.46);
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.16)),
+            linear-gradient(90deg, color-mix(in oklab, var(--fc-primary) 8%, transparent), color-mix(in oklab, var(--fc-accent) 7%, transparent));
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.26),
+            0 18px 44px rgba(15, 23, 42, 0.07);
+        backdrop-filter: blur(18px) saturate(135%);
+        -webkit-backdrop-filter: blur(18px) saturate(135%);
         border-radius: 1.45rem 2.15rem 1.35rem 1.7rem;
-        animation: auth-floater-drift 14s ease-in-out infinite;
-        will-change: transform;
-        opacity: 0.82;
+        animation: landing-floater-sweep-a 15s linear infinite;
+        will-change: transform, opacity, filter;
+        opacity: 0.24;
+        filter: blur(2px);
     }
 
     .auth-floater--company {
@@ -1052,16 +1312,41 @@ select:focus[data-flux-control] {
     }
 
     .auth-floater__label {
-        @apply text-[11px] font-black uppercase tracking-[0.16em] text-brand-700;
+        @apply text-[11px] font-black uppercase tracking-[0.16em];
+        color: color-mix(in oklab, var(--fc-primary-dark) 62%, white);
         font-family: var(--font-display);
     }
 
     .auth-floater__title {
-        @apply mt-2 block text-base font-semibold text-ink-950;
+        @apply mt-2 block text-base font-semibold;
+        color: color-mix(in oklab, var(--fc-ink) 66%, white);
     }
 
     .auth-floater__meta {
-        @apply mt-1 text-sm text-ink-500;
+        @apply mt-1 text-sm;
+        color: color-mix(in oklab, var(--fc-ink-soft) 52%, white);
+    }
+
+    .auth-floater--company,
+    .auth-floater--deal,
+    .auth-floater--ambient-b {
+        animation-name: landing-floater-sweep-a;
+    }
+
+    .auth-floater--quote,
+    .auth-floater--note,
+    .auth-floater--ambient-c {
+        animation-name: landing-floater-sweep-b;
+    }
+
+    .auth-floater--followup,
+    .auth-floater--ambient-a {
+        animation-name: landing-floater-sweep-c;
+    }
+
+    .auth-floater--crm,
+    .auth-floater--ambient-d {
+        animation-name: landing-floater-sweep-d;
     }
 
     .auth-shell {
@@ -1073,7 +1358,11 @@ select:focus[data-flux-control] {
     }
 
     .auth-showcase__frame {
-        @apply relative flex h-full min-h-[calc(100vh-4rem)] flex-col border border-white/70 bg-white/58 p-7 shadow-[0_40px_120px_rgba(15,23,42,0.10)] backdrop-blur-xl;
+        @apply relative flex h-full min-h-[calc(100vh-4rem)] flex-col border p-7 shadow-[0_40px_120px_rgba(15,23,42,0.10)] backdrop-blur-xl;
+        border-color: color-mix(in oklab, var(--fc-primary) 16%, white 58%);
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(248, 251, 255, 0.9)),
+            linear-gradient(135deg, color-mix(in oklab, var(--fc-accent) 8%, transparent), transparent 52%);
         border-radius: 2.2rem 3.2rem 2.4rem 2.8rem;
     }
 
@@ -1091,11 +1380,32 @@ select:focus[data-flux-control] {
     }
 
     .auth-showcase__logo {
-        @apply rounded-[1.15rem] border border-white/85 bg-white px-4 py-2 shadow-[0_16px_40px_rgba(15,23,42,0.12)];
+        @apply rounded-[1.15rem] bg-transparent px-2 shadow-none;
+    }
+
+    /* .auth-showcase__brand {
+        @apply space-y-3;
+    } */
+
+    .auth-showcase__hero-logo {
+        @apply inline-flex rounded-[1.5rem] border bg-white/88 shadow-[0_22px_56px_rgba(15,23,42,0.12)];
+        border-color: color-mix(in oklab, var(--fc-primary) 18%, white 52%);
     }
 
     .auth-showcase__nav-link {
-        @apply inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold text-ink-600 transition hover:bg-brand-50 hover:text-ink-950;
+        @apply inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold transition;
+        border: 1px solid color-mix(in oklab, var(--fc-primary) 18%, white 24%);
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(241, 246, 255, 0.92));
+        color: var(--fc-primary-dark);
+        box-shadow: 0 12px 24px rgba(49, 85, 246, 0.08);
+    }
+
+    .auth-showcase__nav-link:hover {
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(235, 243, 255, 0.98));
+        color: var(--fc-primary-dark);
+        box-shadow: 0 16px 30px rgba(49, 85, 246, 0.12);
     }
 
     .auth-showcase__content {
@@ -1103,8 +1413,16 @@ select:focus[data-flux-control] {
     }
 
     .auth-showcase__badge {
-        @apply inline-flex items-center rounded-full border border-brand-200 bg-brand-50 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-brand-700;
+        @apply inline-flex items-center rounded-full px-4 py-2 text-xs font-black uppercase tracking-[0.18em];
+        border: 1px solid color-mix(in oklab, var(--fc-primary) 20%, white);
+        background: color-mix(in oklab, var(--fc-accent) 10%, white);
+        color: var(--fc-primary-dark);
         font-family: var(--font-display);
+    }
+
+    .auth-showcase__tagline {
+        @apply max-w-md text-sm font-medium leading-6 text-ink-500;
+        text-wrap: balance;
     }
 
     .auth-showcase__title {
@@ -1123,11 +1441,15 @@ select:focus[data-flux-control] {
     }
 
     .auth-showcase__point {
-        @apply inline-flex items-start gap-3 rounded-[1.4rem] border border-white/80 bg-white/70 px-4 py-4 text-sm leading-7 text-ink-700 shadow-[0_18px_40px_rgba(148,163,184,0.10)];
+        @apply inline-flex items-start gap-3 rounded-[1.4rem] border px-4 py-4 text-sm leading-7 text-ink-700 shadow-[0_18px_40px_rgba(148,163,184,0.10)];
+        border-color: color-mix(in oklab, var(--fc-primary) 12%, white 56%);
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(246, 250, 255, 0.82));
     }
 
     .auth-showcase__point-dot {
-        @apply mt-2 size-2 shrink-0 rounded-full bg-gradient-to-r from-brand-500 to-cyan-400;
+        @apply mt-2 size-2 shrink-0 rounded-full;
+        background: linear-gradient(135deg, var(--fc-primary), var(--fc-accent));
     }
 
     .auth-showcase__board {
@@ -1135,7 +1457,7 @@ select:focus[data-flux-control] {
     }
 
     .auth-floater--ambient {
-        @apply block bg-white/50;
+        @apply block;
     }
 
     .auth-floater--ambient-a {
@@ -1171,7 +1493,10 @@ select:focus[data-flux-control] {
     }
 
     .auth-showcase__board-card {
-        @apply border border-white/80 bg-white/76 p-5 shadow-[0_24px_60px_rgba(15,23,42,0.08)] backdrop-blur-xl;
+        @apply border p-5 shadow-[0_24px_60px_rgba(15,23,42,0.08)] backdrop-blur-xl;
+        border-color: color-mix(in oklab, var(--fc-primary) 14%, white 56%);
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(248, 251, 255, 0.84));
     }
 
     .auth-showcase__board-card--primary {
@@ -1188,8 +1513,8 @@ select:focus[data-flux-control] {
 
     .auth-showcase__board-card--accent {
         background:
-            linear-gradient(135deg, rgba(109, 40, 217, 0.08), rgba(255,255,255,0.74)),
-            linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,255,255,0.72));
+            linear-gradient(135deg, color-mix(in oklab, var(--fc-accent) 18%, white 8%), rgba(255,255,255,0.78)),
+            linear-gradient(180deg, rgba(255,255,255,0.92), rgba(247,250,255,0.8));
     }
 
     .auth-showcase__board-row {
@@ -1206,7 +1531,9 @@ select:focus[data-flux-control] {
     }
 
     .auth-showcase__pill {
-        @apply inline-flex size-11 items-center justify-center rounded-2xl bg-rose-50 text-sm font-black text-rose-600;
+        @apply inline-flex size-11 items-center justify-center rounded-2xl text-sm font-black;
+        background: color-mix(in oklab, var(--fc-accent) 14%, white 22%);
+        color: var(--fc-primary-dark);
         font-family: var(--font-display);
     }
 
@@ -1215,7 +1542,9 @@ select:focus[data-flux-control] {
     }
 
     .auth-showcase__task {
-        @apply flex items-start justify-between gap-4 rounded-[1.35rem] border border-slate-200/80 bg-slate-50/90 px-4 py-4;
+        @apply flex items-start justify-between gap-4 rounded-[1.35rem] border px-4 py-4;
+        border-color: color-mix(in oklab, var(--fc-primary) 10%, white 48%);
+        background: linear-gradient(180deg, rgba(248, 251, 255, 0.96), rgba(241, 246, 255, 0.88));
     }
 
     .auth-showcase__task-title {
@@ -1227,12 +1556,15 @@ select:focus[data-flux-control] {
     }
 
     .auth-showcase__task-badge {
-        @apply inline-flex items-center rounded-full bg-emerald-50 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.16em] text-emerald-700;
+        @apply inline-flex items-center rounded-full px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.16em];
+        background: color-mix(in oklab, var(--fc-accent) 14%, white 18%);
+        color: var(--fc-primary-dark);
         font-family: var(--font-display);
     }
 
     .auth-showcase__task-badge--violet {
-        @apply bg-violet-50 text-violet-700;
+        background: color-mix(in oklab, var(--fc-primary) 14%, white 12%);
+        color: var(--fc-primary-dark);
     }
 
     .auth-showcase__metric {
@@ -1254,7 +1586,11 @@ select:focus[data-flux-control] {
     }
 
     .auth-panel__card {
-        @apply border border-white/85 bg-white/88 p-6 shadow-[0_32px_80px_rgba(15,23,42,0.12)] backdrop-blur-xl sm:p-8;
+        @apply border p-6 shadow-[0_32px_80px_rgba(15,23,42,0.12)] backdrop-blur-xl sm:p-8;
+        border-color: color-mix(in oklab, var(--fc-primary) 16%, white 60%);
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(248, 251, 255, 0.94)),
+            linear-gradient(135deg, color-mix(in oklab, var(--fc-accent) 6%, transparent), transparent 56%);
         border-radius: 2rem 2.8rem 2rem 2.3rem;
     }
 
@@ -1274,8 +1610,24 @@ select:focus[data-flux-control] {
         @apply space-y-5;
     }
 
+    .auth-modal-brand {
+        @apply flex flex-col gap-3 rounded-[1.5rem] border px-4 py-3 sm:flex-row sm:items-center sm:justify-between;
+        border-color: color-mix(in oklab, var(--fc-primary) 14%, white 58%);
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(248, 251, 255, 0.86));
+    }
+
+    .auth-modal-brand__logo {
+        @apply inline-flex shrink-0 rounded-[1.15rem] bg-white px-3 py-2 shadow-[0_14px_28px_rgba(15,23,42,0.08)];
+    }
+
+    .auth-modal-brand__tagline {
+        @apply max-w-[18rem] text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-ink-500 sm:text-right;
+        text-wrap: balance;
+    }
+
     .auth-modal-copy {
-        @apply space-y-3;
+        @apply space-y-1;
         min-height: 8.5rem;
     }
 
@@ -1296,11 +1648,19 @@ select:focus[data-flux-control] {
     }
 
     .auth-toggle {
-        @apply relative grid grid-cols-2 gap-1 overflow-hidden rounded-full border border-brand-100/80 p-1;
+        @apply relative grid grid-cols-2 gap-1 overflow-hidden rounded-full border p-1;
+        border-color: color-mix(in oklab, var(--fc-primary) 16%, white 56%);
+        background:
+            linear-gradient(180deg, rgba(241, 246, 255, 0.96), rgba(235, 242, 255, 0.9));
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.92),
+            0 14px 30px rgba(49, 85, 246, 0.08);
     }
 
     .auth-toggle__track {
-        @apply absolute bottom-1 left-1 top-1 w-[calc(50%-0.25rem)] bg-white shadow-[0_12px_28px_rgba(47,71,216,0.14)] transition-transform duration-500;
+        @apply absolute bottom-1 left-1 top-1 w-[calc(50%-0.25rem)] shadow-[0_12px_28px_rgba(47,71,216,0.14)] transition-transform duration-500;
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(239, 246, 255, 0.94));
         border-radius: 999px;
         transform: translateX(0);
     }
@@ -1315,7 +1675,7 @@ select:focus[data-flux-control] {
     }
 
     .auth-toggle__option--active {
-        @apply text-brand-900;
+        color: var(--fc-primary-dark);
     }
 
     .auth-form-shell {
@@ -1323,11 +1683,14 @@ select:focus[data-flux-control] {
     }
 
     .auth-form-note {
-        @apply rounded-[1.45rem] border border-brand-100 bg-brand-50/70 px-4 py-4;
+        @apply rounded-[1.45rem] border px-4 py-4;
+        border-color: color-mix(in oklab, var(--fc-primary) 14%, white 56%);
+        background: linear-gradient(180deg, rgba(241, 246, 255, 0.94), rgba(247, 250, 255, 0.88));
     }
 
     .auth-form-note--soft {
-        @apply border-violet-100 bg-violet-50/70;
+        border-color: color-mix(in oklab, var(--fc-accent) 16%, white 54%);
+        background: linear-gradient(180deg, rgba(235, 249, 255, 0.94), rgba(247, 251, 255, 0.9));
     }
 
     .auth-form-note__label,
@@ -1390,7 +1753,9 @@ select:focus[data-flux-control] {
     }
 
     .auth-form-fieldset {
-        @apply rounded-[1.55rem] border border-slate-200 bg-slate-50/65 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.85)];
+        @apply rounded-[1.55rem] border p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.85)];
+        border-color: color-mix(in oklab, var(--fc-primary) 10%, white 50%);
+        background: linear-gradient(180deg, rgba(248, 251, 255, 0.94), rgba(243, 247, 255, 0.82));
     }
 
     .auth-form-fieldset__eyebrow {
@@ -1398,7 +1763,9 @@ select:focus[data-flux-control] {
     }
 
     .auth-form-row {
-        @apply flex flex-col gap-2 rounded-[1.2rem] border border-slate-200/80 bg-white/70 px-4 py-3 sm:flex-row sm:items-center sm:justify-between;
+        @apply flex flex-col gap-2 rounded-[1.2rem] border px-4 py-3 sm:flex-row sm:items-center sm:justify-between;
+        border-color: color-mix(in oklab, var(--fc-primary) 10%, white 52%);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(247, 250, 255, 0.88));
     }
 
     .auth-form-row__meta {
@@ -1409,12 +1776,55 @@ select:focus[data-flux-control] {
         @apply h-12 w-full;
     }
 
+    .auth-modal-button {
+        @apply flex w-full items-center justify-center rounded-2xl px-4 py-3 text-sm font-semibold transition duration-300;
+        border: 1px solid transparent;
+    }
+
+    .auth-modal-button--primary {
+        background:
+            linear-gradient(135deg, color-mix(in oklab, var(--fc-primary) 88%, white 6%), color-mix(in oklab, var(--fc-accent) 62%, white 10%));
+        color: white;
+        box-shadow:
+            0 16px 34px rgba(49, 85, 246, 0.18),
+            inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    }
+
+    .auth-modal-button--primary:hover {
+        transform: translateY(-1px);
+        box-shadow:
+            0 20px 40px rgba(49, 85, 246, 0.22),
+            inset 0 1px 0 rgba(255, 255, 255, 0.28);
+        filter: saturate(1.05);
+    }
+
+    .auth-modal-button--ghost {
+        border-color: color-mix(in oklab, var(--fc-primary) 14%, white 42%);
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(243, 248, 255, 0.82));
+        color: var(--fc-ink-soft);
+        box-shadow:
+            0 12px 24px rgba(49, 85, 246, 0.06),
+            inset 0 1px 0 rgba(255, 255, 255, 0.78);
+    }
+
+    .auth-modal-button--ghost:hover {
+        transform: translateY(-1px);
+        border-color: color-mix(in oklab, var(--fc-primary) 24%, white 30%);
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(238, 245, 255, 0.92));
+        box-shadow:
+            0 16px 28px rgba(49, 85, 246, 0.10),
+            inset 0 1px 0 rgba(255, 255, 255, 0.86);
+    }
+
     .auth-alt-action {
-        @apply flex items-center justify-between rounded-[1.2rem] px-4 py-3 text-sm text-ink-600 transition hover:text-ink-950;
+        @apply flex items-center justify-between rounded-2xl px-4 py-3 text-sm text-ink-600 transition hover:text-ink-950;
     }
 
     .auth-alt-action strong {
-        @apply font-semibold text-brand-700;
+        @apply font-semibold;
+        color: var(--fc-primary-dark);
     }
 
     .auth-alt-action--button {
@@ -1426,7 +1836,9 @@ select:focus[data-flux-control] {
     }
 
     .auth-side-facts__item {
-        @apply rounded-[1.25rem] border border-white/80 bg-white/60 px-4 py-4 shadow-[0_12px_24px_rgba(148,163,184,0.08)];
+        @apply rounded-[1.25rem] border px-4 py-4 shadow-[0_12px_24px_rgba(148,163,184,0.08)];
+        border-color: color-mix(in oklab, var(--fc-primary) 10%, white 58%);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(247, 250, 255, 0.84));
     }
 
     .auth-side-facts__copy {
@@ -1436,7 +1848,7 @@ select:focus[data-flux-control] {
     .auth-panel__card [data-flux-control] {
         @apply w-full border px-4 py-3 text-sm font-medium text-ink-900 outline-none transition duration-200 placeholder:text-ink-400;
         border-radius: 22px 16px 20px 12px;
-        border-color: color-mix(in oklab, var(--color-brand-200) 72%, white 20%);
+        border-color: color-mix(in oklab, var(--fc-primary) 16%, white 42%);
         background:
             linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(244, 247, 255, 0.98));
         box-shadow:
@@ -1445,7 +1857,7 @@ select:focus[data-flux-control] {
     }
 
     .auth-panel__card [data-flux-control]:hover {
-        border-color: color-mix(in oklab, var(--color-brand-400) 48%, white 18%);
+        border-color: color-mix(in oklab, var(--fc-primary) 38%, white 22%);
         box-shadow:
             inset 0 1px 0 rgba(255, 255, 255, 0.92),
             0 14px 30px rgba(47, 71, 216, 0.10);
@@ -1453,10 +1865,10 @@ select:focus[data-flux-control] {
 
     .auth-panel__card [data-flux-control]:focus {
         transform: translateY(-1px);
-        border-color: color-mix(in oklab, var(--color-brand-500) 68%, white 10%);
+        border-color: color-mix(in oklab, var(--fc-primary) 56%, white 14%);
         box-shadow:
             inset 0 1px 0 rgba(255, 255, 255, 0.94),
-            0 0 0 4px color-mix(in oklab, var(--color-brand-200) 52%, transparent),
+            0 0 0 4px var(--fc-glow),
             0 18px 34px rgba(47, 71, 216, 0.16);
     }
 
@@ -1486,24 +1898,74 @@ select:focus[data-flux-control] {
     }
 
     .landing-floater {
-        @apply absolute hidden border border-white/85 bg-white/62 p-4 text-left shadow-[0_24px_60px_rgba(15,23,42,0.08)] backdrop-blur-xl lg:block;
+        @apply absolute hidden border p-4 text-left lg:block;
+        border-color: rgba(255, 255, 255, 0.46);
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.16)),
+            linear-gradient(90deg, color-mix(in oklab, var(--fc-primary) 8%, transparent), color-mix(in oklab, var(--fc-accent) 7%, transparent));
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.26),
+            0 18px 44px rgba(15, 23, 42, 0.07);
+        backdrop-filter: blur(18px) saturate(135%);
+        -webkit-backdrop-filter: blur(18px) saturate(135%);
         border-radius: 1.35rem 2rem 1.25rem 1.7rem;
-        animation: landing-floater-drift 15s ease-in-out infinite;
-        will-change: transform;
-        opacity: 0.78;
+        animation: landing-floater-sweep-a 15s linear infinite;
+        will-change: transform, opacity, filter;
+        opacity: 0.24;
+        filter: blur(2px);
     }
 
     .landing-floater__label {
-        @apply text-[11px] font-black uppercase tracking-[0.16em] text-brand-700;
+        @apply text-[11px] font-black uppercase tracking-[0.16em];
+        color: color-mix(in oklab, var(--fc-primary-dark) 62%, white);
         font-family: var(--font-display);
     }
 
     .landing-floater__title {
-        @apply mt-2 block text-base font-semibold text-ink-950;
+        @apply mt-2 block text-base font-semibold;
+        color: color-mix(in oklab, var(--fc-ink) 66%, white);
     }
 
     .landing-floater__meta {
-        @apply mt-1 text-sm text-ink-500;
+        @apply mt-1 text-sm;
+        color: color-mix(in oklab, var(--fc-ink-soft) 52%, white);
+    }
+
+    .landing-floater--1,
+    .landing-floater--5,
+    .landing-floater--9,
+    .landing-floater--13,
+    .landing-floater--17,
+    .landing-floater--21,
+    .landing-floater--25 {
+        animation-name: landing-floater-sweep-a;
+    }
+
+    .landing-floater--2,
+    .landing-floater--6,
+    .landing-floater--10,
+    .landing-floater--14,
+    .landing-floater--18,
+    .landing-floater--22 {
+        animation-name: landing-floater-sweep-b;
+    }
+
+    .landing-floater--3,
+    .landing-floater--7,
+    .landing-floater--11,
+    .landing-floater--15,
+    .landing-floater--19,
+    .landing-floater--23 {
+        animation-name: landing-floater-sweep-c;
+    }
+
+    .landing-floater--4,
+    .landing-floater--8,
+    .landing-floater--12,
+    .landing-floater--16,
+    .landing-floater--20,
+    .landing-floater--24 {
+        animation-name: landing-floater-sweep-d;
     }
 
     .landing-floater--1 { top: 6rem; left: 3rem; width: 13rem; animation-delay: -2s; }
@@ -1592,11 +2054,42 @@ select:focus[data-flux-control] {
     }
 
     .landing-logo {
-        @apply rounded-[1.15rem] border border-white/85 bg-white px-4 py-2 shadow-[0_16px_40px_rgba(15,23,42,0.28)];
+        @apply rounded-[1.15rem] border bg-white px-4 py-2 shadow-[0_16px_40px_rgba(15,23,42,0.18)];
+        border-color: color-mix(in oklab, var(--fc-primary) 16%, white);
     }
 
     .landing-link {
-        @apply inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold text-ink-600 transition hover:bg-brand-50 hover:text-ink-950;
+        @apply inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold text-ink-600 transition hover:text-ink-950;
+    }
+
+    .landing-link:hover {
+        background: color-mix(in oklab, var(--fc-primary) 8%, white);
+    }
+
+    .landing-link--cta {
+        @apply gap-2 px-5 py-2.5 text-[0.92rem];
+        border: 1px solid color-mix(in oklab, var(--fc-primary) 18%, white 28%);
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(241, 246, 255, 0.96));
+        color: var(--fc-primary-dark);
+        box-shadow: 0 12px 28px rgba(49, 85, 246, 0.10);
+        animation: landing-cta-breathe 2.8s ease-in-out infinite;
+    }
+
+    .landing-link--cta::after {
+        content: "";
+        width: 0.55rem;
+        height: 0.55rem;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--fc-primary), var(--fc-accent));
+        animation: landing-pulse 1.8s ease-in-out infinite;
+        box-shadow: 0 0 0 4px color-mix(in oklab, var(--fc-glow) 62%, transparent);
+    }
+
+    .landing-link--cta:hover {
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(235, 243, 255, 0.98));
+        color: var(--fc-primary-dark);
     }
 
     .landing-button {
@@ -1616,7 +2109,10 @@ select:focus[data-flux-control] {
     }
 
     .landing-badge {
-        @apply inline-flex items-center rounded-full border border-violet-200 bg-violet-50/80 px-4 py-2 text-xs font-black uppercase tracking-[0.2em] text-violet-700;
+        @apply inline-flex items-center rounded-full px-4 py-2 text-xs font-black uppercase tracking-[0.2em];
+        border: 1px solid color-mix(in oklab, var(--fc-primary) 20%, white);
+        background: color-mix(in oklab, var(--fc-accent) 10%, white);
+        color: var(--fc-primary-dark);
         font-family: var(--font-display);
     }
 
@@ -1627,10 +2123,16 @@ select:focus[data-flux-control] {
     font-family: var(--font-display);
     letter-spacing: -0.07em;
     color: transparent;
-    background-image: linear-gradient(135deg, #3155f6 0%, #1d4ed8 38%, #22c3ee 100%);
+    background-image: linear-gradient(135deg, var(--fc-primary) 0%, var(--fc-primary-dark) 38%, var(--fc-accent) 100%);
     -webkit-background-clip: text;
     background-clip: text;
 }
+
+    .landing-brand-tagline {
+        @apply max-w-3xl text-sm font-semibold uppercase tracking-[0.18em];
+        color: color-mix(in oklab, var(--fc-primary-dark) 82%, var(--fc-ink));
+        font-family: var(--font-display);
+    }
 
 
     .landing-hero-title {
@@ -1653,7 +2155,8 @@ select:focus[data-flux-control] {
     }
 
     .landing-trust-item__dot {
-        @apply size-2 rounded-full bg-gradient-to-r from-cyan-300 to-violet-300;
+        @apply size-2 rounded-full;
+        background: linear-gradient(135deg, var(--fc-primary), var(--fc-accent));
     }
 
     .landing-hero-board {
@@ -1663,7 +2166,7 @@ select:focus[data-flux-control] {
 
     .landing-hero-board__glow {
         @apply pointer-events-none absolute inset-x-[18%] top-0 h-40 rounded-full blur-3xl;
-        background: radial-gradient(circle, rgba(109, 40, 217, 0.18), rgba(109, 40, 217, 0));
+        background: radial-gradient(circle, color-mix(in oklab, var(--fc-primary) 18%, transparent), transparent);
     }
 
     .landing-hero-board__topbar {
@@ -1687,11 +2190,15 @@ select:focus[data-flux-control] {
     }
 
     .landing-live-pill {
-        @apply inline-flex items-center gap-2 rounded-full border border-emerald-400/22 bg-emerald-400/10 px-3 py-2 text-xs font-semibold text-emerald-700;
+        @apply inline-flex items-center gap-2 rounded-full px-3 py-2 text-xs font-semibold;
+        border: 1px solid color-mix(in oklab, var(--fc-accent) 28%, transparent);
+        background: color-mix(in oklab, var(--fc-accent) 12%, white);
+        color: var(--fc-primary-dark);
     }
 
     .landing-live-pill__dot {
-        @apply size-2 rounded-full bg-emerald-300;
+        @apply size-2 rounded-full;
+        background: var(--fc-accent);
         animation: landing-pulse 1.8s ease-in-out infinite;
     }
 
@@ -1721,20 +2228,27 @@ select:focus[data-flux-control] {
     }
 
     .landing-chip {
-        @apply inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-ink-600;
+        @apply inline-flex items-center rounded-full bg-slate-50 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-ink-600;
+        border: 1px solid color-mix(in oklab, var(--fc-primary) 10%, white);
         font-family: var(--font-display);
     }
 
     .landing-chip--danger {
-        @apply border-rose-300/50 bg-rose-100 text-rose-700;
+        border-color: color-mix(in oklab, #ef4444 28%, white);
+        background: color-mix(in oklab, #ef4444 8%, white);
+        color: #b91c1c;
     }
 
     .landing-chip--brand {
-        @apply border-violet-300/50 bg-violet-100 text-violet-700;
+        border-color: color-mix(in oklab, var(--fc-primary) 22%, white);
+        background: color-mix(in oklab, var(--fc-primary) 10%, white);
+        color: var(--fc-primary-dark);
     }
 
     .landing-chip--success {
-        @apply border-emerald-300/50 bg-emerald-100 text-emerald-700;
+        border-color: color-mix(in oklab, var(--fc-accent) 26%, white);
+        background: color-mix(in oklab, var(--fc-accent) 10%, white);
+        color: #0f6b85;
     }
 
     .landing-task-card {
@@ -1791,6 +2305,21 @@ select:focus[data-flux-control] {
         @apply max-w-4xl space-y-3;
     }
 
+    .landing-section-header--glass {
+        @apply border px-6 py-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_18px_45px_rgba(15,23,42,0.08)] sm:px-7 sm:py-7;
+        border-color: color-mix(in oklab, var(--fc-primary) 12%, white);
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.52), rgba(255, 255, 255, 0.24)),
+            linear-gradient(90deg, color-mix(in oklab, var(--fc-primary) 7%, transparent), color-mix(in oklab, var(--fc-accent) 5%, transparent));
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.4),
+            0 18px 45px rgba(15, 23, 42, 0.08),
+            0 0 0 1px rgba(255, 255, 255, 0.14);
+        backdrop-filter: blur(26px) saturate(145%);
+        -webkit-backdrop-filter: blur(26px) saturate(145%);
+        border-radius: 2rem 3rem 2rem 2.4rem;
+    }
+
     .landing-section-header--sticky {
         @apply xl:sticky xl:top-24;
     }
@@ -1837,8 +2366,20 @@ select:focus[data-flux-control] {
     }
 
     .landing-solution-item {
-        @apply flex items-start gap-4 border-l border-brand-100 px-0 py-5 pl-6;
-        background: linear-gradient(90deg, rgba(61,90,254,0.06), rgba(255,255,255,0.4));
+        @apply flex items-start gap-4 px-0 py-5 pl-6;
+        border-left: 1px solid color-mix(in oklab, var(--fc-primary) 18%, white);
+        border-top: 1px solid rgba(255, 255, 255, 0.72);
+        border-right: 1px solid color-mix(in oklab, var(--fc-primary) 10%, white);
+        border-bottom: 1px solid color-mix(in oklab, var(--fc-accent) 12%, white);
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.52), rgba(255, 255, 255, 0.24)),
+            linear-gradient(90deg, color-mix(in oklab, var(--fc-primary) 7%, transparent), color-mix(in oklab, var(--fc-accent) 5%, transparent));
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.4),
+            0 18px 45px rgba(15, 23, 42, 0.08),
+            0 0 0 1px rgba(255, 255, 255, 0.14);
+        backdrop-filter: blur(26px) saturate(145%);
+        -webkit-backdrop-filter: blur(26px) saturate(145%);
         border-radius: 0 2rem 2rem 0;
     }
 
@@ -1855,7 +2396,7 @@ select:focus[data-flux-control] {
 
     .landing-feature-item__copy,
     .landing-workflow-step__copy {
-        @apply mt-1 text-sm leading-7 text-ink-600;
+        @apply mt-1 text-sm font-semibold leading-7 text-ink-600;
     }
 
     .landing-feature-grid {
@@ -1934,15 +2475,37 @@ select:focus[data-flux-control] {
     }
 
     .landing-social-button {
-        @apply inline-flex size-12 items-center justify-center rounded-full border border-white/85 bg-white/82 text-ink-700 shadow-[0_12px_24px_rgba(148,163,184,0.10)] transition hover:-translate-y-0.5 hover:border-brand-200 hover:text-brand-700 hover:shadow-[0_18px_30px_rgba(47,71,216,0.12)];
+        @apply inline-flex size-12 items-center justify-center rounded-full bg-white/82 text-ink-700 shadow-[0_12px_24px_rgba(148,163,184,0.10)] transition hover:-translate-y-0.5;
+        border: 1px solid color-mix(in oklab, var(--fc-primary) 14%, white);
+    }
+
+    .landing-social-button:hover {
+        border-color: color-mix(in oklab, var(--fc-primary) 24%, white);
+        color: var(--fc-primary-dark);
+        box-shadow: 0 18px 30px color-mix(in oklab, var(--fc-primary) 12%, transparent);
     }
 
     .landing-cta-banner {
         @apply flex flex-col items-start justify-between gap-8 border border-white/85 p-7 shadow-[inset_0_1px_0_rgba(255,255,255,0.88),0_18px_50px_rgba(15,23,42,0.08)] backdrop-blur-xl lg:flex-row lg:items-center;
         background-image:
-            linear-gradient(135deg, rgba(109, 40, 217, 0.08), rgba(255, 255, 255, 0.84)),
-            radial-gradient(circle at top right, rgba(14, 165, 233, 0.10), transparent 28%);
+            linear-gradient(135deg, color-mix(in oklab, var(--fc-primary) 8%, white), rgba(255, 255, 255, 0.84)),
+            radial-gradient(circle at top right, color-mix(in oklab, var(--fc-accent) 12%, transparent), transparent 28%);
         border-radius: 1.8rem 2.9rem 1.6rem 2.2rem;
+    }
+
+    .landing-hero-copy-shell {
+        @apply border px-6 py-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.4),0_18px_45px_rgba(15,23,42,0.08)] sm:px-7 sm:py-7;
+        border-color: color-mix(in oklab, var(--fc-primary) 12%, white);
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.52), rgba(255, 255, 255, 0.24)),
+            linear-gradient(90deg, color-mix(in oklab, var(--fc-primary) 7%, transparent), color-mix(in oklab, var(--fc-accent) 5%, transparent));
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.4),
+            0 18px 45px rgba(15, 23, 42, 0.08),
+            0 0 0 1px rgba(255, 255, 255, 0.14);
+        backdrop-filter: blur(26px) saturate(145%);
+        -webkit-backdrop-filter: blur(26px) saturate(145%);
+        border-radius: 2rem 3rem 2rem 2.4rem;
     }
 }
 
