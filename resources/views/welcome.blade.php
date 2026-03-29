@@ -188,9 +188,9 @@
                         <div class="landing-reveal landing-hero-copy-shell is-visible space-y-6 lg:pt-10">
                             <p class="landing-brand-mark">Flowcore</p>
 
-                            <span class="landing-badge">
+                            <!-- <span class="landing-badge">
                                 {{ __('landing.hero.badge') }}
-                            </span>
+                            </span> -->
 
                             <p class="landing-brand-tagline">
                                 {{ __('landing.hero.tagline') }}

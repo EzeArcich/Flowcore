@@ -1,8 +1,8 @@
-# FollowUp CRM
+# Flowcore CRM
 
 Stop losing deals because you forgot to follow up.
 
-FollowUp is a lightweight CRM built for freelancers, developers and small teams who need to manage companies, contacts, conversations and deals — without losing context.
+Flowcore is a lightweight CRM built for freelancers, developers and small teams who need to manage companies, contacts, conversations and deals — without losing context.
 
 ---
 
@@ -16,7 +16,7 @@ They fail because:
 - deals lose momentum
 - everything is scattered across tools
 
-FollowUp solves that by centralizing your entire commercial flow in one place.
+Flowcore solves that by centralizing your entire commercial flow in one place.
 
 ---
 
