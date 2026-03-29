@@ -63,6 +63,14 @@ So I built one.
 
 ## 📊 Demo
 
+## 🌐 Live Demo
+
+You can try the live demo here:
+
+https://flowcore-production.up.railway.app/
+
+---
+
 <p align="center">
   <img src="docs/img/demo/demo2.png" width="32%">
   <img src="docs/img/demo/demo3.png" width="32%">
