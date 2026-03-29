@@ -1,17 +1,17 @@
 <x-layouts::app :title="$company->name">
-    <div class="crm-page space-y-6">
-        <div class="crm-page-header">
+    <div class="fc-page space-y-6">
+        <div class="fc-page-header">
             <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
                 <div class="space-y-4">
                     <div class="space-y-2">
-                        <p class="crm-page-eyebrow">Empresa</p>
+                        <p class="fc-kicker">Empresa</p>
                         <div class="flex flex-wrap items-center gap-3">
-                            <h1 class="crm-page-title !mt-0 !text-[2.6rem]">{{ $company->name }}</h1>
-                            <span class="crm-badge crm-badge--company-status" data-status="{{ $company->status }}">
+                            <h1 class="fc-page-title !mt-0 !text-[2.6rem]">{{ $company->name }}</h1>
+                            <span class="fc-chip fc-chip--company-status" data-status="{{ $company->status }}">
                                 {{ $company->status }}
                             </span>
                         </div>
-                        <p class="crm-page-subtitle !mt-0">
+                        <p class="fc-page-subtitle !mt-0">
                             {{ $company->industry ?: 'Industria no definida' }}
                             @if($company->country || $company->city)
                                 · {{ collect([$company->city, $company->country])->filter()->implode(', ') }}
@@ -20,50 +20,50 @@
                     </div>
 
                     <div class="grid grid-cols-2 gap-3 md:grid-cols-4">
-                        <div class="crm-surface-muted">
-                            <p class="crm-kpi-label">Contactos</p>
+                        <div class="fc-surface-soft">
+                            <p class="fc-kicker">Contactos</p>
                             <p class="text-2xl font-bold text-ink-900 dark:text-white">{{ $company->contacts->count() }}</p>
                         </div>
 
-                        <div class="crm-surface-muted">
-                            <p class="crm-kpi-label">Interacciones</p>
+                        <div class="fc-surface-soft">
+                            <p class="fc-kicker">Interacciones</p>
                             <p class="text-2xl font-bold text-ink-900 dark:text-white">{{ $company->interactions->count() }}</p>
                         </div>
 
-                        <div class="crm-surface-muted">
-                            <p class="crm-kpi-label">Cotizaciones</p>
+                        <div class="fc-surface-soft">
+                            <p class="fc-kicker">Cotizaciones</p>
                             <p class="text-2xl font-bold text-ink-900 dark:text-white">{{ $company->quotations->count() }}</p>
                         </div>
 
-                        <div class="crm-surface-muted">
-                            <p class="crm-kpi-label">Follow-ups</p>
+                        <div class="fc-surface-soft">
+                            <p class="fc-kicker">Follow-ups</p>
                             <p class="text-2xl font-bold text-ink-900 dark:text-white">{{ $company->followUps->count() }}</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="flex flex-wrap items-center gap-3 lg:justify-end">
-                    <a href="{{ route('companies.edit', $company) }}" class="crm-btn-spotlight">
+                    <a href="{{ route('companies.edit', $company) }}" class="fc-btn fc-btn-primary">
                         Editar empresa
                     </a>
-                    <a href="{{ route('companies.index') }}" class="crm-btn-spotlight">
+                    <a href="{{ route('companies.index') }}" class="fc-btn fc-btn-primary">
                         Volver al listado
                     </a>
                 </div>
             </div>
 
             <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-                <div class="crm-form-section space-y-2">
-                    <p class="crm-kpi-label">Sitio web</p>
+                <div class="fc-card-soft space-y-2">
+                    <p class="fc-kicker">Sitio web</p>
                     @if($company->website)
-                        <a href="{{ $company->website }}" target="_blank" rel="noreferrer" class="crm-link break-all">{{ $company->website }}</a>
+                        <a href="{{ $company->website }}" target="_blank" rel="noreferrer" class="fc-link break-all">{{ $company->website }}</a>
                     @else
                         <p class="text-sm text-ink-500 dark:text-ink-400">No definido</p>
                     @endif
                 </div>
 
-                <div class="crm-form-section space-y-2">
-                    <p class="crm-kpi-label">Tamaño estimado</p>
+                <div class="fc-card-soft space-y-2">
+                    <p class="fc-kicker">Tamaño estimado</p>
                     @if($company->company_size_min || $company->company_size_max)
                         <p class="text-sm font-semibold text-ink-800 dark:text-ink-100">
                             {{ $company->company_size_min ?? '—' }} - {{ $company->company_size_max ?? '—' }} personas
@@ -73,8 +73,8 @@
                     @endif
                 </div>
 
-                <div class="crm-form-section space-y-2">
-                    <p class="crm-kpi-label">Timing comercial</p>
+                <div class="fc-card-soft space-y-2">
+                    <p class="fc-kicker">Timing comercial</p>
                     <p class="text-sm text-ink-700 dark:text-ink-200">
                         Primer contacto: {{ $company->first_contact_at?->format('d/m/Y') ?? '—' }}
                     </p>
@@ -83,14 +83,14 @@
                     </p>
                 </div>
 
-                <div class="crm-form-section space-y-2">
-                    <p class="crm-kpi-label">Visibilidad</p>
+                <div class="fc-card-soft space-y-2">
+                    <p class="fc-kicker">Visibilidad</p>
                     <div class="flex flex-wrap gap-2">
                         @if($company->is_priority)
-                            <span class="crm-panel-chip">Prioritaria</span>
+                            <span class="fc-chip fc-chip-accent">Prioritaria</span>
                         @endif
 
-                        <span class="crm-panel-chip {{ $company->is_active ? '' : '!border-zinc-300 !bg-zinc-100 !text-zinc-700 dark:!border-zinc-700 dark:!bg-zinc-900/50 dark:!text-zinc-300' }}">
+                        <span class="{{ $company->is_active ? 'fc-chip fc-chip-info' : 'fc-chip fc-chip-neutral' }}">
                             {{ $company->is_active ? 'Activa' : 'Inactiva' }}
                         </span>
                     </div>
@@ -102,10 +102,10 @@
             </div>
 
             @if($company->notes)
-                    <div class="crm-form-section mt-6 space-y-3">
+                    <div class="fc-card-soft mt-6 space-y-3">
                         <div>
-                            <p class="crm-kpi-label">Contexto</p>
-                            <h2 class="crm-block-title">Notas comerciales</h2>
+                            <p class="fc-kicker">Contexto</p>
+                            <h2 class="fc-block-title">Notas comerciales</h2>
                         </div>
 
                     <p class="whitespace-pre-line text-sm leading-6 text-ink-700 dark:text-ink-200">{{ $company->notes }}</p>
@@ -115,20 +115,20 @@
 
         <div class="grid grid-cols-1 gap-6 xl:grid-cols-[1.55fr_1fr]">
             <div class="space-y-6">
-                <section class="crm-form-shell">
-                    <div class="crm-panel-title">
+                <section class="fc-panel">
+                    <div class="fc-panel-title">
                         <div>
-                            <p class="crm-kpi-label">Personas</p>
-                            <h2 class="crm-block-title">Contactos</h2>
+                            <p class="fc-kicker">Personas</p>
+                            <h2 class="fc-block-title">Contactos</h2>
                         </div>
-                        <a href="{{ route('companies.contacts.create', $company) }}" class="crm-btn-secondary crm-btn-sm">
+                        <a href="{{ route('companies.contacts.create', $company) }}" class="fc-btn fc-btn-secondary fc-btn-sm">
                             Nuevo contacto
                         </a>
                     </div>
 
                     <div class="space-y-3">
                         @forelse($company->contacts as $contact)
-                            <div class="crm-form-section">
+                            <div class="fc-card-soft">
                                 <div class="flex flex-wrap items-start justify-between gap-3">
                                     <div class="space-y-1">
                                         <p class="font-bold text-ink-900 dark:text-ink-50">{{ $contact->full_name }}</p>
@@ -138,10 +138,10 @@
 
                                     <div class="flex flex-wrap gap-2">
                                         @if($contact->is_primary)
-                                            <span class="crm-panel-chip">Principal</span>
+                                            <span class="fc-panel-chip">Principal</span>
                                         @endif
                                         @if($contact->is_decision_maker)
-                                            <span class="crm-panel-chip">Decision maker</span>
+                                            <span class="fc-panel-chip">Decision maker</span>
                                         @endif
                                     </div>
                                 </div>
@@ -152,17 +152,17 @@
                     </div>
                 </section>
 
-                <section class="crm-form-shell">
-                    <div class="crm-panel-title">
+                <section class="fc-panel">
+                    <div class="fc-panel-title">
                         <div>
-                            <p class="crm-kpi-label">Actividad</p>
+                            <p class="fc-kicker">Actividad</p>
                             <h2 class="text-lg font-bold text-ink-900 dark:text-ink-50">Interacciones recientes</h2>
                         </div>
                         <div class="flex flex-wrap gap-2">
-                            <a href="{{ route('companies.timeline', $company) }}" class="crm-btn-secondary crm-btn-sm">
+                            <a href="{{ route('companies.timeline', $company) }}" class="fc-btn fc-btn-secondary fc-btn-sm">
                                 Ver timeline
                             </a>
-                            <a href="{{ route('companies.interactions.create', $company) }}" class="crm-btn-secondary crm-btn-sm">
+                            <a href="{{ route('companies.interactions.create', $company) }}" class="fc-btn fc-btn-secondary fc-btn-sm">
                                 Nueva interacción
                             </a>
                         </div>
@@ -170,7 +170,7 @@
 
                     <div class="space-y-3">
                         @forelse($company->interactions as $interaction)
-                            <div class="crm-form-section">
+                            <div class="fc-card-soft">
                                 <div class="flex flex-wrap items-start justify-between gap-3">
                                     <div class="space-y-1">
                                         <p class="font-bold text-ink-900 capitalize dark:text-ink-50">
@@ -182,7 +182,7 @@
                                     </div>
 
                                     @if($interaction->outcome)
-                                        <span class="crm-panel-chip">{{ $interaction->outcome }}</span>
+                                        <span class="fc-panel-chip">{{ $interaction->outcome }}</span>
                                     @endif
                                 </div>
 
@@ -198,20 +198,20 @@
             </div>
 
             <div class="space-y-6">
-                <section class="crm-form-shell">
-                    <div class="crm-panel-title">
+                <section class="fc-panel">
+                    <div class="fc-panel-title">
                         <div>
-                            <p class="crm-kpi-label">Seguimiento</p>
+                            <p class="fc-kicker">Seguimiento</p>
                             <h2 class="text-lg font-bold text-ink-900 dark:text-ink-50">Follow-ups</h2>
                         </div>
-                        <a href="{{ route('follow-ups.create') }}" class="crm-btn-secondary crm-btn-sm">
+                        <a href="{{ route('follow-ups.create') }}" class="fc-btn fc-btn-secondary fc-btn-sm">
                             Nuevo follow-up
                         </a>
                     </div>
 
                     <div class="space-y-3">
                         @forelse($company->followUps as $followUp)
-                            <div class="{{ $followUp->status === 'pending' ? 'crm-surface-info' : 'crm-form-section' }}">
+                            <div class="{{ $followUp->status === 'pending' ? 'fc-surface-info' : 'fc-card-soft' }}">
                                 <div class="flex items-start justify-between gap-3">
                                     <div class="space-y-1">
                                         <p class="font-bold text-ink-900 dark:text-ink-50">{{ $followUp->reason }}</p>
@@ -220,7 +220,7 @@
                                         </p>
                                     </div>
 
-                                    <span class="crm-panel-chip">{{ $followUp->status }}</span>
+                                    <span class="fc-panel-chip">{{ $followUp->status }}</span>
                                 </div>
                             </div>
                         @empty
@@ -229,20 +229,20 @@
                     </div>
                 </section>
 
-                <section class="crm-form-shell">
-                    <div class="crm-panel-title">
+                <section class="fc-panel">
+                    <div class="fc-panel-title">
                         <div>
-                            <p class="crm-kpi-label">Propuestas</p>
+                            <p class="fc-kicker">Propuestas</p>
                             <h2 class="text-lg font-bold text-ink-900 dark:text-ink-50">Cotizaciones</h2>
                         </div>
-                        <a href="{{ route('companies.quotations.create', $company) }}" class="crm-btn-secondary crm-btn-sm">
+                        <a href="{{ route('companies.quotations.create', $company) }}" class="fc-btn fc-btn-secondary fc-btn-sm">
                             Nueva cotización
                         </a>
                     </div>
 
                     <div class="space-y-3">
                         @forelse($company->quotations as $quotation)
-                            <div class="crm-form-section">
+                            <div class="fc-card-soft">
                                 <div class="space-y-1">
                                     <p class="font-bold text-ink-900 dark:text-ink-50">{{ $quotation->title }}</p>
                                     <p class="text-sm text-ink-500 dark:text-ink-400">

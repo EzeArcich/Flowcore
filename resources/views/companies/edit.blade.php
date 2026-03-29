@@ -1,20 +1,20 @@
 <x-layouts::app :title="'Editar '.$company->name">
-    <div class="crm-page space-y-6">
-        <div class="crm-page-header flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+    <div class="fc-page space-y-6">
+        <div class="fc-page-header flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-                <p class="crm-page-eyebrow">Empresa</p>
-                <h1 class="crm-page-title">Editar {{ $company->name }}</h1>
-                <p class="crm-page-subtitle">
+                <p class="fc-kicker">Empresa</p>
+                <h1 class="fc-page-title">Editar {{ $company->name }}</h1>
+                <p class="fc-page-subtitle">
                     Actualizá los datos clave del lead, su estado comercial y el próximo seguimiento.
                 </p>
             </div>
 
-            <a href="{{ route('companies.show', $company) }}" class="crm-btn-secondary">
+            <a href="{{ route('companies.show', $company) }}" class="fc-btn fc-btn-secondary">
                 Volver al detalle
             </a>
         </div>
 
-        <div class="crm-card max-w-5xl p-6">
+        <div class="fc-card max-w-5xl p-6">
             <form method="POST" action="{{ route('companies.update', $company) }}" class="space-y-6">
                 @csrf
                 @method('PUT')
@@ -28,7 +28,7 @@
                                 type="text"
                                 name="name"
                                 value="{{ old('name', $company->name) }}"
-                                class="crm-input"
+                                class="fc-input"
                                 required
                             >
                         </div>
@@ -40,7 +40,7 @@
                                 type="text"
                                 name="website"
                                 value="{{ old('website', $company->website) }}"
-                                class="crm-input"
+                                class="fc-input"
                             >
                         </div>
 
@@ -51,7 +51,7 @@
                                 type="text"
                                 name="industry"
                                 value="{{ old('industry', $company->industry) }}"
-                                class="crm-input"
+                                class="fc-input"
                             >
                         </div>
 
@@ -63,7 +63,7 @@
                                     type="text"
                                     name="country"
                                     value="{{ old('country', $company->country) }}"
-                                    class="crm-input"
+                                    class="fc-input"
                                 >
                             </div>
 
@@ -74,7 +74,7 @@
                                     type="text"
                                     name="city"
                                     value="{{ old('city', $company->city) }}"
-                                    class="crm-input"
+                                    class="fc-input"
                                 >
                             </div>
                         </div>
@@ -88,7 +88,7 @@
                                     min="1"
                                     name="company_size_min"
                                     value="{{ old('company_size_min', $company->company_size_min) }}"
-                                    class="crm-input"
+                                    class="fc-input"
                                 >
                             </div>
 
@@ -100,7 +100,7 @@
                                     min="1"
                                     name="company_size_max"
                                     value="{{ old('company_size_max', $company->company_size_max) }}"
-                                    class="crm-input"
+                                    class="fc-input"
                                 >
                             </div>
                         </div>
@@ -109,7 +109,7 @@
                     <div class="space-y-4">
                         <div>
                             <label for="status" class="mb-1 block text-sm font-medium">Estado comercial</label>
-                            <select id="status" name="status" class="crm-select">
+                            <select id="status" name="status" class="fc-select">
                                 @foreach(['prospect','contacted','replied','meeting','proposal_sent','negotiation','won','lost','archived'] as $status)
                                     <option value="{{ $status }}" @selected(old('status', $company->status) === $status)>{{ $status }}</option>
                                 @endforeach
@@ -124,7 +124,7 @@
                                     type="date"
                                     name="first_contact_at"
                                     value="{{ old('first_contact_at', $company->first_contact_at?->format('Y-m-d')) }}"
-                                    class="crm-input"
+                                    class="fc-input"
                                 >
                             </div>
 
@@ -135,7 +135,7 @@
                                     type="date"
                                     name="last_contact_at"
                                     value="{{ old('last_contact_at', $company->last_contact_at?->format('Y-m-d')) }}"
-                                    class="crm-input"
+                                    class="fc-input"
                                 >
                             </div>
                         </div>
@@ -147,12 +147,12 @@
                                 type="date"
                                 name="next_follow_up_at"
                                 value="{{ old('next_follow_up_at', $company->next_follow_up_at?->format('Y-m-d')) }}"
-                                class="crm-input"
+                                class="fc-input"
                             >
                         </div>
 
-                        <div class="crm-surface-muted space-y-3">
-                            <p class="crm-kpi-label">Visibilidad comercial</p>
+                        <div class="fc-surface-soft space-y-3">
+                            <p class="fc-kicker">Visibilidad comercial</p>
 
                             <label class="inline-flex items-center gap-2">
                                 <input
@@ -183,13 +183,13 @@
                         id="notes"
                         name="notes"
                         rows="6"
-                        class="crm-textarea"
+                        class="fc-textarea"
                     >{{ old('notes', $company->notes) }}</textarea>
                 </div>
 
                 <div class="flex flex-wrap items-center gap-3">
-                    <button type="submit" class="crm-btn-primary">Guardar cambios</button>
-                    <a href="{{ route('companies.show', $company) }}" class="crm-btn-secondary">Cancelar</a>
+                    <button type="submit" class="fc-btn fc-btn-primary">Guardar cambios</button>
+                    <a href="{{ route('companies.show', $company) }}" class="fc-btn fc-btn-secondary">Cancelar</a>
                 </div>
             </form>
         </div>

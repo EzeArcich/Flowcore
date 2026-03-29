@@ -5,12 +5,34 @@
     --fc-primary: #3155f6;
     --fc-primary-dark: #1d4ed8;
     --fc-accent: #22c3ee;
+
     --fc-ink: #0f172a;
     --fc-ink-soft: #334155;
-    --fc-bg-dark: #0b1220;
-    --fc-bg-soft: #f8fafc;
-    --fc-border: rgba(49, 85, 246, 0.16);
+    --fc-ink-muted: #64748b;
+
+    --fc-bg: #f8fafc;
+    --fc-surface: rgba(255, 255, 255, 0.78);
+    --fc-surface-strong: #ffffff;
+    --fc-surface-soft: #eef4ff;
+
+    --fc-border: rgba(49, 85, 246, 0.14);
+    --fc-border-strong: rgba(49, 85, 246, 0.24);
+
+    --fc-success: #16a34a;
+    --fc-warning: #f59e0b;
+    --fc-danger: #ef4444;
+    --fc-info: #0ea5e9;
+
     --fc-glow: rgba(34, 195, 238, 0.22);
+    --fc-shadow-sm: 0 8px 24px rgba(15, 23, 42, 0.06);
+    --fc-shadow-md: 0 18px 45px rgba(15, 23, 42, 0.1);
+
+    --fc-radius-sm: 14px;
+    --fc-radius-md: 18px;
+    --fc-radius-lg: 24px;
+
+    --fc-ring: 0 0 0 4px rgba(34, 195, 238, 0.18);
+    --fc-gradient-brand: linear-gradient(135deg, #3155f6 0%, #1d4ed8 42%, #22c3ee 100%);
 }
 
 @source '../views';
@@ -24,7 +46,6 @@
     --font-sans: 'Sora', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     --font-display: 'Space Grotesk', 'Sora', ui-sans-serif, system-ui, sans-serif;
 
-    /* CRM identity palette: tactical dark + vivid signal tones */
     --color-brand-50: #edf3ff;
     --color-brand-100: #dbe5ff;
     --color-brand-200: #bed0ff;
@@ -41,18 +62,18 @@
     --color-ink-100: #dde6f3;
     --color-ink-200: #c3d0e3;
     --color-ink-300: #90a3c0;
-    --color-ink-400: #64748b;
+    --color-ink-400: var(--fc-ink-muted);
     --color-ink-500: var(--fc-ink-soft);
     --color-ink-600: #243449;
     --color-ink-700: #1b293c;
     --color-ink-800: #162233;
     --color-ink-900: #111b2c;
-    --color-ink-950: var(--fc-bg-dark);
+    --color-ink-950: var(--fc-ink);
 
-    --color-signal-success: #16a34a;
-    --color-signal-warning: #d97706;
-    --color-signal-danger: #dc2626;
-    --color-signal-info: #0ea5e9;
+    --color-signal-success: var(--fc-success);
+    --color-signal-warning: var(--fc-warning);
+    --color-signal-danger: var(--fc-danger);
+    --color-signal-info: var(--fc-info);
 
     --color-zinc-50: #fafafa;
     --color-zinc-100: #f5f5f5;
@@ -92,7 +113,7 @@
     h1,
     h2,
     h3,
-    [data-crm-display='true'] {
+    [data-fc-display='true'] {
         font-family: var(--font-display);
         letter-spacing: -0.03em;
     }
@@ -125,765 +146,457 @@ select:focus[data-flux-control] {
 } */
 
 @layer components {
-    .crm-page {
-        @apply min-h-full bg-gradient-to-b from-brand-50 via-ink-50 to-ink-100 text-ink-900 dark:from-ink-950 dark:via-ink-950 dark:to-ink-900 dark:text-ink-100;
-    }
-
-    .crm-card {
-        @apply rounded-2xl border border-ink-100 bg-white/95 p-4 shadow-md shadow-brand-950/10 ring-1 ring-white/70 dark:border-ink-800 dark:bg-ink-900 dark:ring-ink-800;
-    }
-
-    .crm-stat-card {
-        @apply relative overflow-hidden rounded-2xl border border-brand-100/80 bg-white p-5 shadow-lg shadow-brand-900/10 ring-1 ring-brand-100/70 dark:border-brand-900/60 dark:bg-ink-900 dark:ring-brand-900/40;
-    }
-
-    .crm-stat-card::before {
-        content: '';
-        @apply absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-brand-500 via-violet-500 to-sky-500;
-    }
-
-    .crm-kpi-label {
-        @apply text-[11px] font-black uppercase tracking-[0.16em] text-ink-500 dark:text-ink-300;
-        font-family: var(--font-display);
-    }
-
-    .crm-kpi-value {
-        @apply mt-2 text-3xl font-bold leading-none text-ink-900 dark:text-white;
-        font-family: var(--font-display);
-        letter-spacing: -0.05em;
-    }
-
-    .crm-section-title {
-        @apply mb-4 text-sm font-black uppercase tracking-[0.14em] text-ink-700 dark:text-ink-100;
-        font-family: var(--font-display);
-    }
-
-    .crm-page-header {
-        @apply relative overflow-hidden rounded-[2rem] border border-white/85 bg-white/82 p-6 shadow-2xl shadow-brand-950/10 ring-1 ring-brand-100/70 backdrop-blur-xl dark:border-ink-800 dark:bg-ink-900/75 dark:ring-brand-900/40;
-        background-image:
-            linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(241, 245, 255, 0.9)),
-            radial-gradient(circle at top right, rgba(61, 90, 254, 0.1), transparent 34%);
-    }
-
-    .crm-page-header::before {
-        content: '';
-        @apply absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-brand-500 via-sky-400 to-cyan-300;
-    }
-
-    .crm-page-header::after {
-        content: '';
-        @apply pointer-events-none absolute -right-8 bottom-0 h-28 w-28 rounded-full;
+    .fc-page {
+        @apply min-h-full text-ink-900;
         background:
-            radial-gradient(circle, rgba(61, 90, 254, 0.14), rgba(61, 90, 254, 0) 68%);
-        filter: blur(8px);
+            linear-gradient(180deg, color-mix(in oklab, var(--fc-bg) 92%, white 8%), white);
     }
 
-    .crm-page-eyebrow {
-        @apply text-[11px] font-black uppercase tracking-[0.22em] text-brand-700 dark:text-brand-200;
+    .dark .fc-page {
+        background:
+            linear-gradient(180deg, rgba(13, 18, 32, 0.98), rgba(15, 23, 42, 0.98));
+        color: white;
+    }
+
+    .fc-card,
+    .fc-panel,
+    .fc-confirm-card {
+        border: 1px solid var(--fc-border);
+        background: var(--fc-surface);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: var(--fc-shadow-md);
+    }
+
+    .fc-card {
+        @apply rounded-3xl p-5;
+    }
+
+    .fc-card-soft,
+    .fc-stat-card,
+    .fc-surface-soft,
+    .fc-surface-info,
+    .fc-surface-danger {
+        border: 1px solid var(--fc-border);
+        background: rgba(255, 255, 255, 0.82);
+        box-shadow: var(--fc-shadow-sm);
+        border-radius: var(--fc-radius-md);
+    }
+
+    .fc-card-soft,
+    .fc-surface-soft,
+    .fc-surface-info,
+    .fc-surface-danger {
+        @apply p-4;
+    }
+
+    .fc-panel {
+        @apply relative overflow-hidden p-6;
+        border-radius: var(--fc-radius-lg);
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(246, 249, 255, 0.94)),
+            radial-gradient(circle at top right, color-mix(in oklab, var(--fc-accent) 10%, transparent), transparent 36%);
+    }
+
+    .fc-page-header {
+        @apply relative overflow-hidden p-6;
+        border: 1px solid var(--fc-border);
+        border-radius: var(--fc-radius-lg);
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(244, 248, 255, 0.94)),
+            radial-gradient(circle at top right, color-mix(in oklab, var(--fc-primary) 10%, transparent), transparent 38%);
+        box-shadow: var(--fc-shadow-md);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .fc-page-header::before {
+        content: '';
+        @apply absolute inset-x-0 top-0 h-px;
+        background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--fc-primary) 24%, white), transparent);
+    }
+
+    .fc-stat-card {
+        @apply p-5;
+    }
+
+    .fc-kicker {
+        @apply text-[11px] font-black uppercase tracking-[0.18em];
+        color: var(--fc-primary-dark);
         font-family: var(--font-display);
     }
 
-    .crm-page-title {
-        @apply mt-2 text-3xl font-bold leading-none text-ink-950 dark:text-white md:text-[2.4rem];
-        font-family: var(--font-display);
-        letter-spacing: -0.06em;
-        text-wrap: balance;
-    }
-
-    .crm-page-subtitle {
-        @apply mt-3 max-w-3xl text-sm leading-6 text-ink-600 dark:text-ink-300;
-    }
-
-    .crm-block-title {
-        @apply text-lg font-bold text-ink-900 dark:text-ink-50;
+    .fc-page-title,
+    .fc-block-title,
+    .fc-section-title {
         font-family: var(--font-display);
         letter-spacing: -0.04em;
     }
 
-    .crm-surface-muted {
-        @apply rounded-xl border border-brand-100/70 bg-gradient-to-r from-white to-brand-50/40 p-3 dark:border-ink-700 dark:from-ink-900 dark:to-ink-800/50;
+    .fc-page-title {
+        @apply mt-2 text-3xl font-bold leading-none md:text-[2.4rem];
+        color: var(--fc-ink);
+        text-wrap: balance;
     }
 
-    .crm-surface-danger {
-        @apply rounded-xl border border-rose-200 bg-gradient-to-r from-rose-50 to-red-50 p-3 dark:border-rose-800/80 dark:from-rose-950/40 dark:to-red-950/30;
+    .fc-page-subtitle {
+        @apply mt-3 max-w-3xl text-sm leading-6;
+        color: var(--fc-ink-soft);
     }
 
-    .crm-surface-info {
-        @apply rounded-xl border border-sky-200 bg-gradient-to-r from-sky-50 to-brand-50 p-3 dark:border-sky-800/80 dark:from-sky-950/30 dark:to-brand-950/30;
+    .fc-block-title {
+        @apply text-lg font-bold;
+        color: var(--fc-ink);
     }
 
-    .crm-form-shell {
-        @apply relative overflow-hidden rounded-[2rem] border border-white/80 bg-white/90 p-6 shadow-2xl shadow-brand-950/12 ring-1 ring-brand-100/70 backdrop-blur-xl dark:border-ink-800 dark:bg-ink-900/90 dark:ring-brand-900/40;
-        background-image:
-            linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(244, 247, 255, 0.98)),
-            radial-gradient(circle at top right, rgba(95, 127, 255, 0.08), transparent 34%);
+    .fc-section-title {
+        @apply text-sm font-black uppercase tracking-[0.14em];
+        color: var(--fc-ink-soft);
     }
 
-    .crm-form-shell::before {
-        content: '';
-        @apply absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-brand-500 via-violet-500 to-sky-500;
+    .fc-metric-value {
+        @apply mt-2 text-3xl font-bold leading-none;
+        color: var(--fc-ink);
+        font-family: var(--font-display);
+        letter-spacing: -0.05em;
     }
 
-    .crm-form-section {
-        @apply rounded-[1.6rem] border border-brand-100/70 bg-white/75 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.82),0_16px_30px_rgba(31,45,130,0.06)] backdrop-blur-sm dark:border-ink-800 dark:bg-ink-900/65 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_16px_30px_rgba(2,6,23,0.28)];
+    .fc-label {
+        @apply mb-2 inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.14em];
+        color: var(--fc-ink-soft);
     }
 
-    .crm-field-label {
-        @apply mb-2 inline-flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.14em] text-ink-600 dark:text-ink-200;
+    .fc-check-label {
+        @apply inline-flex items-center gap-3 px-4 py-3 text-sm font-medium transition;
+        border: 1px solid var(--fc-border);
+        border-radius: var(--fc-radius-md);
+        background: rgba(255, 255, 255, 0.82);
+        color: var(--fc-ink-soft);
+        box-shadow: var(--fc-shadow-sm);
     }
 
-    .crm-check-label {
-        @apply inline-flex items-center gap-3 rounded-[1.1rem] border border-brand-100/80 bg-white/80 px-4 py-3 text-sm font-medium text-ink-700 shadow-[inset_0_1px_0_rgba(255,255,255,0.85),0_10px_24px_rgba(31,45,130,0.06)] transition hover:border-brand-300 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_14px_28px_rgba(47,71,216,0.10)] dark:border-ink-700 dark:bg-ink-900/60 dark:text-ink-200;
-        border-radius: 18px 28px 16px 24px;
+    .fc-check-label:hover {
+        border-color: var(--fc-border-strong);
+        background: rgba(255, 255, 255, 0.92);
     }
 
-    .crm-check {
-        @apply size-4 rounded-sm border-ink-300 text-brand-600 shadow-sm focus:ring-brand-300 dark:border-ink-600 dark:bg-ink-950 dark:text-brand-300 dark:focus:ring-brand-700;
+    .fc-checkbox {
+        @apply size-4 rounded-md shadow-sm;
+        accent-color: var(--fc-primary);
     }
 
-    .crm-alert-stack {
-        @apply mx-auto flex w-full max-w-5xl flex-col gap-3;
+    .fc-input,
+    .fc-select,
+    .fc-textarea {
+        @apply w-full px-4 py-3 text-sm outline-none transition placeholder:text-slate-400;
+        border: 1px solid rgba(49, 85, 246, 0.16);
+        border-radius: var(--fc-radius-md);
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--fc-ink);
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
     }
 
-    .crm-alert {
-        @apply relative overflow-hidden rounded-[1.7rem] border px-5 py-4 shadow-xl backdrop-blur-xl;
-        animation: crm-alert-enter 260ms cubic-bezier(0.22, 1, 0.36, 1);
+    .fc-input:hover,
+    .fc-select:hover,
+    .fc-textarea:hover {
+        border-color: var(--fc-border-strong);
+        background: rgba(255, 255, 255, 0.84);
     }
 
-    .crm-alert::before {
-        content: '';
-        @apply absolute inset-x-0 top-0 h-1.5;
+    .fc-input:focus,
+    .fc-select:focus,
+    .fc-textarea:focus {
+        border-color: var(--fc-info);
+        box-shadow: var(--fc-ring);
     }
 
-    .crm-alert--success {
-        @apply border-emerald-200/90 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(236,253,245,0.96))] text-emerald-950 shadow-emerald-900/10 dark:border-emerald-800/80 dark:bg-[linear-gradient(180deg,rgba(6,78,59,0.25),rgba(2,44,34,0.45))] dark:text-emerald-100;
-    }
-
-    .crm-alert--success::before {
-        @apply bg-gradient-to-r from-emerald-500 via-teal-400 to-sky-400;
-    }
-
-    .crm-alert--error {
-        @apply border-rose-200/90 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(255,241,242,0.98))] text-rose-950 shadow-rose-900/10 dark:border-rose-800/80 dark:bg-[linear-gradient(180deg,rgba(127,29,29,0.26),rgba(76,5,25,0.42))] dark:text-rose-100;
-    }
-
-    .crm-alert--error::before {
-        @apply bg-gradient-to-r from-rose-500 via-orange-400 to-amber-300;
-    }
-
-    .crm-alert-title {
-        @apply text-xs font-black uppercase tracking-[0.16em];
-    }
-
-    .crm-alert-body {
-        @apply mt-1 text-sm leading-6;
-    }
-
-    .crm-alert-list {
-        @apply mt-2 space-y-1 text-sm leading-6;
-    }
-
-    .crm-input,
-    .crm-select,
-    .crm-textarea {
-        @apply w-full border px-4 py-3 text-sm font-medium text-ink-900 outline-none transition duration-200 placeholder:text-ink-400 dark:text-ink-100 dark:placeholder:text-ink-500;
-        border-radius: 22px 16px 20px 12px;
-        border-color: color-mix(in oklab, var(--color-brand-200) 72%, white 20%);
-        background:
-            linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(244, 247, 255, 0.98));
-        box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.92),
-            0 12px 28px rgba(15, 23, 42, 0.06);
-    }
-
-    .crm-input:hover,
-    .crm-select:hover,
-    .crm-textarea:hover {
-        border-color: color-mix(in oklab, var(--color-brand-400) 48%, white 18%);
-        box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.92),
-            0 14px 30px rgba(47, 71, 216, 0.10);
-    }
-
-    .crm-input:focus,
-    .crm-select:focus,
-    .crm-textarea:focus {
-        transform: translateY(-1px);
-        border-color: color-mix(in oklab, var(--color-brand-500) 68%, white 10%);
-        box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.94),
-            0 0 0 4px color-mix(in oklab, var(--color-brand-200) 52%, transparent),
-            0 18px 34px rgba(47, 71, 216, 0.16);
-    }
-
-    .crm-textarea {
+    .fc-textarea {
         min-height: 8.5rem;
         resize: vertical;
     }
 
-    .dark .crm-form-shell {
-        background-image:
-            linear-gradient(180deg, rgba(22, 29, 48, 0.92), rgba(11, 16, 32, 0.96)),
-            radial-gradient(circle at top right, rgba(95, 127, 255, 0.14), transparent 34%);
+    .fc-btn {
+        @apply inline-flex items-center justify-center rounded-2xl px-5 py-3 font-semibold tracking-[0.01em] transition focus:outline-none;
+        border: 1px solid transparent;
     }
 
-    .dark .crm-input,
-    .dark .crm-select,
-    .dark .crm-textarea {
-        border-color: color-mix(in oklab, var(--color-brand-900) 40%, var(--color-ink-700) 60%);
-        background:
-            linear-gradient(180deg, rgba(22, 29, 48, 0.96), rgba(11, 16, 32, 0.98));
-        box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.04),
-            0 14px 32px rgba(2, 6, 23, 0.34);
+    .fc-btn-primary {
+        border-color: rgba(49, 85, 246, 0.18);
+        background: linear-gradient(135deg, #dfe8ff 0%, #cfe2ff 55%, #d9f4ff 100%);
+        color: var(--fc-ink);
+        box-shadow: 0 10px 30px rgba(49, 85, 246, 0.1);
     }
 
-    .dark .crm-input:hover,
-    .dark .crm-select:hover,
-    .dark .crm-textarea:hover {
-        border-color: color-mix(in oklab, var(--color-brand-400) 42%, var(--color-ink-600) 58%);
-        box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.05),
-            0 18px 36px rgba(2, 6, 23, 0.38);
-    }
-
-    .dark .crm-input:focus,
-    .dark .crm-select:focus,
-    .dark .crm-textarea:focus {
-        border-color: color-mix(in oklab, var(--color-brand-300) 62%, white 8%);
-        box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.06),
-            0 0 0 4px rgba(95, 127, 255, 0.16),
-            0 20px 38px rgba(2, 6, 23, 0.44);
-    }
-
-    .crm-btn-primary {
-        @apply relative inline-flex items-center justify-center overflow-hidden border px-4 py-2.5 text-sm font-black transition focus:outline-none focus:ring-2 focus:ring-brand-300 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-ink-950;
-        border-radius: 18px 999px 18px 28px;
-        text-transform: uppercase;
-        letter-spacing: 0.14em;
-        color: var(--color-brand-950);
-        border-color: color-mix(in oklab, var(--color-brand-400) 44%, white 16%);
-        background:
-            linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(227, 236, 255, 0.98) 46%, rgba(188, 209, 255, 0.96));
-        box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.94),
-            0 14px 28px rgba(47, 71, 216, 0.14),
-            0 2px 0 rgba(25, 36, 103, 0.18);
-    }
-
-    .crm-btn-primary::before {
-        content: '';
-        @apply absolute inset-y-1 left-1 w-1 rounded-full;
-        background: linear-gradient(180deg, rgba(61, 90, 254, 0.95), rgba(14, 165, 233, 0.58));
-    }
-
-    .crm-btn-primary:hover {
+    .fc-btn-primary:hover {
         transform: translateY(-1px);
-        border-color: color-mix(in oklab, var(--color-brand-500) 58%, white 12%);
-        box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.98),
-            0 18px 34px rgba(47, 71, 216, 0.18),
-            0 2px 0 rgba(25, 36, 103, 0.22);
+        box-shadow: 0 16px 36px rgba(49, 85, 246, 0.14);
     }
 
-    .crm-btn-secondary {
-        @apply relative inline-flex items-center justify-center overflow-hidden border px-4 py-2.5 text-sm font-black transition focus:outline-none focus:ring-2 focus:ring-brand-200 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-brand-900 dark:focus:ring-offset-ink-950;
-        border-radius: 18px 999px 18px 28px;
-        text-transform: uppercase;
-        letter-spacing: 0.14em;
-        color: var(--color-ink-800);
-        border-color: color-mix(in oklab, var(--color-brand-300) 36%, white 22%);
-        background:
-            linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(245, 247, 255, 0.98) 60%, rgba(230, 237, 255, 0.9));
-        box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.94),
-            0 12px 24px rgba(15, 23, 42, 0.08),
-            0 2px 0 rgba(148, 163, 184, 0.24);
+    .fc-btn-secondary {
+        border-color: rgba(49, 85, 246, 0.16);
+        background: rgba(255, 255, 255, 0.7);
+        color: var(--fc-ink-soft);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
     }
 
-    .crm-btn-secondary::before {
-        content: '';
-        @apply absolute inset-y-1 left-1 w-1 rounded-full;
-        background: linear-gradient(180deg, rgba(148, 163, 184, 0.92), rgba(191, 219, 254, 0.75));
+    .fc-btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.92);
+        border-color: rgba(49, 85, 246, 0.26);
+        color: var(--fc-ink);
     }
 
-    .crm-btn-secondary:hover {
-        transform: translateY(-1px);
-        border-color: color-mix(in oklab, var(--color-brand-400) 46%, white 20%);
-        color: var(--color-brand-900);
-        box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.96),
-            0 16px 28px rgba(47, 71, 216, 0.1),
-            0 2px 0 rgba(148, 163, 184, 0.28);
+    .fc-btn-ghost {
+        @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium transition;
+        color: var(--fc-ink-soft);
     }
 
-    .dark .crm-btn-primary {
-        color: var(--color-brand-50);
-        border-color: color-mix(in oklab, var(--color-brand-400) 58%, var(--color-ink-700) 42%);
-        background:
-            linear-gradient(135deg, rgba(37, 45, 67, 0.96), rgba(31, 45, 130, 0.9) 52%, rgba(14, 20, 55, 0.96));
-        box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.06),
-            0 18px 34px rgba(2, 6, 23, 0.34),
-            0 2px 0 rgba(95, 127, 255, 0.18);
+    .fc-btn-ghost:hover {
+        background: rgba(255, 255, 255, 0.7);
+        color: var(--fc-ink);
     }
 
-    .dark .crm-btn-primary:hover {
-        border-color: color-mix(in oklab, var(--color-brand-300) 68%, white 8%);
+    .fc-btn-sm {
+        @apply rounded-xl px-3 py-1.5 text-xs;
     }
 
-    .dark .crm-btn-secondary {
-        color: var(--color-ink-100);
-        border-color: color-mix(in oklab, var(--color-ink-600) 60%, var(--color-brand-500) 40%);
-        background:
-            linear-gradient(135deg, rgba(22, 29, 48, 0.96), rgba(31, 45, 67, 0.96) 55%, rgba(24, 34, 58, 0.98));
-        box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.05),
-            0 16px 30px rgba(2, 6, 23, 0.28),
-            0 2px 0 rgba(15, 23, 42, 0.22);
-    }
-
-    .dark .crm-btn-secondary:hover {
-        color: var(--color-brand-100);
-        border-color: color-mix(in oklab, var(--color-brand-400) 58%, var(--color-ink-600) 42%);
-    }
-
-    .crm-btn-sm {
-        @apply rounded-lg px-3 py-1.5 text-xs font-semibold;
-        letter-spacing: 0.04em;
-    }
-
-    .crm-btn-action {
-        @apply h-8 px-3 py-0 text-xs font-semibold;
+    .fc-btn-action {
+        @apply h-8 px-3 py-0 text-xs;
         line-height: 1;
     }
 
-    .crm-btn-success {
-        @apply relative inline-flex items-center justify-center overflow-hidden border px-4 py-2.5 text-sm font-black transition focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-ink-950;
-        border-radius: 18px 999px 18px 28px;
-        text-transform: uppercase;
-        letter-spacing: 0.14em;
-        color: #0f5132;
-        border-color: color-mix(in oklab, #34d399 48%, white 16%);
-        background:
-            linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(220, 252, 231, 0.98) 48%, rgba(167, 243, 208, 0.96));
-        box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.94),
-            0 14px 28px rgba(5, 150, 105, 0.14),
-            0 2px 0 rgba(6, 95, 70, 0.16);
+    .fc-btn-success,
+    .fc-btn-warning,
+    .fc-btn-danger {
+        color: var(--fc-ink);
     }
 
-    .crm-btn-success::before {
-        content: '';
-        @apply absolute inset-y-1 left-1 w-1 rounded-full;
-        background: linear-gradient(180deg, rgba(16, 185, 129, 0.95), rgba(5, 150, 105, 0.6));
+    .fc-btn-success {
+        border-color: color-mix(in oklab, var(--fc-success) 18%, white);
+        background: color-mix(in oklab, var(--fc-success) 10%, white);
     }
 
-    .crm-btn-success:hover {
-        transform: translateY(-1px);
-        border-color: color-mix(in oklab, #10b981 58%, white 12%);
-        box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.98),
-            0 18px 34px rgba(5, 150, 105, 0.18),
-            0 2px 0 rgba(6, 95, 70, 0.2);
+    .fc-btn-warning {
+        border-color: color-mix(in oklab, var(--fc-warning) 22%, white);
+        background: color-mix(in oklab, var(--fc-warning) 12%, white);
     }
 
-    .crm-btn-warning {
-        @apply relative inline-flex items-center justify-center overflow-hidden border px-4 py-2.5 text-sm font-black transition focus:outline-none focus:ring-2 focus:ring-amber-300 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-ink-950;
-        border-radius: 18px 999px 18px 28px;
-        text-transform: uppercase;
-        letter-spacing: 0.14em;
-        color: #7c2d12;
-        border-color: color-mix(in oklab, #fb923c 46%, white 16%);
-        background:
-            linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(255, 237, 213, 0.98) 48%, rgba(254, 215, 170, 0.96));
-        box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.94),
-            0 14px 28px rgba(234, 88, 12, 0.14),
-            0 2px 0 rgba(154, 52, 18, 0.16);
+    .fc-btn-danger {
+        border-color: color-mix(in oklab, var(--fc-danger) 18%, white);
+        background: color-mix(in oklab, var(--fc-danger) 10%, white);
+        color: color-mix(in oklab, var(--fc-danger) 82%, var(--fc-ink) 18%);
     }
 
-    .crm-btn-warning::before {
-        content: '';
-        @apply absolute inset-y-1 left-1 w-1 rounded-full;
-        background: linear-gradient(180deg, rgba(249, 115, 22, 0.95), rgba(245, 158, 11, 0.62));
+    .fc-link {
+        @apply text-sm font-medium transition hover:underline;
+        color: var(--fc-primary-dark);
     }
 
-    .crm-btn-warning:hover {
-        transform: translateY(-1px);
-        border-color: color-mix(in oklab, #f97316 58%, white 12%);
-        box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.98),
-            0 18px 34px rgba(234, 88, 12, 0.18),
-            0 2px 0 rgba(154, 52, 18, 0.2);
+    .fc-panel-title {
+        @apply mb-4 flex items-center justify-between gap-4;
     }
 
-    .dark .crm-btn-success {
-        color: #d1fae5;
-        border-color: color-mix(in oklab, #34d399 56%, var(--color-ink-700) 44%);
-        background:
-            linear-gradient(135deg, rgba(20, 47, 39, 0.96), rgba(6, 95, 70, 0.88) 56%, rgba(6, 78, 59, 0.96));
-        box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.05),
-            0 18px 34px rgba(2, 6, 23, 0.3),
-            0 2px 0 rgba(16, 185, 129, 0.16);
+    .fc-panel-chip,
+    .fc-chip {
+        @apply inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em];
+        border-radius: 999px;
     }
 
-    .dark .crm-btn-success:hover {
-        border-color: color-mix(in oklab, #6ee7b7 64%, white 8%);
+    .fc-panel-chip,
+    .fc-chip-neutral {
+        border-color: rgba(15, 23, 42, 0.08);
+        background: rgba(15, 23, 42, 0.04);
+        color: #475569;
     }
 
-    .dark .crm-btn-warning {
-        color: #ffedd5;
-        border-color: color-mix(in oklab, #fb923c 56%, var(--color-ink-700) 44%);
-        background:
-            linear-gradient(135deg, rgba(67, 31, 12, 0.96), rgba(154, 52, 18, 0.88) 56%, rgba(124, 45, 18, 0.96));
-        box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.05),
-            0 18px 34px rgba(2, 6, 23, 0.3),
-            0 2px 0 rgba(249, 115, 22, 0.16);
+    .fc-chip-info,
+    .fc-chip-primary {
+        border-color: rgba(49, 85, 246, 0.18);
+        background: rgba(49, 85, 246, 0.08);
+        color: var(--fc-primary);
     }
 
-    .dark .crm-btn-warning:hover {
-        border-color: color-mix(in oklab, #fdba74 64%, white 8%);
+    .fc-chip-success {
+        border-color: rgba(22, 163, 74, 0.18);
+        background: rgba(22, 163, 74, 0.08);
+        color: var(--fc-success);
     }
 
-    .crm-btn-danger {
-        @apply inline-flex items-center justify-center rounded-xl border border-rose-300 bg-rose-50 px-4 py-2 text-sm font-semibold text-rose-700 transition hover:bg-rose-100 focus:outline-none focus:ring-2 focus:ring-rose-300 dark:border-rose-700 dark:bg-rose-900/30 dark:text-rose-200 dark:hover:bg-rose-900/50;
-        border-radius: 999px 18px 14px 24px;
+    .fc-chip-warning {
+        border-color: rgba(245, 158, 11, 0.2);
+        background: rgba(245, 158, 11, 0.1);
+        color: #d97706;
     }
 
-    /* Variantes con personalidad para acciones de Follow-ups */
-
-    .crm-btn-tech {
-        @apply relative overflow-hidden bg-gradient-to-r from-sky-500 via-brand-500 to-violet-500 text-white shadow-sm shadow-brand-900/40;
-        border-radius: 999px 18px 999px 14px;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        font-weight: 700;
+    .fc-chip-urgent,
+    .fc-chip-danger {
+        border-color: rgba(239, 68, 68, 0.18);
+        background: rgba(239, 68, 68, 0.08);
+        color: #dc2626;
     }
 
-    .crm-btn-tech::before {
-        content: '';
-        @apply absolute inset-y-1 left-1 w-0.5 bg-gradient-to-b from-white/80 via-sky-200/60 to-transparent;
+    .fc-chip-process {
+        border-color: rgba(139, 92, 246, 0.2);
+        background: rgba(139, 92, 246, 0.1);
+        color: #7c3aed;
     }
 
-    .crm-btn-tech:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 6px 18px color-mix(in oklab, var(--color-brand-900) 35%, transparent);
+    .fc-chip-accent {
+        border-color: rgba(34, 195, 238, 0.22);
+        background: rgba(34, 195, 238, 0.1);
+        color: #0891b2;
     }
 
-    .crm-btn-editorial {
-        /* @apply relative overflow-hidden bg-gradient-to-b from-amber-50 to-orange-50 text-amber-900 shadow-[0_1px_0_rgba(15,23,42,0.4)]; */
-        /* Más editorial y menos exagerado: solo lado derecho irregular, izquierdo suave */
-        border-radius: 14px 90px 90px 26px;
-        text-transform: uppercase;
-        letter-spacing: 0.14em;
-        border-width: 1.5px;
-        border-style: solid;
-        border-color: color-mix(in oklab, #1f67c6 65%, transparent);
-        /* box-shadow: 0 2px 0 color-mix(in oklab, #b45309 50%, transparent); */
+    .fc-chip {
+        border-color: rgba(100, 116, 139, 0.14);
+        background: rgba(255, 255, 255, 0.82);
+        color: var(--fc-ink-soft);
     }
 
-    .crm-btn-editorial:hover {
-        transform: translateY(-1px) rotate(-0.4deg);
+    .fc-chip--company-status[data-status='prospect'] {
+        border-color: rgba(49, 85, 246, 0.18);
+        background: rgba(49, 85, 246, 0.08);
+        color: var(--fc-primary);
     }
 
-    .crm-btn-retro {
-        @apply relative bg-gradient-to-br from-lime-200 via-amber-200 to-rose-200 text-ink-900;
-        border-radius: 18px 999px 26px 999px;
-        border-width: 2px;
-        border-style: solid;
-        border-color: color-mix(in oklab, #f97316 55%, #0f172a 20%);
-        box-shadow:
-            0 2px 0 #0f172a33,
-            0 0 0 1px #ffffffb3 inset;
-        text-transform: uppercase;
-        letter-spacing: 0.16em;
-        font-weight: 800;
+    .fc-chip--company-status[data-status='contacted'],
+    .fc-chip--company-status[data-status='replied'],
+    .fc-chip--company-status[data-status='meeting'] {
+        border-color: rgba(14, 165, 233, 0.18);
+        background: rgba(14, 165, 233, 0.08);
+        color: var(--fc-info);
     }
 
-    .crm-btn-retro:hover {
-        transform: translateY(-1px) rotate(0.6deg);
-        filter: saturate(1.15);
+    .fc-chip--company-status[data-status='proposal_sent'],
+    .fc-chip--company-status[data-status='negotiation'] {
+        border-color: rgba(245, 158, 11, 0.18);
+        background: rgba(245, 158, 11, 0.08);
+        color: #b45309;
     }
 
-    .crm-btn-spotlight {
-        @apply relative inline-flex items-center justify-center overflow-hidden border px-5 py-2.5 text-sm font-black transition focus:outline-none focus:ring-2 focus:ring-brand-300 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-ink-950;
-        border-radius: 18px 999px 18px 28px;
-        text-transform: uppercase;
-        letter-spacing: 0.14em;
-        color: var(--color-brand-950);
-        border-color: color-mix(in oklab, var(--color-brand-400) 44%, white 16%);
-        background:
-            linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(227, 236, 255, 0.98) 46%, rgba(188, 209, 255, 0.96));
-        box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.94),
-            0 14px 28px rgba(47, 71, 216, 0.14),
-            0 2px 0 rgba(25, 36, 103, 0.18);
+    .fc-chip--company-status[data-status='won'] {
+        border-color: rgba(22, 163, 74, 0.18);
+        background: rgba(22, 163, 74, 0.08);
+        color: var(--fc-success);
     }
 
-    .crm-btn-spotlight::before {
-        content: '';
-        @apply absolute inset-y-1 left-1 w-1 rounded-full;
-        background: linear-gradient(180deg, rgba(61, 90, 254, 0.95), rgba(14, 165, 233, 0.58));
+    .fc-chip--company-status[data-status='lost'] {
+        border-color: rgba(239, 68, 68, 0.18);
+        background: rgba(239, 68, 68, 0.08);
+        color: var(--fc-danger);
     }
 
-    .crm-btn-spotlight:hover {
-        transform: translateY(-1px);
-        border-color: color-mix(in oklab, var(--color-brand-500) 58%, white 12%);
-        box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.98),
-            0 18px 34px rgba(47, 71, 216, 0.18),
-            0 2px 0 rgba(25, 36, 103, 0.22);
+    .fc-chip--company-status[data-status='archived'] {
+        border-color: rgba(100, 116, 139, 0.18);
+        background: rgba(100, 116, 139, 0.08);
+        color: var(--fc-ink-muted);
     }
 
-    .dark .crm-btn-spotlight {
-        color: var(--color-brand-50);
-        border-color: color-mix(in oklab, var(--color-brand-400) 58%, var(--color-ink-700) 42%);
-        background:
-            linear-gradient(135deg, rgba(37, 45, 67, 0.96), rgba(31, 45, 130, 0.9) 52%, rgba(14, 20, 55, 0.96));
-        box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.06),
-            0 18px 34px rgba(2, 6, 23, 0.34),
-            0 2px 0 rgba(95, 127, 255, 0.18);
+    .fc-surface-soft {
+        background: var(--fc-surface-soft);
     }
 
-    .dark .crm-btn-spotlight:hover {
-        border-color: color-mix(in oklab, var(--color-brand-300) 68%, white 8%);
+    .fc-surface-info {
+        background: color-mix(in oklab, var(--fc-info) 8%, white);
+        border-color: color-mix(in oklab, var(--fc-info) 18%, white);
     }
 
-    .crm-link {
-        @apply text-sm font-medium text-brand-600 transition hover:text-brand-500 hover:underline dark:text-brand-300 dark:hover:text-brand-200;
+    .fc-surface-danger {
+        background: color-mix(in oklab, var(--fc-danger) 7%, white);
+        border-color: color-mix(in oklab, var(--fc-danger) 18%, white);
     }
 
-    .crm-panel-title {
-        @apply mb-4 flex items-center justify-between border-b border-ink-100 pb-3 dark:border-ink-800;
-    }
-
-    .crm-panel-chip {
-        @apply rounded-full border border-brand-200 bg-brand-50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-brand-700 dark:border-brand-800 dark:bg-brand-900/40 dark:text-brand-200;
-        border-radius: 999px 18px 12px 22px;
-        box-shadow: inset 0 -1px 0 color-mix(in oklab, currentColor 20%, transparent);
-        font-family: var(--font-display);
-    }
-
-    .crm-table {
+    .fc-table {
         @apply w-full text-sm;
     }
 
-    .crm-table thead {
-        @apply bg-ink-50 dark:bg-ink-800;
+    .fc-table thead {
+        background: rgba(238, 244, 255, 0.84);
     }
 
-    .crm-table th {
-        @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-[0.05em] text-ink-500 dark:text-ink-300;
+    .fc-table th {
+        @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-[0.05em];
+        color: var(--fc-ink-muted);
         font-family: var(--font-display);
     }
 
-    .crm-table td {
-        @apply px-4 py-3 text-ink-700 dark:text-ink-200;
+    .fc-table td {
+        @apply px-4 py-3;
+        color: var(--fc-ink-soft);
     }
 
-    .crm-table tbody tr {
-        @apply border-t border-ink-100 dark:border-ink-800;
+    .fc-table tbody tr {
+        border-top: 1px solid rgba(49, 85, 246, 0.1);
     }
-
-    .crm-badge {
-        @apply inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.05em];
-        border-radius: 999px 18px 12px 22px;
-        box-shadow: inset 0 -1px 0 color-mix(in oklab, currentColor 16%, transparent);
-    }
-
-    .crm-badge--company-status[data-status='prospect'] {
-        @apply border-brand-200 bg-brand-50 text-brand-700 dark:border-brand-700 dark:bg-brand-900/40 dark:text-brand-200;
-    }
-
-    .crm-badge--company-status[data-status='contacted'] {
-        @apply border-sky-200 bg-sky-50 text-sky-700 dark:border-sky-700 dark:bg-sky-900/30 dark:text-sky-200;
-    }
-
-    .crm-badge--company-status[data-status='replied'] {
-        @apply border-teal-200 bg-teal-50 text-teal-700 dark:border-teal-700 dark:bg-teal-900/30 dark:text-teal-200;
-    }
-
-    .crm-badge--company-status[data-status='meeting'] {
-        @apply border-violet-200 bg-violet-50 text-violet-700 dark:border-violet-700 dark:bg-violet-900/30 dark:text-violet-200;
-    }
-
-    .crm-badge--company-status[data-status='proposal_sent'] {
-        @apply border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-700 dark:bg-amber-900/30 dark:text-amber-200;
-    }
-
-    .crm-badge--company-status[data-status='negotiation'] {
-        @apply border-orange-200 bg-orange-50 text-orange-700 dark:border-orange-700 dark:bg-orange-900/30 dark:text-orange-200;
-    }
-
-    .crm-badge--company-status[data-status='won'] {
-        @apply border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-200;
-    }
-
-    .crm-badge--company-status[data-status='lost'] {
-        @apply border-rose-200 bg-rose-50 text-rose-700 dark:border-rose-700 dark:bg-rose-900/30 dark:text-rose-200;
-    }
-
-    .crm-badge--company-status[data-status='archived'] {
-        @apply border-zinc-200 bg-zinc-50 text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900/30 dark:text-zinc-300;
-    }
-
-    /* Hover editorial para navegación lateral */
 
     [data-flux-sidebar-item] {
-        border-radius: 999px 18px 14px 22px;
-        border-width: 1px;
-        border-style: solid;
+        @apply rounded-2xl border px-3 py-2 transition;
         border-color: transparent;
-        position: relative;
-        overflow: hidden;
     }
 
     [data-flux-sidebar-item]:hover {
-        border-color: color-mix(in oklab, var(--color-brand-500) 55%, var(--color-brand-800) 20%);
-        background-image: linear-gradient(to right, color-mix(in oklab, var(--color-brand-200) 55%, white 20%), color-mix(in oklab, var(--color-brand-50) 40%, transparent));
-        color: var(--color-brand-900);
-        box-shadow: 0 1px 0 color-mix(in oklab, var(--color-brand-700) 55%, transparent);
+        border-color: var(--fc-border);
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--fc-ink);
     }
 
     [data-flux-sidebar-item][data-current] {
-        border-color: color-mix(in oklab, var(--color-brand-600) 70%, var(--color-brand-900) 20%);
-        background-image: linear-gradient(to right, color-mix(in oklab, var(--color-brand-300) 62%, white 16%), color-mix(in oklab, var(--color-brand-100) 45%, transparent));
-        color: var(--color-brand-900);
-        box-shadow: 0 1px 0 color-mix(in oklab, var(--color-brand-800) 65%, transparent);
+        border-color: var(--fc-border-strong);
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--fc-ink);
+        box-shadow: var(--fc-shadow-sm);
     }
 
-    [data-flux-sidebar-item]::before {
-        content: '';
-        position: absolute;
-        inset-inline: 10px 40%;
-        top: 0;
-        height: 2px;
-        background-image: linear-gradient(to right, color-mix(in oklab, var(--color-brand-200) 70%, transparent), transparent);
-        opacity: 0;
-        transition: opacity 150ms ease-out;
+    .fc-sidebar-shell {
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(244, 248, 255, 0.96));
+        border-right: 1px solid var(--fc-border);
     }
 
-    [data-flux-sidebar-item]:hover::before,
-    [data-flux-sidebar-item][data-current]::before {
-        opacity: 1;
+    .fc-confirm-dialog {
+        @apply rounded-2xl border-0 bg-transparent p-0 shadow-none backdrop:bg-slate-950/45;
     }
 
-    .dark [data-flux-sidebar-item]:hover {
-        border-color: color-mix(in oklab, var(--color-brand-500) 45%, white 18%);
-        background-image: linear-gradient(to right, color-mix(in oklab, var(--color-brand-700) 55%, var(--color-ink-900) 45%), color-mix(in oklab, var(--color-brand-900) 45%, transparent));
-        color: var(--color-brand-100);
-        box-shadow: 0 1px 0 color-mix(in oklab, var(--color-brand-300) 35%, transparent);
+    .fc-confirm-card {
+        @apply w-[min(92vw,30rem)] p-6;
+        border-radius: var(--fc-radius-lg);
     }
 
-    .dark [data-flux-sidebar-item][data-current] {
-        border-color: color-mix(in oklab, var(--color-brand-400) 55%, white 20%);
-        background-image: linear-gradient(to right, color-mix(in oklab, var(--color-brand-700) 70%, var(--color-ink-900) 40%), color-mix(in oklab, var(--color-brand-900) 55%, transparent));
+    .dark .fc-card,
+    .dark .fc-panel,
+    .dark .fc-confirm-card,
+    .dark .fc-card-soft,
+    .dark .fc-stat-card,
+    .dark .fc-surface-soft,
+    .dark .fc-surface-info,
+    .dark .fc-surface-danger {
+        background: rgba(15, 23, 42, 0.86);
+        border-color: rgba(148, 163, 184, 0.18);
         color: white;
-        box-shadow: 0 1px 0 color-mix(in oklab, var(--color-brand-300) 55%, transparent);
     }
 
-    .crm-sidebar-shell {
-        position: relative;
-        overflow: hidden;
-        isolation: isolate;
-        background-color: color-mix(in oklab, var(--color-brand-50) 55%, white);
-        background-image:
-            radial-gradient(circle at 10% 15%, color-mix(in oklab, var(--color-brand-200) 30%, transparent) 0, transparent 36%),
-            radial-gradient(circle at 82% 12%, color-mix(in oklab, var(--color-brand-300) 22%, transparent) 0, transparent 42%),
-            linear-gradient(165deg, color-mix(in oklab, var(--color-brand-50) 88%, white) 0%, color-mix(in oklab, var(--color-ink-50) 82%, white) 48%, color-mix(in oklab, var(--color-brand-100) 78%, white) 100%);
+    .dark .fc-page-title,
+    .dark .fc-block-title,
+    .dark .fc-metric-value {
+        color: white;
     }
 
-    .dark .crm-sidebar-shell {
-        background-color: color-mix(in oklab, var(--color-ink-900) 88%, var(--color-brand-950) 12%);
-        background-image:
-            radial-gradient(circle at 14% 10%, color-mix(in oklab, var(--color-brand-500) 18%, transparent) 0, transparent 38%),
-            radial-gradient(circle at 85% 14%, color-mix(in oklab, var(--color-brand-400) 12%, transparent) 0, transparent 42%),
-            linear-gradient(170deg, color-mix(in oklab, var(--color-ink-950) 92%, var(--color-brand-950) 8%) 0%, color-mix(in oklab, var(--color-ink-900) 94%, var(--color-brand-900) 6%) 60%, color-mix(in oklab, var(--color-ink-800) 92%, var(--color-brand-900) 8%) 100%);
+    .dark .fc-page-subtitle,
+    .dark .fc-label,
+    .dark .fc-kicker,
+    .dark .fc-table th,
+    .dark .fc-table td,
+    .dark .fc-link {
+        color: rgba(226, 232, 240, 0.86);
     }
 
-    .crm-sidebar-shell::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        opacity: 0.65;
-        background-image:
-            radial-gradient(circle at 26px 24px, color-mix(in oklab, var(--color-brand-500) 28%, white) 0 2px, transparent 2.5px),
-            radial-gradient(circle at 74px 70px, color-mix(in oklab, var(--color-ink-400) 20%, transparent) 0 1.5px, transparent 2px),
-            linear-gradient(145deg, transparent 0 44%, color-mix(in oklab, var(--color-brand-300) 18%, transparent) 44.5% 45.5%, transparent 46% 100%),
-            linear-gradient(35deg, transparent 0 66%, color-mix(in oklab, var(--color-signal-info) 16%, transparent) 66.5% 67.5%, transparent 68% 100%);
-        background-size: 96px 96px;
-        background-position: 0 0, 0 0, 0 0, 0 0;
-        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.62) 58%, rgba(0, 0, 0, 0.2));
-    }
-
-    .crm-sidebar-shell::after {
-        content: '';
-        position: absolute;
-        inset: auto -4rem 5rem auto;
-        width: 18rem;
-        height: 32rem;
-        pointer-events: none;
-        border-radius: 999px;
-        opacity: 0.8;
-        background:
-            radial-gradient(circle at 16% 12%, color-mix(in oklab, white 88%, var(--color-brand-300) 12%) 0 0.35rem, transparent 0.42rem),
-            radial-gradient(circle at 55% 30%, color-mix(in oklab, var(--color-brand-400) 72%, white 18%) 0 0.42rem, transparent 0.5rem),
-            radial-gradient(circle at 84% 21%, color-mix(in oklab, var(--color-signal-info) 55%, white 16%) 0 0.62rem, transparent 0.72rem),
-            radial-gradient(circle at 24% 52%, color-mix(in oklab, white 85%, var(--color-brand-300) 15%) 0 0.35rem, transparent 0.42rem),
-            radial-gradient(circle at 62% 70%, color-mix(in oklab, var(--color-brand-400) 70%, white 15%) 0 0.42rem, transparent 0.5rem),
-            radial-gradient(circle at 88% 82%, color-mix(in oklab, var(--color-signal-info) 55%, white 16%) 0 0.62rem, transparent 0.72rem),
-            linear-gradient(149deg, transparent 0 18%, color-mix(in oklab, var(--color-brand-300) 22%, transparent) 18.4% 18.9%, transparent 19.2% 100%),
-            linear-gradient(147deg, transparent 0 36%, color-mix(in oklab, var(--color-brand-300) 18%, transparent) 36.4% 36.9%, transparent 37.2% 100%),
-            linear-gradient(145deg, transparent 0 61%, color-mix(in oklab, var(--color-signal-info) 16%, transparent) 61.4% 61.9%, transparent 62.2% 100%),
-            linear-gradient(142deg, transparent 0 78%, color-mix(in oklab, var(--color-brand-300) 18%, transparent) 78.2% 78.8%, transparent 79.1% 100%);
-        filter: saturate(1.05);
-    }
-
-    .crm-sidebar-shell > * {
-        position: relative;
-        z-index: 1;
-    }
-
-    .dark .crm-sidebar-shell::before {
-        opacity: 0.58;
-        background-image:
-            radial-gradient(circle at 26px 24px, color-mix(in oklab, var(--color-brand-300) 40%, white 10%) 0 2px, transparent 2.5px),
-            radial-gradient(circle at 74px 70px, color-mix(in oklab, var(--color-ink-300) 18%, transparent) 0 1.5px, transparent 2px),
-            linear-gradient(145deg, transparent 0 44%, color-mix(in oklab, var(--color-brand-500) 20%, transparent) 44.5% 45.5%, transparent 46% 100%),
-            linear-gradient(35deg, transparent 0 66%, color-mix(in oklab, var(--color-signal-info) 18%, transparent) 66.5% 67.5%, transparent 68% 100%);
-    }
-
-    .dark .crm-sidebar-shell::after {
-        opacity: 0.72;
-        background:
-            radial-gradient(circle at 16% 12%, color-mix(in oklab, white 75%, var(--color-brand-300) 25%) 0 0.35rem, transparent 0.42rem),
-            radial-gradient(circle at 55% 30%, color-mix(in oklab, var(--color-brand-300) 82%, white 8%) 0 0.42rem, transparent 0.5rem),
-            radial-gradient(circle at 84% 21%, color-mix(in oklab, var(--color-signal-info) 65%, white 10%) 0 0.62rem, transparent 0.72rem),
-            radial-gradient(circle at 24% 52%, color-mix(in oklab, white 72%, var(--color-brand-300) 28%) 0 0.35rem, transparent 0.42rem),
-            radial-gradient(circle at 62% 70%, color-mix(in oklab, var(--color-brand-300) 82%, white 8%) 0 0.42rem, transparent 0.5rem),
-            radial-gradient(circle at 88% 82%, color-mix(in oklab, var(--color-signal-info) 65%, white 10%) 0 0.62rem, transparent 0.72rem),
-            linear-gradient(149deg, transparent 0 18%, color-mix(in oklab, var(--color-brand-300) 28%, transparent) 18.4% 18.9%, transparent 19.2% 100%),
-            linear-gradient(147deg, transparent 0 36%, color-mix(in oklab, var(--color-brand-300) 20%, transparent) 36.4% 36.9%, transparent 37.2% 100%),
-            linear-gradient(145deg, transparent 0 61%, color-mix(in oklab, var(--color-signal-info) 18%, transparent) 61.4% 61.9%, transparent 62.2% 100%),
-            linear-gradient(142deg, transparent 0 78%, color-mix(in oklab, var(--color-brand-300) 20%, transparent) 78.2% 78.8%, transparent 79.1% 100%);
-    }
-
-    .crm-confirm-dialog {
-        @apply rounded-2xl border-0 bg-transparent p-0 shadow-none backdrop:bg-ink-950/55;
-    }
-
-    .crm-confirm-card {
-        @apply w-[min(92vw,30rem)] rounded-2xl border border-ink-100 bg-white p-6 shadow-2xl shadow-ink-950/25 dark:border-ink-800 dark:bg-ink-900;
+    .dark .fc-btn-secondary,
+    .dark .fc-btn-ghost {
+        color: rgba(241, 245, 249, 0.9);
     }
 }
 
-@keyframes crm-alert-enter {
+@keyframes fc-alert-enter {
     0% {
         opacity: 0;
         transform: translateY(-10px) scale(0.985);
@@ -931,25 +644,6 @@ select:focus[data-flux-control] {
         box-shadow:
             0 18px 36px rgba(49, 85, 246, 0.16),
             0 0 0 8px rgba(34, 195, 238, 0.10);
-    }
-}
-
-@keyframes auth-floater-drift {
-    0%,
-    100% {
-        transform: translate3d(0, 0, 0) rotate(0deg);
-    }
-
-    25% {
-        transform: translate3d(22px, -18px, 0) rotate(1.2deg);
-    }
-
-    50% {
-        transform: translate3d(-16px, 12px, 0) rotate(-1deg);
-    }
-
-    75% {
-        transform: translate3d(14px, 24px, 0) rotate(0.8deg);
     }
 }
 

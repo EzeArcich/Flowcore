@@ -1,5 +1,5 @@
 <x-layouts::app :title="'Timeline · ' . $company->name">
-    <div class="crm-page space-y-6">
+    <div class="fc-page space-y-6">
         <div class="flex items-center justify-between">
             <div>
                 <h1 class="text-lg font-semibold text-ink-900 dark:text-ink-50">Timeline de interacciones</h1>
@@ -9,12 +9,12 @@
             </div>
 
             <div class="flex items-center gap-3">
-                <a href="{{ route('companies.show', $company) }}" class="crm-btn-secondary">Volver a la empresa</a>
-                <a href="{{ route('companies.interactions.create', $company) }}" class="crm-btn-primary">Nueva interacción</a>
+                <a href="{{ route('companies.show', $company) }}" class="fc-btn fc-btn-secondary">Volver a la empresa</a>
+                <a href="{{ route('companies.interactions.create', $company) }}" class="fc-btn fc-btn-primary">Nueva interacción</a>
             </div>
         </div>
 
-        <div class="crm-card p-6">
+        <div class="fc-card p-6">
             <div class="space-y-4">
                 @forelse($interactions as $interaction)
                     <div class="flex gap-4">
@@ -23,7 +23,7 @@
                         <div class="flex-1 space-y-1">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-2">
-                                    <span class="crm-badge text-[10px] uppercase tracking-[0.12em]">
+                                    <span class="fc-chip text-[10px] uppercase tracking-[0.12em]">
                                         {{ $interaction->direction }} · {{ $interaction->channel }}
                                     </span>
                                     @if($interaction->contact)

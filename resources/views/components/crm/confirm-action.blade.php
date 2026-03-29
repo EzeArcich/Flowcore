@@ -6,13 +6,13 @@
     'confirmLabel' => 'Confirmar',
     'cancelLabel' => 'Cancelar',
     'triggerLabel' => 'Continuar',
-    'triggerClass' => 'crm-btn-secondary crm-btn-sm',
-    'confirmClass' => 'crm-btn-primary',
+    'triggerClass' => 'fc-btn fc-btn-secondary fc-btn-sm',
+    'confirmClass' => 'fc-btn fc-btn-primary',
     'dialogId' => null,
 ])
 
 @php
-    $resolvedDialogId = $dialogId ?: 'crm-confirm-' . \Illuminate\Support\Str::ulid();
+    $resolvedDialogId = $dialogId ?: 'fc-confirm-' . \Illuminate\Support\Str::ulid();
     $resolvedMethod = strtoupper($method);
 @endphp
 
@@ -21,13 +21,13 @@
         {{ $triggerLabel }}
     </button>
 
-    <dialog id="{{ $resolvedDialogId }}" class="crm-confirm-dialog">
-        <div class="crm-confirm-card">
+    <dialog id="{{ $resolvedDialogId }}" class="fc-confirm-dialog">
+        <div class="fc-confirm-card">
             <h3 class="text-base font-semibold text-ink-900 dark:text-ink-50">{{ $title }}</h3>
             <p class="mt-2 text-sm text-ink-600 dark:text-ink-300">{{ $message }}</p>
 
             <div class="mt-6 flex items-center justify-end gap-3">
-                <button type="button" class="crm-btn-secondary" onclick="document.getElementById('{{ $resolvedDialogId }}')?.close()">
+                <button type="button" class="fc-btn fc-btn-secondary" onclick="document.getElementById('{{ $resolvedDialogId }}')?.close()">
                     {{ $cancelLabel }}
                 </button>
 

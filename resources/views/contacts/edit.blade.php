@@ -1,61 +1,61 @@
 <x-layouts::app :title="'Editar contacto · ' . $contact->full_name">
-    <div class="crm-page space-y-6">
-        <div class="crm-page-header flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+    <div class="fc-page space-y-6">
+        <div class="fc-page-header flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-                <p class="crm-page-eyebrow">Contacto</p>
-                <h1 class="crm-page-title">Editar contacto</h1>
-                <p class="crm-page-subtitle">
+                <p class="fc-kicker">Contacto</p>
+                <h1 class="fc-page-title">Editar contacto</h1>
+                <p class="fc-page-subtitle">
                     Empresa: <span class="font-semibold">{{ $contact->company->name }}</span>
                 </p>
             </div>
 
-            <a href="{{ route('companies.show', $contact->company) }}" class="crm-btn-secondary">Volver a la empresa</a>
+            <a href="{{ route('companies.show', $contact->company) }}" class="fc-btn fc-btn-secondary">Volver a la empresa</a>
         </div>
 
-        <div class="crm-form-shell max-w-4xl">
+        <div class="fc-panel max-w-4xl">
             <form method="POST" action="{{ route('contacts.update', $contact) }}" class="space-y-6">
                 @csrf
                 @method('PUT')
 
                 <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                    <div class="crm-form-section space-y-4">
+                    <div class="fc-card-soft space-y-4">
                         <div>
-                            <p class="crm-kpi-label">Identidad</p>
-                            <h2 class="crm-block-title">Persona de contacto</h2>
+                            <p class="fc-kicker">Identidad</p>
+                            <h2 class="fc-block-title">Persona de contacto</h2>
                         </div>
 
                         <div>
-                            <label class="crm-field-label">Nombre completo</label>
-                            <input type="text" name="full_name" value="{{ old('full_name', $contact->full_name) }}" class="crm-input" required>
+                            <label class="fc-label">Nombre completo</label>
+                            <input type="text" name="full_name" value="{{ old('full_name', $contact->full_name) }}" class="fc-input" required>
                         </div>
 
                         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                             <div>
-                                <label class="crm-field-label">Rol</label>
-                                <input type="text" name="role" value="{{ old('role', $contact->role) }}" class="crm-input">
+                                <label class="fc-label">Rol</label>
+                                <input type="text" name="role" value="{{ old('role', $contact->role) }}" class="fc-input">
                             </div>
 
                             <div>
-                                <label class="crm-field-label">Email</label>
-                                <input type="email" name="email" value="{{ old('email', $contact->email) }}" class="crm-input">
+                                <label class="fc-label">Email</label>
+                                <input type="email" name="email" value="{{ old('email', $contact->email) }}" class="fc-input">
                             </div>
                         </div>
 
                         <div>
-                            <label class="crm-field-label">LinkedIn</label>
-                            <input type="url" name="linkedin_url" value="{{ old('linkedin_url', $contact->linkedin_url) }}" class="crm-input">
+                            <label class="fc-label">LinkedIn</label>
+                            <input type="url" name="linkedin_url" value="{{ old('linkedin_url', $contact->linkedin_url) }}" class="fc-input">
                         </div>
                     </div>
 
-                    <div class="crm-form-section space-y-4">
+                    <div class="fc-card-soft space-y-4">
                         <div>
-                            <p class="crm-kpi-label">Relación</p>
-                            <h2 class="crm-block-title">Nivel de contacto</h2>
+                            <p class="fc-kicker">Relación</p>
+                            <h2 class="fc-block-title">Nivel de contacto</h2>
                         </div>
 
                         <div>
-                            <label class="crm-field-label">Estado</label>
-                            <select name="status" class="crm-select">
+                            <label class="fc-label">Estado</label>
+                            <select name="status" class="fc-select">
                                 @foreach(['not_contacted','contacted','replied','unresponsive','invalid'] as $status)
                                     <option value="{{ $status }}" @selected(old('status', $contact->status) === $status)>{{ $status }}</option>
                                 @endforeach
@@ -63,13 +63,13 @@
                         </div>
 
                         <div class="grid grid-cols-1 gap-3">
-                            <label class="crm-check-label">
-                                <input type="checkbox" name="is_primary" value="1" class="crm-check" @checked(old('is_primary', $contact->is_primary))>
+                            <label class="fc-check-label">
+                                <input type="checkbox" name="is_primary" value="1" class="fc-checkbox" @checked(old('is_primary', $contact->is_primary))>
                                 <span>Contacto principal</span>
                             </label>
 
-                            <label class="crm-check-label">
-                                <input type="checkbox" name="is_decision_maker" value="1" class="crm-check" @checked(old('is_decision_maker', $contact->is_decision_maker))>
+                            <label class="fc-check-label">
+                                <input type="checkbox" name="is_decision_maker" value="1" class="fc-checkbox" @checked(old('is_decision_maker', $contact->is_decision_maker))>
                                 <span>Decision maker</span>
                             </label>
                         </div>
@@ -77,8 +77,8 @@
                 </div>
 
                 <div class="flex items-center justify-end gap-3 pt-4">
-                    <a href="{{ route('companies.show', $contact->company) }}" class="crm-btn-secondary">Cancelar</a>
-                    <button class="crm-btn-primary">Guardar cambios</button>
+                    <a href="{{ route('companies.show', $contact->company) }}" class="fc-btn fc-btn-secondary">Cancelar</a>
+                    <button class="fc-btn fc-btn-primary">Guardar cambios</button>
                 </div>
             </form>
 
@@ -90,8 +90,8 @@
                     message="Esta acción eliminará el contacto de forma permanente."
                     trigger-label="Eliminar contacto"
                     confirm-label="Sí, eliminar"
-                    trigger-class="crm-btn-danger crm-btn-sm"
-                    confirm-class="crm-btn-danger"
+                    trigger-class="fc-btn fc-btn-danger fc-btn-sm"
+                    confirm-class="fc-btn fc-btn-danger"
                 />
             </div>
         </div>

@@ -1,40 +1,40 @@
 <x-layouts::app title="Follow-ups">
-    <div class="crm-page space-y-6">
-        <div class="crm-page-header flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+    <div class="fc-page space-y-6">
+        <div class="fc-page-header flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-                <p class="crm-page-eyebrow">Cadencia comercial</p>
-                <h1 class="crm-page-title">Follow-ups</h1>
-                <p class="crm-page-subtitle">
+                <p class="fc-kicker">Cadencia comercial</p>
+                <h1 class="fc-page-title">Follow-ups</h1>
+                <p class="fc-page-subtitle">
                     Control centralizado de tareas de seguimiento.
                 </p>
             </div>
 
-            <a href="{{ route('follow-ups.create') }}" class="crm-btn-spotlight">Nuevo follow-up</a>
+            <a href="{{ route('follow-ups.create') }}" class="fc-btn fc-btn-primary">Nuevo follow-up</a>
         </div>
 
-        <div class="crm-card p-6 space-y-4">
+        <div class="fc-card p-6 space-y-4">
             <form method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <select name="status" class="crm-select">
+                <select name="status" class="fc-select">
                     <option value="">Estado</option>
                     @foreach(['pending','done','skipped','cancelled'] as $status)
                         <option value="{{ $status }}" @selected(request('status') === $status)>{{ $status }}</option>
                     @endforeach
                 </select>
 
-                <select name="due" class="crm-select">
+                <select name="due" class="fc-select">
                     <option value="">Vencimiento</option>
                     <option value="today" @selected(request('due') === 'today')>Hoy</option>
                     <option value="overdue" @selected(request('due') === 'overdue')>Vencidos</option>
                 </select>
 
                 <div class="md:col-span-2 flex items-center justify-end">
-                    <button class="crm-btn-primary">Filtrar</button>
+                    <button class="fc-btn fc-btn-primary">Filtrar</button>
                 </div>
             </form>
         </div>
 
-        <div class="crm-card p-0 overflow-hidden">
-            <table class="crm-table">
+        <div class="fc-card p-0 overflow-hidden">
+            <table class="fc-table">
                 <thead>
                     <tr>
                         <th>Empresa</th>
@@ -58,7 +58,7 @@
                                 {{ $followUp->due_date?->format('d/m/Y') ?? '—' }}
                             </td>
                             <td  class="text-right">
-                                <span class="crm-badge"
+                                <span class="fc-chip"
                                       data-status="{{ $followUp->status }}">
                                     {{ $followUp->status }}
                                 </span>
@@ -68,7 +68,7 @@
                             </td>
                             <td>
                                 <div class="flex flex-wrap items-center gap-2">
-                                    <a href="{{ route('follow-ups.edit', $followUp) }}" class="crm-btn-secondary crm-btn-sm crm-btn-action crm-btn-editorial">Editar</a>
+                                    <a href="{{ route('follow-ups.edit', $followUp) }}" class="fc-btn fc-btn-secondary fc-btn-sm fc-btn-action">Editar</a>
 
                                     @if($followUp->status === 'pending')
                                         <x-crm.confirm-action
@@ -78,8 +78,8 @@
                                             message="Se marcará este seguimiento como completado."
                                             trigger-label="Completar"
                                             confirm-label="Sí, completar"
-                                            trigger-class="crm-btn-success crm-btn-sm crm-btn-action crm-btn-editorial"
-                                            confirm-class="crm-btn-success crm-btn-editorial"
+                                            trigger-class="fc-btn fc-btn-success fc-btn-sm fc-btn-action"
+                                            confirm-class="fc-btn fc-btn-success"
                                         />
 
                                         <x-crm.confirm-action
@@ -89,8 +89,8 @@
                                             message="Se omitirá esta tarea de seguimiento."
                                             trigger-label="Omitir"
                                             confirm-label="Sí, omitir"
-                                            trigger-class="crm-btn-warning crm-btn-sm crm-btn-action crm-btn-editorial"
-                                            confirm-class="crm-btn-warning crm-btn-editorial"
+                                            trigger-class="fc-btn fc-btn-warning fc-btn-sm fc-btn-action"
+                                            confirm-class="fc-btn fc-btn-warning"
                                         />
                                     @endif
                                 </div>

@@ -1,19 +1,19 @@
 <x-layouts::app title="Empresas">
-    <div class="crm-page space-y-6">
-    <div class="crm-page-header">
-        <p class="crm-page-eyebrow">Prospección</p>
-        <h1 class="crm-page-title">Empresas</h1>
-        <p class="crm-page-subtitle">
+    <div class="fc-page space-y-6">
+    <div class="fc-page-header">
+        <p class="fc-kicker">Prospección</p>
+        <h1 class="fc-page-title">Empresas</h1>
+        <p class="fc-page-subtitle">
             Explorá leads, filtrá por estado comercial y detectá rápido qué cuentas necesitan el próximo movimiento.
         </p>
     </div>
 
-    <div class="crm-card">
+    <div class="fc-card">
         <form method="GET" class="grid grid-cols-1 gap-4 md:grid-cols-4">
             <input type="text" name="q" value="{{ request('q') }}" placeholder="Buscar..."
-                   class="crm-input">
+                   class="fc-input">
 
-            <select name="status" class="crm-select">
+            <select name="status" class="fc-select">
                 <option value="">Estado</option>
                 @foreach(['prospect','contacted','replied','meeting','proposal_sent','negotiation','won','lost','archived'] as $status)
                     <option value="{{ $status }}" @selected(request('status') === $status)>
@@ -23,14 +23,14 @@
             </select>
 
             <input type="text" name="industry" value="{{ request('industry') }}" placeholder="Industria"
-                   class="crm-input">
+                   class="fc-input">
 
-            <button class="crm-btn-primary">Filtrar</button>
+            <button class="fc-btn fc-btn-primary">Filtrar</button>
         </form>
     </div>
 
-    <div class="crm-card overflow-hidden p-0">
-        <table class="crm-table">
+    <div class="fc-card overflow-hidden p-0">
+        <table class="fc-table">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -46,7 +46,7 @@
                         <td class="font-medium">{{ $company->name }}</td>
                         <td>{{ $company->industry }}</td>
                         <td class="text-right">
-                            <span class="crm-badge crm-badge--company-status" data-status="{{ $company->status }}">
+                            <span class="fc-chip fc-chip--company-status" data-status="{{ $company->status }}">
                                 {{ $company->status }}
                             </span>
                         </td>
@@ -54,7 +54,7 @@
                             {{ $company->next_follow_up_at?->format('d/m/Y') ?? '-' }}
                         </td>
                         <td>
-                            <a href="{{ route('companies.show', $company) }}" class="crm-link">Ver</a>
+                            <a href="{{ route('companies.show', $company) }}" class="fc-link">Ver</a>
                         </td>
                     </tr>
                 @empty

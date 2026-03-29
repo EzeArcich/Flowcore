@@ -4,7 +4,7 @@
         @include('partials.head')
     </head>
     <body class="min-h-screen bg-white dark:bg-zinc-800">
-        <flux:sidebar sticky collapsible="mobile" class="crm-sidebar-shell border-e border-zinc-200/85 dark:border-zinc-700/85">
+        <flux:sidebar sticky collapsible="mobile" class="fc-sidebar-shell border-e border-zinc-200/85 dark:border-zinc-700/85">
             <flux:sidebar.header>
                 <x-app-logo :sidebar="true" href="{{ route('dashboard') }}" wire:navigate />
                 <flux:sidebar.collapse class="lg:hidden" />
@@ -41,7 +41,7 @@
                     <flux:sidebar.item icon="clock" :href="route('follow-ups.index')" :current="request()->routeIs('follow-ups.*') && ! request()->has('due')" wire:navigate>
                         <span class="flex w-full items-center justify-between gap-2">
                             <span>{{ __('Todos') }}</span>
-                            <span class="rounded-full bg-zinc-200 px-2 py-0.5 text-[11px] font-semibold text-zinc-700 dark:bg-zinc-700 dark:text-zinc-100">
+                            <span class="fc-chip fc-chip-neutral">
                                 {{ $allPendingFollowUpsCount }}
                             </span>
                         </span>
@@ -50,7 +50,7 @@
                     <flux:sidebar.item icon="calendar-days" :href="route('follow-ups.index', ['due' => 'today'])" :current="request()->routeIs('follow-ups.*') && request('due') === 'today'" wire:navigate>
                         <span class="flex w-full items-center justify-between gap-2">
                             <span>{{ __('De hoy') }}</span>
-                            <span class="rounded-full bg-sky-100 px-2 py-0.5 text-[11px] font-semibold text-sky-700 dark:bg-sky-900/70 dark:text-sky-200">
+                            <span class="fc-chip fc-chip-info">
                                 {{ $todayFollowUpsCount }}
                             </span>
                         </span>
@@ -59,7 +59,7 @@
                     <flux:sidebar.item icon="exclamation-triangle" :href="route('follow-ups.index', ['due' => 'overdue'])" :current="request()->routeIs('follow-ups.*') && request('due') === 'overdue'" wire:navigate>
                         <span class="flex w-full items-center justify-between gap-2">
                             <span>{{ __('Vencidos') }}</span>
-                            <span class="rounded-full bg-rose-100 px-2 py-0.5 text-[11px] font-semibold text-rose-700 dark:bg-rose-900/70 dark:text-rose-200">
+                            <span class="fc-chip fc-chip-urgent">
                                 {{ $overdueFollowUpsCount }}
                             </span>
                         </span>
